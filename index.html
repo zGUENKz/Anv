@@ -68,7 +68,7 @@ p{line-height:1.8}
   <div class="sub">ขอบคุณที่เข้ามาเป็นส่วนหนึ่งในชีวิตของเรา</div>
   <div class="photo">ใส่รูปคู่ของเราไว้ตรงนี้ ♡</div>
   <p>“ไม่ว่าจะผ่านไปกี่วัน<br>เราก็ยังอยากมีเธออยู่ในวันต่อ ๆ ไป”</p>
-  <div class="date">25 • 08 • 2026</div>
+  <div class="date">05 • 08 • 2026</div>
   <div class="days">เราอยู่ด้วยกันมาแล้ว<strong id="days">— วัน</strong></div>
   <button class="btn" onclick="show('letter')">มีอะไรอยากบอก 💌</button>
  </div>
@@ -113,7 +113,7 @@ function show(id){
  document.getElementById(id).classList.add("active");
 }
 function openLetter(){document.getElementById("env").classList.toggle("open")}
-const startDate=new Date("2025-08-25T00:00:00");
+const startDate=new Date("2025-08-05T00:00:00");
 const diff=Math.max(0,Math.floor((new Date()-startDate)/86400000));
 document.getElementById("days").textContent=diff+" วัน";
 for(let i=0;i<14;i++){
