@@ -3,123 +3,1122 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Little Story ♡</title>
+<title>Our Anniversary ♡</title>
+
 <style>
-*{box-sizing:border-box}
-:root{--pink:#c85c78;--soft:#fff2f5;--text:#49343b;--muted:#9a7781}
-body{margin:0;min-height:100vh;font-family:"Segoe UI","Noto Sans Thai",sans-serif;color:var(--text);background:linear-gradient(135deg,#fffafb,#ffeef3);overflow:hidden}
-.screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transform:translateY(12px);transition:.65s ease}
-.screen.active{opacity:1;pointer-events:auto;transform:translateY(0)}
-.card{width:min(92vw,520px);text-align:center;background:rgba(255,255,255,.82);backdrop-filter:blur(14px);border:1px solid #fff;border-radius:30px;padding:38px 25px;box-shadow:0 25px 70px rgba(110,55,75,.13)}
-.heart{font-size:36px;color:var(--pink);animation:beat 1.6s infinite}
-h1{font-size:clamp(32px,8vw,48px);font-weight:600;margin:8px 0}
-h2{font-size:28px;font-weight:600;margin:8px 0 12px}
-p{line-height:1.8}
-.sub{color:var(--muted);font-size:15px}
-.pin{display:flex;justify-content:center;gap:10px;margin:24px 0 18px}
-.pin span{width:12px;height:12px;border:1.5px solid #c98b9a;border-radius:50%;transition:.2s}
-.pin span.on{background:var(--pink);border-color:var(--pink)}
-.keypad{display:grid;grid-template-columns:repeat(3,64px);gap:10px;justify-content:center}
-.key{height:54px;border:0;border-radius:16px;background:#fff0f4;color:var(--text);font-size:19px;cursor:pointer;transition:.15s}
-.key:hover{transform:translateY(-2px);background:#fce1e8}
-.key.zero{grid-column:2}
-.unlock{margin-top:18px;border:0;border-radius:999px;padding:12px 25px;background:var(--pink);color:white;font-size:15px;cursor:pointer}
-.error{height:22px;color:#c85c78;font-size:13px;margin-top:8px}
-.photo{height:245px;border-radius:22px;background:#f7dfe6;border:5px solid white;display:flex;align-items:center;justify-content:center;color:#a77a85;box-shadow:0 10px 30px rgba(120,60,80,.12);margin:24px auto}
-.date{display:inline-block;background:var(--soft);color:#a15368;padding:9px 18px;border-radius:999px;font-size:14px}
-.days{margin-top:18px;color:var(--muted);font-size:14px}.days strong{display:block;color:#a15368;font-size:25px;margin-top:2px}
-.btn{border:0;background:var(--pink);color:#fff;padding:13px 22px;border-radius:999px;cursor:pointer;font-size:14px;margin-top:12px}
-.back{background:transparent;color:var(--pink);margin-left:6px}
-.letter-wrap{height:220px;display:flex;align-items:center;justify-content:center;perspective:800px}
-.envelope{position:relative;width:270px;height:170px;background:#f4cfd9;border-radius:10px;cursor:pointer;box-shadow:0 15px 30px rgba(100,50,70,.13);transition:.5s}
-.envelope:before{content:"";position:absolute;left:0;top:0;border-left:135px solid transparent;border-right:135px solid transparent;border-top:92px solid #e9b7c5;z-index:3;transform-origin:top;transition:.7s}
-.envelope:after{content:"";position:absolute;left:0;bottom:0;border-left:135px solid #edc1cc;border-right:135px solid #edc1cc;border-top:85px solid transparent}
-.letter{position:absolute;left:18px;right:18px;bottom:10px;height:145px;background:#fffaf8;padding:18px;border-radius:8px;z-index:2;transition:.7s;line-height:1.7;font-size:14px}
-.envelope.open .letter{transform:translateY(-105px);z-index:4}.envelope.open:before{transform:rotateX(180deg);z-index:1}.envelope.open{margin-top:90px}
-.hint{font-size:12px;color:#ad8c95;margin-top:14px}
-.float{position:fixed;pointer-events:none;opacity:.45;animation:up 7s linear infinite;z-index:-1}
-@keyframes beat{50%{transform:scale(1.12)}}@keyframes up{from{transform:translateY(105vh) rotate(0);opacity:0}15%{opacity:.45}to{transform:translateY(-15vh) rotate(25deg);opacity:0}}
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --pink: #c85c78;
+    --dark: #4b343b;
+    --muted: #9b7781;
+    --soft: #fff0f4;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI", "Noto Sans Thai", sans-serif;
+    color: var(--dark);
+    background: linear-gradient(135deg, #fffafb, #ffeef3);
+}
+
+button {
+    font: inherit;
+}
+
+.screen {
+    display: none;
+    min-height: 100vh;
+    padding: 25px 16px;
+    align-items: center;
+    justify-content: center;
+}
+
+.screen.active {
+    display: flex;
+}
+
+.card {
+    width: min(94vw, 720px);
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid white;
+    border-radius: 30px;
+    padding: 32px 22px;
+    box-shadow: 0 20px 65px rgba(123, 70, 93, 0.09);
+    backdrop-filter: blur(12px);
+}
+
+.center {
+    text-align: center;
+}
+
+.heart {
+    font-size: 34px;
+    color: var(--pink);
+    animation: beat 1.5s infinite;
+}
+
+h1 {
+    font-size: clamp(32px, 8vw, 50px);
+    margin: 8px 0;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 29px;
+    margin: 7px 0 10px;
+}
+
+.sub {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+.pin {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 23px 0 16px;
+}
+
+.pin span {
+    width: 11px;
+    height: 11px;
+    border: 1.5px solid #cc91a0;
+    border-radius: 50%;
+}
+
+.pin span.on {
+    background: var(--pink);
+}
+
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(3, 62px);
+    gap: 9px;
+    justify-content: center;
+}
+
+.key {
+    height: 52px;
+    border: 0;
+    border-radius: 15px;
+    background: var(--soft);
+    color: var(--dark);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.key:hover {
+    transform: translateY(-2px);
+}
+
+.key.zero {
+    grid-column: 2;
+}
+
+.primary {
+    border: 0;
+    background: var(--pink);
+    color: white;
+    border-radius: 999px;
+    padding: 12px 22px;
+    cursor: pointer;
+    margin-top: 17px;
+}
+
+.error {
+    height: 22px;
+    color: #c85c78;
+    font-size: 13px;
+    margin-top: 7px;
+}
+
+/* =========================
+   HOME
+========================= */
+
+.homeHero {
+    text-align: center;
+    padding: 15px 0 24px;
+}
+
+.homeHero .date {
+    display: inline-block;
+    background: var(--soft);
+    color: #a15368;
+    border-radius: 999px;
+    padding: 8px 16px;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.counter {
+    margin: 22px auto;
+    padding: 17px;
+    background: #fff7f9;
+    border-radius: 20px;
+    max-width: 430px;
+    color: var(--muted);
+}
+
+.counter strong {
+    display: block;
+    font-size: 28px;
+    color: #a15368;
+    margin-top: 4px;
+}
+
+.sectionTitle {
+    text-align: center;
+    margin: 12px 0 18px;
+}
+
+/* =========================
+   MONTH MENU
+========================= */
+
+.months {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.month {
+    border: 0;
+    border-radius: 20px;
+    background: #fff7f9;
+    padding: 19px 8px;
+    cursor: pointer;
+    color: var(--dark);
+    box-shadow: 0 5px 18px rgba(123, 70, 93, 0.04);
+    transition: 0.2s;
+}
+
+.month:hover {
+    transform: translateY(-3px);
+}
+
+.month .num {
+    font-size: 12px;
+    color: #b48691;
+}
+
+.month .title {
+    font-size: 18px;
+    margin: 4px 0;
+}
+
+.month .date {
+    font-size: 11px;
+    color: #a9848e;
+}
+
+.month.locked {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.month.unlocked {
+    border: 1px solid #f2d1da;
+}
+
+/* =========================
+   DETAIL PAGE
+========================= */
+
+.detail {
+    text-align: center;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.nav button {
+    border: 0;
+    background: transparent;
+    color: var(--pink);
+    cursor: pointer;
+}
+
+.detailDate {
+    display: inline-block;
+    background: var(--soft);
+    padding: 7px 15px;
+    border-radius: 999px;
+    color: #a15368;
+    font-size: 13px;
+}
+
+/* =========================
+   PHOTO
+========================= */
+
+.photoArea {
+    margin: 22px auto;
+    max-width: 500px;
+    aspect-ratio: 4 / 3;
+    border-radius: 24px;
+    background: #f7dfe6;
+    border: 5px solid white;
+    box-shadow: 0 10px 30px rgba(123, 70, 93, 0.08);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #a77a85;
+}
+
+.photoArea img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+.photoArea.has img {
+    display: block;
+}
+
+.photoArea.has .placeholder {
+    display: none;
+}
+
+.photoControls {
+    display: flex;
+    gap: 9px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.photoControls label,
+.photoControls button {
+    border: 0;
+    border-radius: 999px;
+    padding: 10px 16px;
+    background: var(--soft);
+    color: #a15368;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.photoControls input {
+    display: none;
+}
+
+.small {
+    font-size: 12px;
+    color: #aa8992;
+    margin-top: 12px;
+}
+
+/* =========================
+   NOTE
+========================= */
+
+.note {
+    margin: 20px auto;
+    max-width: 520px;
+    line-height: 1.9;
+    color: #66515a;
+}
+
+textarea {
+    width: 100%;
+    min-height: 125px;
+    border: 1px solid #efd5dd;
+    border-radius: 16px;
+    padding: 13px;
+    background: #fffafb;
+    resize: vertical;
+    color: var(--dark);
+}
+
+.save {
+    margin-top: 9px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--pink);
+    color: white;
+    padding: 10px 18px;
+    cursor: pointer;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 520px) {
+
+    .months {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+        padding: 27px 16px;
+    }
+
+    .photoArea {
+        aspect-ratio: 1 / 1;
+    }
+}
+
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes beat {
+    50% {
+        transform: scale(1.12);
+    }
+}
 </style>
 </head>
+
 <body>
 
+<!-- =========================
+     LOCK SCREEN
+========================= -->
+
 <section id="lock" class="screen active">
- <div class="card">
-  <div class="heart">♡</div>
-  <h1>A little surprise</h1>
-  <div class="sub">มีบางอย่างอยากให้เธอเปิดดู</div>
-  <div class="pin" id="pin"><span></span><span></span><span></span><span></span></div>
-  <div class="keypad">
-   <button class="key" onclick="press('1')">1</button><button class="key" onclick="press('2')">2</button><button class="key" onclick="press('3')">3</button>
-   <button class="key" onclick="press('4')">4</button><button class="key" onclick="press('5')">5</button><button class="key" onclick="press('6')">6</button>
-   <button class="key" onclick="press('7')">7</button><button class="key" onclick="press('8')">8</button><button class="key" onclick="press('9')">9</button>
-   <button class="key zero" onclick="press('0')">0</button>
-  </div>
-  <button class="unlock" onclick="unlock()">Unlock ♡</button>
-  <div class="error" id="error"></div>
-  <div class="hint">Hint: รหัสลับของเราคือ 4 ตัวเลข</div>
- </div>
+
+    <div class="card center">
+
+        <div class="heart">♡</div>
+
+        <h1>Our Little Story</h1>
+
+        <div class="sub">
+            มีเรื่องราวเล็ก ๆ ที่อยากให้เธอเปิดดู
+        </div>
+
+        <div class="pin" id="pin">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="keypad">
+
+            <button class="key" onclick="press('1')">1</button>
+            <button class="key" onclick="press('2')">2</button>
+            <button class="key" onclick="press('3')">3</button>
+
+            <button class="key" onclick="press('4')">4</button>
+            <button class="key" onclick="press('5')">5</button>
+            <button class="key" onclick="press('6')">6</button>
+
+            <button class="key" onclick="press('7')">7</button>
+            <button class="key" onclick="press('8')">8</button>
+            <button class="key" onclick="press('9')">9</button>
+
+            <button class="key zero" onclick="press('0')">0</button>
+
+        </div>
+
+        <button class="primary" onclick="unlock()">
+            Unlock ♡
+        </button>
+
+        <div class="error" id="error"></div>
+
+        <div class="small">
+            รหัสลับ 4 ตัวเลข
+        </div>
+
+    </div>
+
 </section>
+
+
+<!-- =========================
+     HOME
+========================= -->
 
 <section id="home" class="screen">
- <div class="card">
-  <div class="heart">♥</div>
-  <h1>Happy Anniversary</h1>
-  <div class="sub">ขอบคุณที่เข้ามาเป็นส่วนหนึ่งในชีวิตของเรา</div>
-  <div class="photo">ใส่รูปคู่ของเราไว้ตรงนี้ ♡</div>
-  <p>“ไม่ว่าจะผ่านไปกี่วัน<br>เราก็ยังอยากมีเธออยู่ในวันต่อ ๆ ไป”</p>
-  <div class="date">05 • 08 • 2026</div>
-  <div class="days">เราอยู่ด้วยกันมาแล้ว<strong id="days">— วัน</strong></div>
-  <button class="btn" onclick="show('letter')">มีอะไรอยากบอก 💌</button>
- </div>
+
+    <div class="card">
+
+        <div class="homeHero">
+
+            <div class="heart">♥</div>
+
+            <h1>Happy Anniversary</h1>
+
+            <div class="sub">
+                เรื่องราวของเราจะถูกเก็บไว้ทีละเดือน ♡
+            </div>
+
+            <div class="date">
+                เริ่มต้น 05 • 08 • 2026
+            </div>
+
+            <div class="counter">
+
+                เราเดินทางมาด้วยกันแล้ว
+
+                <strong id="days">
+                    0 วัน
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="sectionTitle">
+
+            <h2>
+                Our Journey
+            </h2>
+
+            <div class="sub">
+                เลือกเดือนที่อยากเปิดดู
+            </div>
+
+        </div>
+
+
+        <div class="months" id="months"></div>
+
+    </div>
+
 </section>
 
-<section id="letter" class="screen">
- <div class="card">
-  <div class="heart">♡</div>
-  <h2>จดหมายถึงเธอ</h2>
-  <div class="sub">ลองกดที่ซองจดหมายดูนะ</div>
-  <div class="letter-wrap">
-   <div class="envelope" id="env" onclick="openLetter()">
-    <div class="letter">
-     ถึงเธอ ♡<br><br>
-     ขอบคุณสำหรับทุกช่วงเวลาที่เราได้มีด้วยกันนะ<br>
-     ขอบคุณที่ทำให้วันธรรมดา ๆ กลายเป็นวันที่มีความหมาย<br>
-     และหวังว่าเราจะได้สร้างความทรงจำดี ๆ ด้วยกันไปอีกนาน ๆ
+
+<!-- =========================
+     MONTH DETAIL
+========================= -->
+
+<section id="detail" class="screen">
+
+    <div class="card detail">
+
+        <div class="nav">
+
+            <button onclick="show('home')">
+                ← กลับ
+            </button>
+
+            <span id="detailNumber"></span>
+
+            <button onclick="nextMonth()">
+                ถัดไป →
+            </button>
+
+        </div>
+
+
+        <div class="heart">
+            ♡
+        </div>
+
+
+        <h2 id="detailTitle"></h2>
+
+
+        <div
+            class="detailDate"
+            id="detailDate">
+        </div>
+
+
+        <!-- PHOTO -->
+
+        <div
+            class="photoArea"
+            id="photoArea">
+
+            <div class="placeholder">
+                กด “เพิ่มรูป”
+                เพื่อใส่รูปของเดือนนี้ ♡
+            </div>
+
+            <img
+                id="monthPhoto"
+                alt="รูปความทรงจำ">
+
+        </div>
+
+
+        <div class="photoControls">
+
+            <label>
+
+                ＋ เพิ่มรูป
+
+                <input
+                    id="photoInput"
+                    type="file"
+                    accept="image/*"
+                    onchange="loadPhoto(event)">
+
+            </label>
+
+
+            <button onclick="removePhoto()">
+                ลบรูป
+            </button>
+
+        </div>
+
+
+        <p class="small">
+            รูปและข้อความจะถูกเก็บไว้ในเบราว์เซอร์เครื่องนี้
+        </p>
+
+
+        <!-- NOTE -->
+
+        <div class="note">
+
+            <textarea
+                id="note"
+                placeholder="เขียนความทรงจำของเดือนนี้...">
+            </textarea>
+
+            <button
+                class="save"
+                onclick="saveNote()">
+
+                บันทึกข้อความ
+
+            </button>
+
+        </div>
+
     </div>
-   </div>
-  </div>
-  <button class="btn back" onclick="show('home')">← กลับ</button>
- </div>
+
 </section>
+
 
 <script>
-let entered="";
-const correct="1234";
-function press(n){
- if(entered.length>=4)return;
- entered+=n; renderPin();
- if(entered.length===4) setTimeout(unlock,180);
+
+/* =====================================
+   CONFIG
+===================================== */
+
+const CONFIG = {
+
+    password: "2704",
+
+    startDate: "2026-08-05",
+
+    totalMonths: 12
+
+};
+
+
+/* =====================================
+   VARIABLES
+===================================== */
+
+let entered = "";
+
+let currentMonth = 1;
+
+
+/* =====================================
+   HELPERS
+===================================== */
+
+const pad = n =>
+    String(n).padStart(2, "0");
+
+
+/* =====================================
+   LOGIN
+===================================== */
+
+function press(number) {
+
+    if (entered.length >= 4)
+        return;
+
+    entered += number;
+
+    renderPin();
+
+    if (entered.length === 4) {
+
+        setTimeout(unlock, 180);
+
+    }
+
 }
-function renderPin(){
- document.querySelectorAll("#pin span").forEach((s,i)=>s.classList.toggle("on",i<entered.length));
+
+
+function renderPin() {
+
+    document
+        .querySelectorAll("#pin span")
+        .forEach((dot, index) => {
+
+            dot.classList.toggle(
+                "on",
+                index < entered.length
+            );
+
+        });
+
 }
-function unlock(){
- if(entered===correct){show("home");entered="";renderPin();document.getElementById("error").textContent="";}
- else if(entered.length){document.getElementById("error").textContent="รหัสไม่ถูกต้อง ลองใหม่อีกครั้ง ♡";entered="";renderPin();}
+
+
+function unlock() {
+
+    if (entered === CONFIG.password) {
+
+        entered = "";
+
+        renderPin();
+
+        document.getElementById(
+            "error"
+        ).textContent = "";
+
+        show("home");
+
+        renderMonths();
+
+    }
+
+    else {
+
+        document.getElementById(
+            "error"
+        ).textContent =
+            "รหัสไม่ถูกต้อง ลองใหม่อีกครั้ง ♡";
+
+        entered = "";
+
+        renderPin();
+
+    }
+
 }
-function show(id){
- document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
- document.getElementById(id).classList.add("active");
+
+
+/* =====================================
+   SCREEN
+===================================== */
+
+function show(id) {
+
+    document
+        .querySelectorAll(".screen")
+        .forEach(screen => {
+
+            screen.classList.remove("active");
+
+        });
+
+
+    document
+        .getElementById(id)
+        .classList.add("active");
+
+
+    if (id === "home") {
+
+        renderMonths();
+
+    }
+
 }
-function openLetter(){document.getElementById("env").classList.toggle("open")}
-const startDate=new Date("2025-08-05T00:00:00");
-const diff=Math.max(0,Math.floor((new Date()-startDate)/86400000));
-document.getElementById("days").textContent=diff+" วัน";
-for(let i=0;i<14;i++){
- const h=document.createElement("div");h.className="float";h.textContent=Math.random()>.5?"♡":"♥";
- h.style.left=Math.random()*100+"vw";h.style.fontSize=(12+Math.random()*18)+"px";h.style.animationDelay=(-Math.random()*7)+"s";document.body.appendChild(h);
+
+
+/* =====================================
+   ANNIVERSARY DATE
+===================================== */
+
+function anniversaryDate(month) {
+
+    const date =
+        new Date(
+            CONFIG.startDate + "T00:00:00"
+        );
+
+    date.setMonth(
+        date.getMonth() + month
+    );
+
+    return date;
+
 }
+
+
+/* =====================================
+   CHECK IF MONTH IS AVAILABLE
+===================================== */
+
+function isUnlocked(month) {
+
+    return new Date() >=
+        anniversaryDate(month);
+
+}
+
+
+/* =====================================
+   FORMAT DATE
+===================================== */
+
+function formatDate(date) {
+
+    return (
+        pad(date.getDate()) +
+        " • " +
+        pad(date.getMonth() + 1) +
+        " • " +
+        date.getFullYear()
+    );
+
+}
+
+
+/* =====================================
+   RENDER MONTH MENU
+===================================== */
+
+function renderMonths() {
+
+    const box =
+        document.getElementById("months");
+
+    box.innerHTML = "";
+
+
+    for (
+        let month = 1;
+        month <= CONFIG.totalMonths;
+        month++
+    ) {
+
+        const unlocked =
+            isUnlocked(month);
+
+
+        const button =
+            document.createElement("button");
+
+
+        button.className =
+            "month " +
+            (
+                unlocked
+                    ? "unlocked"
+                    : "locked"
+            );
+
+
+        button.innerHTML = `
+
+            <div class="num">
+                CHAPTER ${pad(month)}
+            </div>
+
+            <div class="title">
+                ${unlocked ? "♡" : "🔒"}
+                Month ${month}
+            </div>
+
+            <div class="date">
+                ${formatDate(
+                    anniversaryDate(month)
+                )}
+            </div>
+
+        `;
+
+
+        button.onclick = () => {
+
+            if (unlocked) {
+
+                openMonth(month);
+
+            }
+
+        };
+
+
+        box.appendChild(button);
+
+    }
+
+
+    updateCounter();
+
+}
+
+
+/* =====================================
+   DAY COUNTER
+===================================== */
+
+function updateCounter() {
+
+    const start =
+        new Date(
+            CONFIG.startDate
+        );
+
+
+    const now =
+        new Date();
+
+
+    const days =
+        Math.max(
+            0,
+            Math.floor(
+                (now - start)
+                / 86400000
+            )
+        );
+
+
+    document.getElementById(
+        "days"
+    ).textContent =
+        days + " วัน";
+
+}
+
+
+/* =====================================
+   OPEN MONTH
+===================================== */
+
+function openMonth(month) {
+
+    currentMonth = month;
+
+    show("detail");
+
+
+    document.getElementById(
+        "detailNumber"
+    ).textContent =
+        "CHAPTER " +
+        pad(month);
+
+
+    document.getElementById(
+        "detailTitle"
+    ).textContent =
+        "Month " +
+        month +
+        " ♡";
+
+
+    document.getElementById(
+        "detailDate"
+    ).textContent =
+        formatDate(
+            anniversaryDate(month)
+        );
+
+
+    document.getElementById(
+        "note"
+    ).value =
+        localStorage.getItem(
+            "note_" + month
+        ) || "";
+
+
+    loadSavedPhoto();
+
+}
+
+
+/* =====================================
+   NEXT MONTH
+===================================== */
+
+function nextMonth() {
+
+    const next =
+        currentMonth + 1;
+
+
+    if (
+        next <= CONFIG.totalMonths &&
+        isUnlocked(next)
+    ) {
+
+        openMonth(next);
+
+    }
+
+    else {
+
+        alert(
+            "เดือนถัดไปยังไม่ถึงวันครบรอบนะ ♡"
+        );
+
+    }
+
+}
+
+
+/* =====================================
+   SAVE NOTE
+===================================== */
+
+function saveNote() {
+
+    localStorage.setItem(
+
+        "note_" + currentMonth,
+
+        document.getElementById(
+            "note"
+        ).value
+
+    );
+
+
+    alert(
+        "บันทึกข้อความแล้ว ♡"
+    );
+
+}
+
+
+/* =====================================
+   LOAD PHOTO
+===================================== */
+
+function loadPhoto(event) {
+
+    const file =
+        event.target.files[0];
+
+
+    if (!file)
+        return;
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload =
+        function () {
+
+            localStorage.setItem(
+
+                "photo_" +
+                currentMonth,
+
+                reader.result
+
+            );
+
+
+            loadSavedPhoto();
+
+        };
+
+
+    reader.readAsDataURL(file);
+
+}
+
+
+/* =====================================
+   DISPLAY SAVED PHOTO
+===================================== */
+
+function loadSavedPhoto() {
+
+    const source =
+        localStorage.getItem(
+            "photo_" + currentMonth
+        );
+
+
+    const area =
+        document.getElementById(
+            "photoArea"
+        );
+
+
+    const image =
+        document.getElementById(
+            "monthPhoto"
+        );
+
+
+    if (source) {
+
+        image.src = source;
+
+        area.classList.add(
+            "has"
+        );
+
+    }
+
+    else {
+
+        image.removeAttribute(
+            "src"
+        );
+
+        area.classList.remove(
+            "has"
+        );
+
+    }
+
+}
+
+
+/* =====================================
+   REMOVE PHOTO
+===================================== */
+
+function removePhoto() {
+
+    localStorage.removeItem(
+        "photo_" + currentMonth
+    );
+
+
+    document.getElementById(
+        "photoInput"
+    ).value = "";
+
+
+    loadSavedPhoto();
+
+}
+
+
+/* =====================================
+   INITIALIZE
+===================================== */
+
+renderMonths();
+
 </script>
+
 </body>
 </html>
