@@ -1,2243 +1,2508 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Anniversary ♡</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      --pink: #c85c78;
-      --dark: #4b343b;
-      --muted: #9b7781;
-      --soft: #fff0f4;
-      --white: #ffffff;
-      --border: #f0d8df;
-      --shadow: 0 12px 35px rgba(126, 65, 82, 0.12);
-    }
-
-    body {
-      font-family: "Segoe UI", "Tahoma", sans-serif;
-      background:
-        radial-gradient(circle at top left, #fff6f8 0%, transparent 35%),
-        linear-gradient(135deg, #fff8fa, #fff0f4);
-      color: var(--dark);
-      min-height: 100vh;
-    }
-
-    button,
-    textarea,
-    input {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    /* =========================
-       LOCK SCREEN
-    ========================= */
-
-    #lock {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .lockCard {
-      width: min(430px, 100%);
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(12px);
-      padding: 40px 28px;
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-      text-align: center;
-      border: 1px solid rgba(255,255,255,0.8);
-    }
-
-    .heart {
-      font-size: 48px;
-      margin-bottom: 10px;
-    }
-
-    .lockCard h1 {
-      font-size: 30px;
-      margin-bottom: 8px;
-    }
-
-    .lockCard p {
-      color: var(--muted);
-      margin-bottom: 25px;
-    }
-
-    .pinInput {
-      width: 100%;
-      padding: 15px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      outline: none;
-      text-align: center;
-      font-size: 22px;
-      letter-spacing: 8px;
-      color: var(--dark);
-      background: #fffafb;
-    }
-
-    .pinInput:focus {
-      border-color: var(--pink);
-      box-shadow: 0 0 0 4px rgba(200,92,120,0.1);
-    }
-
-    .mainBtn {
-      width: 100%;
-      margin-top: 15px;
-      border: none;
-      border-radius: 14px;
-      padding: 14px 18px;
-      background: var(--pink);
-      color: white;
-      font-weight: 700;
-      transition: 0.2s;
-    }
-
-    .mainBtn:hover {
-      transform: translateY(-2px);
-      filter: brightness(1.04);
-    }
-
-    .error {
-      color: #c4495f;
-      margin-top: 12px;
-      font-size: 14px;
-      min-height: 20px;
-    }
-
-    /* =========================
-       APP
-    ========================= */
-
-    #app {
-      min-height: 100vh;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: rgba(255,255,255,0.88);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(200,92,120,0.08);
-    }
-
-    .topbarInner {
-      width: min(1100px, calc(100% - 30px));
-      margin: auto;
-      min-height: 72px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .brand {
-      font-weight: 800;
-      color: var(--dark);
-      font-size: 18px;
-    }
-
-    .brand span {
-      color: var(--pink);
-    }
-
-    .backBtn {
-      border: none;
-      background: var(--soft);
-      color: var(--pink);
-      border-radius: 12px;
-      padding: 9px 14px;
-      font-weight: 700;
-    }
-
-    .container {
-      width: min(1100px, calc(100% - 30px));
-      margin: auto;
-      padding: 35px 0 60px;
-    }
-
-    /* =========================
-       HOME
-    ========================= */
-
-    .hero {
-      background: rgba(255,255,255,0.85);
-      border: 1px solid rgba(240,216,223,0.8);
-      box-shadow: var(--shadow);
-      border-radius: 28px;
-      padding: 38px 30px;
-      text-align: center;
-      margin-bottom: 25px;
-    }
-
-    .hero .small {
-      color: var(--pink);
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .hero h2 {
-      font-size: clamp(28px, 5vw, 44px);
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    .counter {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 25px;
-    }
-
-    .counterBox {
-      min-width: 105px;
-      padding: 15px 12px;
-      background: var(--soft);
-      border-radius: 18px;
-    }
-
-    .counterBox strong {
-      display: block;
-      font-size: 24px;
-      color: var(--pink);
-    }
-
-    .counterBox span {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .tools {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-      margin-bottom: 30px;
-    }
-
-    .toolBtn {
-      border: 1px solid var(--border);
-      background: white;
-      border-radius: 18px;
-      padding: 20px;
-      text-align: left;
-      color: var(--dark);
-      transition: 0.2s;
-    }
-
-    .toolBtn:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow);
-      border-color: #e9b8c5;
-    }
-
-    .toolBtn strong {
-      display: block;
-      font-size: 17px;
-      margin-bottom: 5px;
-    }
-
-    .toolBtn span {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .sectionTitle {
-      margin-bottom: 15px;
-    }
-
-    .sectionTitle h3 {
-      font-size: 22px;
-    }
-
-    .sectionTitle p {
-      color: var(--muted);
-      font-size: 14px;
-      margin-top: 4px;
-    }
-
-    /* =========================
-       MONTH GRID
-    ========================= */
-
-    .monthGrid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .monthCard {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      overflow: hidden;
-      box-shadow: 0 6px 22px rgba(126,65,82,0.07);
-      transition: 0.2s;
-    }
-
-    .monthCard:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow);
-    }
-
-    .monthPreview {
-      height: 180px;
-      background: linear-gradient(135deg, #fff0f4, #ffe3eb);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .monthPreview img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .placeholder {
-      color: var(--muted);
-      text-align: center;
-      padding: 20px;
-    }
-
-    .monthInfo {
-      padding: 18px;
-    }
-
-    .monthInfo h4 {
-      font-size: 18px;
-      margin-bottom: 5px;
-    }
-
-    .monthInfo p {
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 12px;
-    }
-
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      background: var(--soft);
-      color: var(--pink);
-      padding: 6px 9px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    /* =========================
-       DETAIL
-    ========================= */
-
-    .detailHeader {
-      background: white;
-      border-radius: 24px;
-      padding: 25px;
-      box-shadow: var(--shadow);
-      margin-bottom: 20px;
-    }
-
-    .detailHeader h2 {
-      margin-bottom: 6px;
-    }
-
-    .detailHeader p {
-      color: var(--muted);
-    }
-
-    .detailGrid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 20px;
-    }
-
-    .panel {
-      background: white;
-      border-radius: 22px;
-      padding: 22px;
-      border: 1px solid var(--border);
-      box-shadow: 0 7px 25px rgba(126,65,82,0.06);
-    }
-
-    .panel h3 {
-      margin-bottom: 15px;
-    }
-
-    /* =========================
-       GALLERY
-    ========================= */
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-
-    .galleryItem {
-      position: relative;
-      aspect-ratio: 1 / 1;
-      border-radius: 15px;
-      overflow: hidden;
-      background: var(--soft);
-    }
-
-    .galleryItem img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .deletePhoto {
-      position: absolute;
-      right: 7px;
-      top: 7px;
-      border: none;
-      background: rgba(0,0,0,0.55);
-      color: white;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-    }
-
-    .photoControls {
-      margin-top: 15px;
-    }
-
-    .photoControls input {
-      width: 100%;
-    }
-
-    .photoHint {
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 8px;
-      line-height: 1.5;
-    }
-
-    /* =========================
-       LETTER
-    ========================= */
-
-    .letterBox {
-      background: linear-gradient(135deg, #fffafb, #fff1f5);
-      border-radius: 18px;
-      padding: 18px;
-    }
-
-    .letterBox textarea {
-      width: 100%;
-      min-height: 180px;
-      resize: vertical;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px;
-      outline: none;
-      background: white;
-      color: var(--dark);
-      line-height: 1.7;
-    }
-
-    .letterBox textarea:focus {
-      border-color: var(--pink);
-      box-shadow: 0 0 0 4px rgba(200,92,120,0.08);
-    }
-
-    .saveLetterBtn {
-      margin-top: 12px;
-      border: none;
-      background: var(--pink);
-      color: white;
-      padding: 11px 16px;
-      border-radius: 12px;
-      font-weight: 700;
-    }
-
-    .detailActions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 15px;
-    }
-
-    .secondaryBtn {
-      border: none;
-      background: var(--soft);
-      color: var(--pink);
-      padding: 10px 14px;
-      border-radius: 12px;
-      font-weight: 700;
-    }
-
-    /* =========================
-       STORY
-    ========================= */
-
-    .storyList {
-      display: grid;
-      gap: 18px;
-    }
-
-    .storyCard {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 6px 22px rgba(126,65,82,0.06);
-    }
-
-    .storyCard h3 {
-      color: var(--pink);
-      margin-bottom: 5px;
-    }
-
-    .storyDate {
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 15px;
-    }
-
-    .storyPhotoGrid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin-bottom: 15px;
-    }
-
-    .storyPhotoGrid img {
-      width: 100%;
-      aspect-ratio: 1;
-      object-fit: cover;
-      border-radius: 10px;
-    }
-
-    .storyLetter {
-      background: var(--soft);
-      border-radius: 14px;
-      padding: 14px;
-      margin-top: 10px;
-      line-height: 1.7;
-      white-space: pre-wrap;
-    }
-
-    .storyLetterTitle {
-      font-weight: 700;
-      color: var(--pink);
-      margin-bottom: 6px;
-    }
-
-    /* =========================
-       MODAL
-    ========================= */
-
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(53, 27, 34, 0.48);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      z-index: 100;
-    }
-
-    .modalCard {
-      width: min(650px, 100%);
-      max-height: 85vh;
-      overflow: auto;
-      background: white;
-      border-radius: 24px;
-      padding: 25px;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.2);
-    }
-
-    .modalHead {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .closeBtn {
-      border: none;
-      background: var(--soft);
-      color: var(--pink);
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      font-size: 20px;
-    }
-
-    .lettersList {
-      display: grid;
-      gap: 12px;
-    }
-
-    .letterItem {
-      background: #fff7f9;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 15px;
-    }
-
-    .letterItemHead {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-
-    .letterNumber {
-      font-weight: 800;
-      color: var(--pink);
-    }
-
-    .letterDate {
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .letterText {
-      white-space: pre-wrap;
-      line-height: 1.7;
-    }
-
-    .deleteLetter {
-      border: none;
-      background: #ffe7ed;
-      color: #b54d66;
-      border-radius: 8px;
-      padding: 5px 8px;
-      font-size: 12px;
-    }
-
-    .empty {
-      text-align: center;
-      color: var(--muted);
-      padding: 30px 15px;
-    }
-
-    /* =========================
-       TOAST
-    ========================= */
-
-    #toast {
-      position: fixed;
-      left: 50%;
-      bottom: 25px;
-      transform: translateX(-50%) translateY(20px);
-      background: #4b343b;
-      color: white;
-      padding: 12px 18px;
-      border-radius: 999px;
-      opacity: 0;
-      pointer-events: none;
-      transition: 0.25s;
-      z-index: 200;
-      font-size: 14px;
-    }
-
-    #toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================= */
-
-    @media (max-width: 800px) {
-      .monthGrid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .detailGrid {
-        grid-template-columns: 1fr;
-      }
-
-      .storyPhotoGrid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    @media (max-width: 560px) {
-      .tools {
-        grid-template-columns: 1fr;
-      }
-
-      .monthGrid {
-        grid-template-columns: 1fr;
-      }
-
-      .gallery {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .storyPhotoGrid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .hero {
-        padding: 30px 20px;
-      }
-
-      .container {
-        width: min(100% - 20px, 1100px);
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Anniversary ♡</title>
+
+<style>
+* { box-sizing:border-box; }
+
+:root {
+    --pink:#c85c78;
+    --dark:#4b343b;
+    --muted:#9b7781;
+    --soft:#fff0f4;
+}
+
+body {
+    margin:0;
+    min-height:100vh;
+    font-family:"Segoe UI","Noto Sans Thai",sans-serif;
+    color:var(--dark);
+    background:linear-gradient(135deg,#fffafb,#ffeef3);
+}
+
+button { font:inherit; }
+
+.screen {
+    display:none;
+    min-height:100vh;
+    padding:25px 16px;
+    align-items:center;
+    justify-content:center;
+}
+
+.screen.active {
+    display:flex;
+    animation:pageIn .32s ease;
+}
+
+.card {
+    width:min(94vw,720px);
+    background:rgba(255,255,255,.88);
+    border:1px solid white;
+    border-radius:30px;
+    padding:32px 22px;
+    box-shadow:0 20px 65px rgba(123,70,93,.09);
+    backdrop-filter:blur(12px);
+}
+
+.center,.detail { text-align:center; }
+
+.heart {
+    font-size:34px;
+    color:var(--pink);
+    animation:beat 1.5s infinite;
+}
+
+h1 {
+    font-size:clamp(32px,8vw,50px);
+    margin:8px 0;
+    font-weight:600;
+}
+
+h2 {
+    font-size:29px;
+    margin:7px 0 10px;
+}
+
+.sub {
+    color:var(--muted);
+    font-size:15px;
+    line-height:1.7;
+}
+
+.pin {
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin:23px 0 16px;
+}
+
+.pin span {
+    width:11px;
+    height:11px;
+    border:1.5px solid #cc91a0;
+    border-radius:50%;
+}
+
+.pin span.on { background:var(--pink); }
+
+.keypad {
+    display:grid;
+    grid-template-columns:repeat(3,62px);
+    gap:9px;
+    justify-content:center;
+}
+
+.key {
+    height:52px;
+    border:0;
+    border-radius:15px;
+    background:var(--soft);
+    color:var(--dark);
+    cursor:pointer;
+    transition:.2s;
+}
+
+.key:hover { transform:translateY(-2px); }
+
+.key.zero { grid-column:2; }
+
+.primary {
+    border:0;
+    background:var(--pink);
+    color:white;
+    border-radius:999px;
+    padding:12px 22px;
+    cursor:pointer;
+    margin-top:17px;
+}
+
+.error {
+    height:22px;
+    color:#c85c78;
+    font-size:13px;
+    margin-top:7px;
+}
+
+.homeHero {
+    text-align:center;
+    padding:15px 0 24px;
+}
+
+.homeHero .date {
+    display:inline-block;
+    background:var(--soft);
+    color:#a15368;
+    border-radius:999px;
+    padding:8px 16px;
+    margin-top:10px;
+    font-size:14px;
+}
+
+.counter {
+    margin:22px auto;
+    padding:17px;
+    background:#fff7f9;
+    border-radius:20px;
+    max-width:430px;
+    color:var(--muted);
+}
+
+.counter strong {
+    display:block;
+    font-size:28px;
+    color:#a15368;
+    margin-top:4px;
+}
+
+.sectionTitle {
+    text-align:center;
+    margin:12px 0 18px;
+}
+
+.months {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.month {
+    position:relative;
+    min-height:118px;
+    border:0;
+    border-radius:20px;
+    background:#fff7f9;
+    padding:19px 8px;
+    cursor:pointer;
+    color:var(--dark);
+    box-shadow:0 5px 18px rgba(123,70,93,.04);
+    transition:.2s;
+}
+
+.month:hover { transform:translateY(-3px); }
+
+.month .num {
+    font-size:12px;
+    color:#b48691;
+}
+
+.month .title {
+    font-size:18px;
+    margin:4px 0;
+}
+
+.month .date {
+    font-size:11px;
+    color:#a9848e;
+}
+
+.month.locked {
+    opacity:.55;
+    cursor:not-allowed;
+}
+
+.month.unlocked {
+    border:1px solid #f2d1da;
+}
+
+.month .status {
+    position:absolute;
+    top:9px;
+    right:10px;
+    font-size:11px;
+    opacity:.8;
+}
+
+.month .thumb {
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    object-fit:cover;
+    margin:5px auto 7px;
+    display:none;
+    border:2px solid white;
+}
+
+.month.hasMemory .thumb { display:block; }
+
+.month.hasMemory .title { margin-top:0; }
+
+.nav {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.nav button {
+    border:0;
+    background:transparent;
+    color:var(--pink);
+    cursor:pointer;
+}
+
+.detailDate {
+    display:inline-block;
+    background:var(--soft);
+    padding:7px 15px;
+    border-radius:999px;
+    color:#a15368;
+    font-size:13px;
+}
+
+.photoArea {
+    margin:22px auto;
+    max-width:500px;
+    aspect-ratio:4/3;
+    border-radius:24px;
+    background:#f7dfe6;
+    border:5px solid white;
+    box-shadow:0 10px 30px rgba(123,70,93,.08);
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#a77a85;
+}
+
+.photoArea img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:none;
+}
+
+.photoArea.has img { display:block; }
+
+.photoArea.has .placeholder { display:none; }
+
+.photoControls,
+.detailActions,
+.backupArea {
+    display:flex;
+    gap:9px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.photoControls label,
+.photoControls button,
+.secondary {
+    border:0;
+    border-radius:999px;
+    padding:10px 16px;
+    background:var(--soft);
+    color:#a15368;
+    cursor:pointer;
+    font-size:13px;
+}
+
+.photoControls input,
+.hiddenFile {
+    display:none;
+}
+
+.small {
+    font-size:12px;
+    color:#aa8992;
+    margin-top:12px;
+}
+
+.note {
+    margin:20px auto;
+    max-width:520px;
+}
+
+textarea {
+    width:100%;
+    min-height:125px;
+    border:1px solid #efd5dd;
+    border-radius:16px;
+    padding:13px;
+    background:#fffafb;
+    resize:vertical;
+    color:var(--dark);
+}
+
+.save {
+    margin-top:9px;
+    border:0;
+    border-radius:999px;
+    background:var(--pink);
+    color:white;
+    padding:10px 18px;
+    cursor:pointer;
+}
+
+.homeTools {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin:18px auto 4px;
+    max-width:600px;
+}
+
+.toolBtn {
+    border:0;
+    border-radius:17px;
+    padding:13px 10px;
+    background:#fff7f9;
+    color:#9d5369;
+    cursor:pointer;
+    transition:.2s;
+    box-shadow:0 5px 18px rgba(123,70,93,.04);
+}
+
+.toolBtn:hover { transform:translateY(-2px); }
+
+.toolBtn strong,
+.toolBtn span {
+    display:block;
+}
+
+.toolBtn strong { font-size:14px; }
+
+.toolBtn span {
+    font-size:11px;
+    color:#aa8992;
+    margin-top:3px;
+}
+
+.nextAnniv {
+    margin:10px auto 0;
+    max-width:430px;
+    padding:12px 15px;
+    border:1px dashed #eccbd5;
+    border-radius:17px;
+    background:#fffafb;
+    color:#9d6877;
+    font-size:13px;
+}
+
+.nextAnniv strong { color:#a15368; }
+
+.memoryCount {
+    margin-top:7px;
+    font-size:12px;
+    color:#aa8992;
+}
+
+.galleryGrid {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:18px;
+}
+
+.galleryItem {
+    position:relative;
+    border-radius:17px;
+    overflow:hidden;
+    background:#fff7f9;
+    aspect-ratio:1;
+    cursor:pointer;
+    border:0;
+    padding:0;
+}
+
+.galleryItem img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.galleryLabel {
+    position:absolute;
+    left:7px;
+    right:7px;
+    bottom:7px;
+    padding:5px 7px;
+    border-radius:10px;
+    background:rgba(255,255,255,.9);
+    color:#8f5667;
+    font-size:10px;
+}
+
+.emptyState {
+    padding:35px 15px;
+    text-align:center;
+    color:#a77a85;
+    background:#fff7f9;
+    border-radius:20px;
+    grid-column:1/-1;
+}
+
+.story {
+    max-width:600px;
+    margin:10px auto 0;
+    text-align:left;
+}
+
+.storyItem {
+    position:relative;
+    padding:0 0 18px 25px;
+    border-left:2px solid #efd5dd;
+}
+
+.storyItem:last-child {
+    border-left-color:transparent;
+}
+
+.storyDot {
+    position:absolute;
+    left:-7px;
+    top:1px;
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:var(--pink);
+    border:2px solid white;
+}
+
+.storyTitle {
+    font-weight:600;
+    color:#7e4c5c;
+}
+
+.storyDate {
+    font-size:11px;
+    color:#ad8993;
+    margin:2px 0 5px;
+}
+
+.storyText {
+    font-size:13px;
+    color:#725b63;
+    white-space:pre-wrap;
+    line-height:1.7;
+}
+
+/* =========================
+   MEMORY LETTERS
+========================= */
+
+.letterList {
+    margin-top:18px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.letter {
+    position:relative;
+    margin:0;
+    padding:18px 48px 18px 18px;
+    border-radius:20px;
+    background:linear-gradient(145deg,#fff7f9,#fffafb);
+    border:1px solid #f0d8df;
+    text-align:left;
+}
+
+.letter h3 {
+    margin:0 0 8px;
+    color:#8d5264;
+    font-size:15px;
+}
+
+.letter p {
+    margin:0;
+    color:#725b63;
+    line-height:1.8;
+    white-space:pre-wrap;
+    word-break:break-word;
+}
+
+.letterDelete {
+    position:absolute;
+    top:12px;
+    right:12px;
+    width:32px;
+    height:32px;
+    border:0;
+    border-radius:50%;
+    background:#fff0f4;
+    color:#b35c73;
+    cursor:pointer;
+}
+
+.letterDelete:hover {
+    background:#f9dce5;
+}
+
+.letterEmpty {
+    padding:25px 15px;
+    text-align:center;
+    color:#a77a85;
+    background:#fff7f9;
+    border-radius:18px;
+    font-size:13px;
+}
+
+.letterInputTitle {
+    margin:22px 0 8px;
+    color:#8d5264;
+    font-size:14px;
+    text-align:left;
+}
+
+.letterHint {
+    font-size:12px;
+    color:#aa8992;
+    margin-top:7px;
+    text-align:center;
+}
+
+.backupHint {
+    font-size:12px;
+    color:#a77a85;
+    line-height:1.7;
+    margin:12px 0;
+}
+
+.modal {
+    position:fixed;
+    inset:0;
+    background:rgba(75,52,59,.28);
+    backdrop-filter:blur(6px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+    z-index:40;
+}
+
+.modal.show { display:flex; }
+
+.modalCard {
+    width:min(94vw,600px);
+    max-height:88vh;
+    overflow:auto;
+    background:white;
+    border-radius:26px;
+    padding:24px;
+    box-shadow:0 20px 70px rgba(75,52,59,.2);
+}
+
+.modalHead {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+}
+
+.modalHead h2 { margin:0; }
+
+.closeBtn {
+    border:0;
+    background:var(--soft);
+    color:#a15368;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    cursor:pointer;
+}
+
+.toast {
+    position:fixed;
+    left:50%;
+    bottom:22px;
+    transform:translate(-50%,20px);
+    opacity:0;
+    pointer-events:none;
+    background:rgba(75,52,59,.92);
+    color:white;
+    padding:10px 16px;
+    border-radius:999px;
+    font-size:13px;
+    z-index:50;
+    transition:.25s;
+}
+
+.toast.show {
+    opacity:1;
+    transform:translate(-50%,0);
+}
+
+button:focus-visible,
+label:focus-visible,
+textarea:focus-visible,
+input:focus-visible {
+    outline:2px solid var(--pink);
+    outline-offset:3px;
+}
+
+@media (max-width:520px) {
+    .months {
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .card {
+        padding:27px 16px;
+    }
+
+    .photoArea {
+        aspect-ratio:1/1;
+    }
+
+    .homeTools {
+        grid-template-columns:1fr;
+    }
+
+    .galleryGrid {
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .month {
+        min-height:112px;
+        padding:15px 7px;
+    }
+}
+
+@keyframes beat {
+    50% { transform:scale(1.12); }
+}
+
+@keyframes pageIn {
+    from {
+        opacity:0;
+        transform:translateY(8px);
+    }
+
+    to {
+        opacity:1;
+        transform:none;
+    }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- =========================
-       LOCK
-  ========================= -->
+<!-- LOCK -->
+<section id="lock" class="screen active">
+    <div class="card center">
+        <div class="heart">♡</div>
+        <h1>Our Little Story</h1>
+        <div class="sub">มีเรื่องราวเล็ก ๆ ที่อยากให้เธอเปิดดู</div>
 
-  <section id="lock">
-    <div class="lockCard">
-      <div class="heart">♡</div>
+        <div class="pin" id="pin">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
 
-      <h1>Our Little Story</h1>
+        <div class="keypad">
+            <button class="key" onclick="press('1')">1</button>
+            <button class="key" onclick="press('2')">2</button>
+            <button class="key" onclick="press('3')">3</button>
+            <button class="key" onclick="press('4')">4</button>
+            <button class="key" onclick="press('5')">5</button>
+            <button class="key" onclick="press('6')">6</button>
+            <button class="key" onclick="press('7')">7</button>
+            <button class="key" onclick="press('8')">8</button>
+            <button class="key" onclick="press('9')">9</button>
+            <button class="key zero" onclick="press('0')">0</button>
+        </div>
 
-      <p>
-        พื้นที่เล็ก ๆ สำหรับเก็บความทรงจำของเรา
-      </p>
+        <button class="primary" onclick="unlock()">Unlock ♡</button>
 
-      <input
-        id="pinInput"
-        class="pinInput"
-        type="password"
-        maxlength="4"
-        inputmode="numeric"
-        placeholder="••••"
-      >
+        <div class="error" id="error"></div>
 
-      <button class="mainBtn" onclick="unlock()">
-        เปิดความทรงจำ ♡
-      </button>
-
-      <div id="pinError" class="error"></div>
+        <div class="small">รหัสลับ 4 ตัวเลข</div>
     </div>
-  </section>
+</section>
 
 
-  <!-- =========================
-       APP
-  ========================= -->
+<!-- HOME -->
+<section id="home" class="screen">
+    <div class="card">
 
-  <div id="app" class="hidden">
+        <div class="homeHero">
+            <div class="heart">♥</div>
+            <h1>Happy Anniversary</h1>
 
-    <header class="topbar">
-      <div class="topbarInner">
+            <div class="sub">
+                เรื่องราวของเราจะถูกเก็บไว้ทีละเดือน ♡
+            </div>
 
-        <div class="brand">
-          Our Anniversary <span>♡</span>
+            <div class="date">
+                เริ่มต้น 05 • 08 • 2026
+            </div>
+
+            <div class="counter">
+                เราเดินทางมาด้วยกันแล้ว
+                <strong id="days">0 วัน</strong>
+            </div>
+
+            <div class="nextAnniv" id="nextAnniv"></div>
         </div>
 
-        <button
-          id="backButton"
-          class="backBtn hidden"
-          onclick="goHome()"
-        >
-          ← Home
-        </button>
+        <div class="homeTools">
+            <button class="toolBtn" onclick="openGallery()">
+                <strong>🖼️ All Memories</strong>
+                <span>รวมรูปทั้งหมด</span>
+            </button>
 
-      </div>
-    </header>
+            <button class="toolBtn" onclick="openStory()">
+                <strong>📖 Our Story</strong>
+                <span>ไทม์ไลน์ความทรงจำ</span>
+            </button>
 
-
-    <!-- =========================
-         HOME
-    ========================= -->
-
-    <main id="home" class="container">
-
-      <section class="hero">
-
-        <div class="small">
-          Since 05/08/2026
+            <button class="toolBtn" onclick="openBackup()">
+                <strong>💾 Backup</strong>
+                <span>สำรอง / กู้คืนข้อมูล</span>
+            </button>
         </div>
-
-        <h2>Our Little Story ♡</h2>
-
-        <p>
-          ทุกเดือนจะมีความทรงจำใหม่เพิ่มเข้ามา
-          และเรื่องราวของเราจะค่อย ๆ เติบโตไปด้วยกัน
-        </p>
-
-        <div class="counter">
-
-          <div class="counterBox">
-            <strong id="daysTogether">0</strong>
-            <span>วันที่อยู่ด้วยกัน</span>
-          </div>
-
-          <div class="counterBox">
-            <strong id="monthsTogether">0</strong>
-            <span>เดือน</span>
-          </div>
-
-          <div class="counterBox">
-            <strong id="memoryCount">0</strong>
-            <span>ความทรงจำ</span>
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <section class="tools">
-
-        <button class="toolBtn" onclick="openAllMemories()">
-          <strong>📖 All Memories</strong>
-          <span>ดูความทรงจำทั้งหมดของเรา</span>
-        </button>
-
-        <button class="toolBtn" onclick="openStory()">
-          <strong>💌 Our Story</strong>
-          <span>อ่านเรื่องราวและจดหมายของเรา</span>
-        </button>
-
-      </section>
-
-
-      <section>
 
         <div class="sectionTitle">
-          <h3>Our Months ♡</h3>
-          <p>เลือกเดือนเพื่อเพิ่มรูปและข้อความ</p>
+            <h2>Our Journey</h2>
+            <div class="sub">
+                เดือนที่เปิดแล้วจะมีหัวใจ ♡ ส่วนเดือนในอนาคตจะล็อกไว้
+            </div>
         </div>
 
-        <div id="monthGrid" class="monthGrid"></div>
+        <div class="months" id="months"></div>
 
-      </section>
-
-    </main>
-
-
-    <!-- =========================
-         DETAIL
-    ========================= -->
-
-    <main id="detail" class="container hidden">
-
-      <section class="detailHeader">
-
-        <h2 id="detailTitle">
-          Month 1
-        </h2>
-
-        <p id="detailDate">
-          05/08/2026
-        </p>
-
-      </section>
+    </div>
+</section>
 
 
-      <div class="detailGrid">
+<!-- DETAIL -->
+<section id="detail" class="screen">
+    <div class="card detail">
 
-        <!-- PHOTO -->
+        <div class="nav">
+            <button onclick="show('home')">← กลับ</button>
+            <span id="detailNumber"></span>
+            <button id="nextBtn" onclick="nextMonth()">ถัดไป →</button>
+        </div>
 
-        <section class="panel">
+        <div class="heart">♡</div>
 
-          <h3>📸 Our Photos</h3>
+        <h2 id="detailTitle"></h2>
 
-          <div id="gallery" class="gallery"></div>
+        <div class="detailDate" id="detailDate"></div>
 
-          <div class="photoControls">
-
-            <input
-              id="photoInput"
-              type="file"
-              accept="image/*"
-              multiple
-              onchange="addPhotos(event)"
-            >
-
-            <div class="photoHint">
-              เลือกรูปภาพได้หลายรูปพร้อมกัน
-              รูปจะถูกเก็บไว้ใน Browser ของเครื่องนี้
+        <div class="photoArea" id="photoArea">
+            <div class="placeholder">
+                กด “เพิ่มรูป” เพื่อใส่รูปของเดือนนี้ ♡
             </div>
 
-          </div>
-
-        </section>
-
-
-        <!-- LETTER -->
-
-        <section class="panel">
-
-          <h3>💌 Memory Letter</h3>
-
-          <div class="letterBox">
-
-            <textarea
-              id="note"
-              placeholder="เขียนข้อความหรือความรู้สึกของเดือนนี้..."
-            ></textarea>
-
-            <button
-              class="saveLetterBtn"
-              onclick="saveNote()"
-            >
-              บันทึกข้อความ ♡
-            </button>
-
-          </div>
-
-
-          <div class="detailActions">
-
-            <button
-              class="secondaryBtn"
-              onclick="openLetter()"
-            >
-              💌 ดูข้อความทั้งหมด
-            </button>
-
-          </div>
-
-        </section>
-
-      </div>
-
-    </main>
-
-
-    <!-- =========================
-         STORY
-    ========================= -->
-
-    <main id="story" class="container hidden">
-
-      <section class="detailHeader">
-
-        <h2>Our Story ♡</h2>
-
-        <p>
-          เรื่องราวทั้งหมดที่เราเก็บไว้ด้วยกัน
-        </p>
-
-      </section>
-
-      <div id="storyList" class="storyList"></div>
-
-    </main>
-
-  </div>
-
-
-  <!-- =========================
-       LETTER MODAL
-  ========================= -->
-
-  <div
-    id="letterModal"
-    class="modal hidden"
-    onclick="closeModalOutside(event)"
-  >
-
-    <div class="modalCard">
-
-      <div class="modalHead">
-
-        <div>
-          <h2 id="modalTitle">
-            Memory Letter
-          </h2>
-
-          <p
-            id="modalSubtitle"
-            style="color:var(--muted);font-size:13px;"
-          ></p>
+            <img id="monthPhoto" alt="รูปความทรงจำ">
         </div>
 
-        <button
-          class="closeBtn"
-          onclick="closeLetter()"
-        >
-          ×
-        </button>
+        <div class="photoControls">
+            <label>
+                ＋ เพิ่มรูป
+                <input
+                    id="photoInput"
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onchange="loadPhotos(event)"
+                >
+            </label>
 
-      </div>
+            <button onclick="removePhotos()">
+                ลบรูปทั้งหมด
+            </button>
+        </div>
 
-      <div
-        id="lettersList"
-        class="lettersList"
-      ></div>
+        <div class="memoryCount" id="memoryCount"></div>
+
+        <div class="galleryGrid" id="monthGallery"></div>
+
+        <div class="detailActions">
+            <button class="secondary" onclick="openLetter()">
+                ✉️ Memory Letter
+            </button>
+
+            <button class="secondary" onclick="openGallery()">
+                🖼️ ดู All Memories
+            </button>
+        </div>
+
+        <p class="small">
+            รูปและข้อความจะถูกเก็บไว้ในเบราว์เซอร์เครื่องนี้
+            หากเปลี่ยนเครื่องควร Export Backup ไว้ก่อน
+        </p>
+
+        <!-- Memory Letter Input -->
+        <div class="note">
+
+            <div class="letterInputTitle">
+                ✉️ เขียน Memory Letter
+            </div>
+
+            <textarea
+                id="note"
+                placeholder="เขียนข้อความถึงเธอสำหรับเดือนนี้..."
+            ></textarea>
+
+            <button class="save" onclick="saveNote()">
+                💌 บันทึก Memory Letter
+            </button>
+
+            <div class="letterHint">
+                กดบันทึกแล้วสามารถเขียนจดหมายฉบับใหม่ต่อได้เลย ♡
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- GALLERY -->
+<section id="gallery" class="screen">
+    <div class="card">
+
+        <div class="nav">
+            <button onclick="show('home')">← กลับ</button>
+            <span>All Memories</span>
+            <span></span>
+        </div>
+
+        <div class="center">
+            <div class="heart">♡</div>
+            <h2>All Memories</h2>
+
+            <div class="sub">
+                รวมรูปความทรงจำจากทุกเดือนที่บันทึกไว้
+            </div>
+        </div>
+
+        <div class="galleryGrid" id="allGallery"></div>
+
+    </div>
+</section>
+
+
+<!-- STORY -->
+<section id="story" class="screen">
+    <div class="card">
+
+        <div class="nav">
+            <button onclick="show('home')">← กลับ</button>
+            <span>Our Story</span>
+            <span></span>
+        </div>
+
+        <div class="center">
+            <div class="heart">♡</div>
+            <h2>Our Story</h2>
+
+            <div class="sub">
+                ทุกเดือนคืออีกหนึ่งบทของเรื่องราว
+            </div>
+        </div>
+
+        <div class="story" id="storyList"></div>
+
+    </div>
+</section>
+
+
+<!-- BACKUP -->
+<section id="backup" class="screen">
+    <div class="card">
+
+        <div class="nav">
+            <button onclick="show('home')">← กลับ</button>
+            <span>Backup</span>
+            <span></span>
+        </div>
+
+        <div class="center">
+            <div class="heart">♡</div>
+            <h2>Backup & Restore</h2>
+
+            <div class="sub">
+                สำรองรูปและข้อความทั้งหมดเป็นไฟล์เดียว
+                เพื่อย้ายเครื่องหรือเก็บไว้กันข้อมูลหาย
+            </div>
+        </div>
+
+        <div class="backupArea">
+
+            <button class="primary" onclick="exportBackup()">
+                ⬇ Export Backup
+            </button>
+
+            <label class="secondary">
+                ⬆ Import Backup
+                <input
+                    class="hiddenFile"
+                    type="file"
+                    accept=".json,application/json"
+                    onchange="importBackup(event)"
+                >
+            </label>
+
+        </div>
+
+        <div class="backupHint">
+            Backup จะเก็บข้อมูลความทรงจำใน localStorage
+            ของเว็บไซต์นี้เท่านั้น ไม่ได้ส่งข้อมูลไปยังเซิร์ฟเวอร์
+            <br>
+            แนะนำให้ Export เป็นระยะ โดยเฉพาะก่อนเปลี่ยนอุปกรณ์
+            หรือเคลียร์ข้อมูลเว็บไซต์
+        </div>
+
+    </div>
+</section>
+
+
+<!-- MEMORY LETTER MODAL -->
+<div
+    class="modal"
+    id="letterModal"
+    onclick="closeModal(event)"
+>
+
+    <div
+        class="modalCard"
+        onclick="event.stopPropagation()"
+    >
+
+        <div class="modalHead">
+            <h2>Memory Letters 💌</h2>
+
+            <button
+                class="closeBtn"
+                onclick="closeLetter()"
+            >
+                ×
+            </button>
+        </div>
+
+        <div
+            class="sub"
+            id="letterMonth"
+            style="margin-top:8px;"
+        ></div>
+
+        <div
+            class="letterList"
+            id="letterList"
+        ></div>
 
     </div>
 
-  </div>
+</div>
 
 
-  <!-- =========================
-       TOAST
-  ========================= -->
-
-  <div id="toast"></div>
+<div class="toast" id="toast"></div>
 
 
-  <script>
+<script>
 
-    /* =========================
-       CONFIG
-    ========================= */
+const CONFIG = {
+    password:"2704",
+    startDate:"2026-08-05",
+    totalMonths:60
+};
 
-    const PIN = "2704";
-    const startDate = new Date("2026-08-05T00:00:00");
+let entered = "";
+let currentMonth = 1;
 
-    let currentMonth = 1;
+const pad = n => String(n).padStart(2,"0");
 
+const photoKey = m => "photos_" + m;
 
-    /* =========================
-       MONTH DATA
-    ========================= */
+/*
+    Memory Letter จะใช้ key:
+    letters_1
+    letters_2
+    letters_3
+    ...
+*/
+const letterKey = m => "letters_" + m;
 
-    const months = [
-      {
-        month: 1,
-        title: "1 Month",
-        date: "05/08/2026"
-      },
-      {
-        month: 2,
-        title: "2 Months",
-        date: "05/09/2026"
-      },
-      {
-        month: 3,
-        title: "3 Months",
-        date: "05/10/2026"
-      },
-      {
-        month: 4,
-        title: "4 Months",
-        date: "05/11/2026"
-      },
-      {
-        month: 5,
-        title: "5 Months",
-        date: "05/12/2026"
-      },
-      {
-        month: 6,
-        title: "6 Months",
-        date: "05/01/2027"
-      },
-      {
-        month: 7,
-        title: "7 Months",
-        date: "05/02/2027"
-      },
-      {
-        month: 8,
-        title: "8 Months",
-        date: "05/03/2027"
-      },
-      {
-        month: 9,
-        title: "9 Months",
-        date: "05/04/2027"
-      },
-      {
-        month: 10,
-        title: "10 Months",
-        date: "05/05/2027"
-      },
-      {
-        month: 11,
-        title: "11 Months",
-        date: "05/06/2027"
-      },
-      {
-        month: 12,
-        title: "1 Year ♡",
-        date: "05/07/2027"
-      }
-    ];
+/*
+    รองรับข้อมูลเก่า
+*/
+const noteKey = m => "note_" + m;
 
 
-    /* =========================
-       STORAGE
-    ========================= */
+/* =========================
+   PIN
+========================= */
 
-    const photoKey = m => "photos_" + m;
-    const letterKey = m => "letters_" + m;
+function press(number){
 
+    if(entered.length >= 4) return;
 
-    function getPhotos(month) {
+    entered += number;
 
-      try {
+    renderPin();
 
-        return JSON.parse(
-          localStorage.getItem(photoKey(month)) || "[]"
-        );
-
-      } catch {
-
-        return [];
-
-      }
-
+    if(entered.length === 4){
+        setTimeout(unlock,180);
     }
+}
 
-
-    function savePhotos(month, photos) {
-
-      localStorage.setItem(
-        photoKey(month),
-        JSON.stringify(photos)
-      );
-
-    }
-
-
-    /* =========================
-       LETTER SYSTEM
-    ========================= */
-
-    function getLetters(month) {
-
-      try {
-
-        const saved = localStorage.getItem(
-          letterKey(month)
-        );
-
-        if (saved) {
-
-          const parsed = JSON.parse(saved);
-
-          if (Array.isArray(parsed)) {
-            return parsed;
-          }
-
-        }
-
-      } catch {}
-
-
-
-      /*
-        Migration:
-        ถ้าเว็บเวอร์ชันเก่ามี note_1,
-        note_2 ฯลฯ ให้ย้ายมาเป็น Memory Letter
-      */
-
-      const oldNote = localStorage.getItem(
-        "note_" + month
-      );
-
-      if (oldNote && oldNote.trim()) {
-
-        const migrated = [
-          {
-            id:
-              Date.now().toString() +
-              "_" +
-              Math.random().toString(36).slice(2),
-
-            text: oldNote.trim(),
-
-            createdAt:
-              new Date().toISOString()
-          }
-        ];
-
-        saveLetters(month, migrated);
-
-        return migrated;
-
-      }
-
-      return [];
-
-    }
-
-
-    function saveLetters(month, letters) {
-
-      localStorage.setItem(
-        letterKey(month),
-        JSON.stringify(letters)
-      );
-
-    }
-
-
-    function hasLetters(month) {
-
-      return getLetters(month).length > 0;
-
-    }
-
-
-    function hasMemory(month) {
-
-      return (
-        getPhotos(month).length > 0 ||
-        hasLetters(month)
-      );
-
-    }
-
-
-    /* =========================
-       UNLOCK
-    ========================= */
-
-    function unlock() {
-
-      const value =
-        document.getElementById("pinInput").value.trim();
-
-      const error =
-        document.getElementById("pinError");
-
-
-      if (value === PIN) {
-
-        document
-          .getElementById("lock")
-          .classList.add("hidden");
-
-        document
-          .getElementById("app")
-          .classList.remove("hidden");
-
-        error.textContent = "";
-
-        init();
-
-      } else {
-
-        error.textContent =
-          "รหัสไม่ถูกต้อง ลองใหม่อีกครั้งนะ ♡";
-
-      }
-
-    }
-
+function renderPin(){
 
     document
-      .getElementById("pinInput")
-      .addEventListener("keydown", e => {
+        .querySelectorAll("#pin span")
+        .forEach((dot,index)=>{
+            dot.classList.toggle(
+                "on",
+                index < entered.length
+            );
+        });
 
-        if (e.key === "Enter") {
-          unlock();
-        }
+}
 
-      });
+function unlock(){
 
+    if(entered === CONFIG.password){
 
-    /* =========================
-       INIT
-    ========================= */
+        entered = "";
 
-    function init() {
+        renderPin();
 
-      renderMonths();
-      updateCounter();
-      showPage("home");
+        document.getElementById("error").textContent = "";
 
-    }
+        show("home");
 
+        toast("เปิดเรื่องราวของเราแล้ว ♡");
 
-    /* =========================
-       COUNTER
-    ========================= */
+    }else{
 
-    function updateCounter() {
+        document.getElementById("error").textContent =
+            "รหัสไม่ถูกต้อง ลองใหม่อีกครั้ง ♡";
 
-      const now = new Date();
+        entered = "";
 
-      const diff =
-        Math.max(
-          0,
-          now - startDate
-        );
-
-      const days =
-        Math.floor(
-          diff / (1000 * 60 * 60 * 24)
-        );
-
-
-      let monthsTogether =
-        (now.getFullYear() - startDate.getFullYear()) * 12 +
-        (now.getMonth() - startDate.getMonth());
-
-
-      if (
-        now.getDate() <
-        startDate.getDate()
-      ) {
-
-        monthsTogether--;
-
-      }
-
-
-      monthsTogether =
-        Math.max(0, monthsTogether);
-
-
-      let memoryCount = 0;
-
-      months.forEach(m => {
-
-        if (hasMemory(m.month)) {
-          memoryCount++;
-        }
-
-      });
-
-
-      document.getElementById(
-        "daysTogether"
-      ).textContent = days;
-
-
-      document.getElementById(
-        "monthsTogether"
-      ).textContent = monthsTogether;
-
-
-      document.getElementById(
-        "memoryCount"
-      ).textContent = memoryCount;
+        renderPin();
 
     }
+}
 
 
-    /* =========================
-       MONTH GRID
-    ========================= */
+/* =========================
+   NAVIGATION
+========================= */
 
-    function renderMonths() {
+function show(id){
 
-      const grid =
-        document.getElementById("monthGrid");
+    document
+        .querySelectorAll(".screen")
+        .forEach(s=>s.classList.remove("active"));
 
-      grid.innerHTML = "";
+    const target = document.getElementById(id);
+
+    if(!target) return;
+
+    target.classList.add("active");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+    if(id === "home") renderMonths();
+
+    if(id === "gallery") renderAllGallery();
+
+    if(id === "story") renderStory();
+
+}
 
 
-      months.forEach(m => {
+/* =========================
+   DATE
+========================= */
+
+function anniversaryDate(month){
+
+    const date =
+        new Date(CONFIG.startDate + "T00:00:00");
+
+    date.setMonth(date.getMonth() + month);
+
+    return date;
+}
+
+function isUnlocked(month){
+
+    return new Date() >= anniversaryDate(month);
+
+}
+
+function formatDate(date){
+
+    return (
+        pad(date.getDate()) +
+        " • " +
+        pad(date.getMonth()+1) +
+        " • " +
+        date.getFullYear()
+    );
+
+}
+
+
+/* =========================
+   PHOTOS
+========================= */
+
+function getPhotos(month){
+
+    try{
+        return JSON.parse(
+            localStorage.getItem(photoKey(month)) || "[]"
+        );
+    }catch{
+        return [];
+    }
+
+}
+
+function savePhotos(month,photos){
+
+    try{
+
+        localStorage.setItem(
+            photoKey(month),
+            JSON.stringify(photos)
+        );
+
+        return true;
+
+    }catch{
+
+        alert(
+            "พื้นที่จัดเก็บของเบราว์เซอร์ไม่พอสำหรับรูปชุดนี้ " +
+            "ลองใช้รูปที่เล็กลงหรือ Export Backup แล้วลบรูปเก่า"
+        );
+
+        return false;
+    }
+
+}
+
+
+/* =========================
+   MEMORY LETTER
+========================= */
+
+/*
+    ดึง Memory Letters ของเดือนนั้น
+
+    รูปแบบข้อมูล:
+
+    [
+        {
+            id: "...",
+            text: "...",
+            createdAt: "..."
+        }
+    ]
+*/
+
+function getLetters(month){
+
+    try{
+
+        const saved =
+            localStorage.getItem(letterKey(month));
+
+        if(saved){
+
+            const letters = JSON.parse(saved);
+
+            if(Array.isArray(letters)){
+                return letters;
+            }
+
+        }
+
+    }catch{}
+
+    /*
+        Migration:
+        ถ้าเว็บไซต์เวอร์ชันเก่ามี note_1
+        จะเปลี่ยนให้กลายเป็น Memory Letter อัตโนมัติ
+    */
+
+    const oldNote =
+        localStorage.getItem(noteKey(month));
+
+    if(oldNote && oldNote.trim()){
+
+        const migrated = [{
+            id:Date.now().toString(),
+            text:oldNote.trim(),
+            createdAt:new Date().toISOString()
+        }];
+
+        try{
+
+            localStorage.setItem(
+                letterKey(month),
+                JSON.stringify(migrated)
+            );
+
+            /*
+                ไม่ลบ note เดิม
+                เพื่อความปลอดภัยของข้อมูลเก่า
+            */
+
+        }catch{}
+
+        return migrated;
+    }
+
+    return [];
+
+}
+
+
+function saveLetters(month,letters){
+
+    try{
+
+        localStorage.setItem(
+            letterKey(month),
+            JSON.stringify(letters)
+        );
+
+        return true;
+
+    }catch{
+
+        alert(
+            "ไม่สามารถบันทึก Memory Letter ได้ " +
+            "พื้นที่จัดเก็บของเบราว์เซอร์อาจเต็ม"
+        );
+
+        return false;
+    }
+
+}
+
+
+function hasLetters(month){
+
+    return getLetters(month).length > 0;
+
+}
+
+
+/*
+    มี Memory หรือไม่
+*/
+function hasMemory(month){
+
+    return (
+        getPhotos(month).length > 0 ||
+        hasLetters(month)
+    );
+
+}
+
+
+/* =========================
+   MONTHS
+========================= */
+
+function renderMonths(){
+
+    const box =
+        document.getElementById("months");
+
+    box.innerHTML = "";
+
+    for(
+        let month=1;
+        month<=CONFIG.totalMonths;
+        month++
+    ){
+
+        const unlocked =
+            isUnlocked(month);
 
         const photos =
-          getPhotos(m.month);
+            getPhotos(month);
 
-        const has =
-          hasMemory(m.month);
+        const button =
+            document.createElement("button");
 
+        button.className =
+            "month " +
+            (unlocked ? "unlocked" : "locked") +
+            (hasMemory(month) ? " hasMemory" : "");
 
-        const card =
-          document.createElement("div");
+        button.innerHTML = `
 
-        card.className = "monthCard";
+            <span class="status">
+                ${
+                    unlocked
+                    ? (
+                        hasMemory(month)
+                        ? "♡"
+                        : "○"
+                    )
+                    : "🔒"
+                }
+            </span>
 
-        card.onclick = () =>
-          openMonth(m.month);
+            ${
+                photos[0]
+                ? `
+                    <img
+                        class="thumb"
+                        src="${photos[0]}"
+                        alt=""
+                    >
+                `
+                : ""
+            }
 
-
-        const preview =
-          document.createElement("div");
-
-        preview.className =
-          "monthPreview";
-
-
-        if (photos.length > 0) {
-
-          const img =
-            document.createElement("img");
-
-          img.src = photos[0];
-
-          preview.appendChild(img);
-
-        } else {
-
-          preview.innerHTML = `
-            <div class="placeholder">
-              ♡<br>
-              ยังไม่มีรูปของเดือนนี้
+            <div class="num">
+                CHAPTER ${pad(month)}
             </div>
-          `;
+
+            <div class="title">
+                ${unlocked ? "♡" : "🔒"}
+                Month ${month}
+            </div>
+
+            <div class="date">
+                ${formatDate(anniversaryDate(month))}
+            </div>
+
+        `;
+
+        button.onclick = () =>
+            unlocked
+            ? openMonth(month)
+            : toast("เดือนนี้ยังไม่ถึงวันครบรอบ ♡");
+
+        box.appendChild(button);
+    }
+
+    updateCounter();
+
+}
+
+
+/* =========================
+   COUNTER
+========================= */
+
+function updateCounter(){
+
+    const start =
+        new Date(CONFIG.startDate+"T00:00:00");
+
+    const now = new Date();
+
+    const days =
+        Math.max(
+            0,
+            Math.floor(
+                (now-start)/86400000
+            )
+        );
+
+    document.getElementById("days")
+        .textContent = days + " วัน";
+
+    const next = nextAnniversary();
+
+    const el =
+        document.getElementById("nextAnniv");
+
+    if(!next){
+
+        el.innerHTML =
+            "🎉 ครบรอบทุกเดือนที่เปิดแล้ว " +
+            "เก็บความทรงจำต่อได้เลย ♡";
+
+        return;
+    }
+
+    const diff =
+        Math.ceil(
+            (next.date-now)/86400000
+        );
+
+    el.innerHTML = `
+        ⏳ ครบรอบเดือนถัดไป:
+        <strong>Month ${next.month}</strong>
+        ในอีก
+        <strong>${Math.max(0,diff)} วัน</strong>
+        <br>
+        <span>${formatDate(next.date)}</span>
+    `;
+
+}
+
+function nextAnniversary(){
+
+    for(
+        let month=1;
+        month<=CONFIG.totalMonths;
+        month++
+    ){
+
+        const date =
+            anniversaryDate(month);
+
+        if(date > new Date()){
+            return {
+                month,
+                date
+            };
+        }
+
+    }
+
+    return null;
+}
+
+
+/* =========================
+   OPEN MONTH
+========================= */
+
+function openMonth(month){
+
+    if(!isUnlocked(month)){
+        return toast(
+            "เดือนนี้ยังไม่ถึงวันครบรอบ ♡"
+        );
+    }
+
+    currentMonth = month;
+
+    show("detail");
+
+    document.getElementById("detailNumber")
+        .textContent =
+        "CHAPTER " + pad(month);
+
+    document.getElementById("detailTitle")
+        .textContent =
+        "Month " + month + " ♡";
+
+    document.getElementById("detailDate")
+        .textContent =
+        formatDate(
+            anniversaryDate(month)
+        );
+
+    /*
+        สำคัญ:
+        textarea จะเริ่มว่างเสมอ
+        เพราะใช้สำหรับสร้าง Letter ใหม่
+    */
+    document.getElementById("note").value = "";
+
+    loadSavedPhotos();
+
+}
+
+
+function nextMonth(){
+
+    const next = currentMonth + 1;
+
+    if(
+        next <= CONFIG.totalMonths &&
+        isUnlocked(next)
+    ){
+
+        openMonth(next);
+
+    }else{
+
+        toast(
+            "เดือนถัดไปยังไม่ถึงวันครบรอบนะ ♡"
+        );
+
+    }
+
+}
+
+
+/* =========================
+   SAVE MEMORY LETTER
+========================= */
+
+function saveNote(){
+
+    const textarea =
+        document.getElementById("note");
+
+    const text =
+        textarea.value.trim();
+
+    /*
+        ป้องกันการบันทึกข้อความว่าง
+    */
+    if(!text){
+
+        toast(
+            "ลองเขียนข้อความก่อนบันทึกนะ ♡"
+        );
+
+        textarea.focus();
+
+        return;
+    }
+
+    /*
+        ดึงจดหมายเก่าทั้งหมด
+    */
+    const letters =
+        getLetters(currentMonth);
+
+    /*
+        เพิ่มจดหมายใหม่
+        โดยไม่ลบของเก่า
+    */
+    letters.push({
+
+        id:
+            Date.now().toString() +
+            Math.random().toString(16).slice(2),
+
+        text:text,
+
+        createdAt:
+            new Date().toISOString()
+
+    });
+
+    /*
+        จำกัดจำนวนไว้ 100 ฉบับต่อเดือน
+        เผื่อป้องกัน localStorage เต็ม
+    */
+    const finalLetters =
+        letters.slice(-100);
+
+    if(
+        saveLetters(
+            currentMonth,
+            finalLetters
+        )
+    ){
+
+        /*
+            สำคัญ:
+            ล้างกล่องข้อความทันที
+        */
+        textarea.value = "";
+
+        renderMonths();
+
+        toast(
+            "บันทึก Memory Letter แล้ว ♡"
+        );
+
+    }
+
+}
+
+
+/* =========================
+   SHOW MEMORY LETTERS
+========================= */
+
+function openLetter(){
+
+    document.getElementById("letterMonth")
+        .textContent =
+        `Month ${currentMonth} · ${formatDate(
+            anniversaryDate(currentMonth)
+        )}`;
+
+    renderLetters();
+
+    document
+        .getElementById("letterModal")
+        .classList.add("show");
+
+}
+
+
+function renderLetters(){
+
+    const box =
+        document.getElementById("letterList");
+
+    const letters =
+        getLetters(currentMonth);
+
+    if(!letters.length){
+
+        box.innerHTML = `
+            <div class="letterEmpty">
+                ยังไม่มี Memory Letter สำหรับเดือนนี้ ♡
+                <br>
+                ลองเขียนข้อความแรกของเราดูนะ
+            </div>
+        `;
+
+        return;
+    }
+
+    /*
+        แสดงจดหมายล่าสุดก่อน
+    */
+    const reversed =
+        [...letters].reverse();
+
+    box.innerHTML =
+        reversed.map((letter,index)=>{
+
+            const date =
+                letter.createdAt
+                ? new Date(letter.createdAt)
+                : null;
+
+            const dateText =
+                date && !isNaN(date)
+                ? `${pad(date.getDate())}/${pad(
+                    date.getMonth()+1
+                  )}/${date.getFullYear()}`
+                : "";
+
+            return `
+
+                <div class="letter">
+
+                    <button
+                        class="letterDelete"
+                        onclick="deleteLetter('${letter.id}')"
+                        title="ลบ Memory Letter"
+                    >
+                        ×
+                    </button>
+
+                    <h3>
+                        💌 Memory Letter #${
+                            letters.length-index
+                        }
+                        ${
+                            dateText
+                            ? ` · ${dateText}`
+                            : ""
+                        }
+                    </h3>
+
+                    <p>${escapeHtml(letter.text)}</p>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+function deleteLetter(id){
+
+    if(
+        !confirm(
+            "ต้องการลบ Memory Letter นี้ใช่ไหม?"
+        )
+    ){
+
+        return;
+    }
+
+    const letters =
+        getLetters(currentMonth);
+
+    const filtered =
+        letters.filter(
+            letter => String(letter.id) !== String(id)
+        );
+
+    if(
+        saveLetters(
+            currentMonth,
+            filtered
+        )
+    ){
+
+        renderLetters();
+
+        renderMonths();
+
+        toast(
+            "ลบ Memory Letter แล้ว"
+        );
+
+    }
+
+}
+
+
+/* =========================
+   PHOTOS
+========================= */
+
+function compressImage(
+    file,
+    maxSize=1400,
+    quality=.82
+){
+
+    return new Promise(
+        (resolve,reject)=>{
+
+            const reader =
+                new FileReader();
+
+            reader.onload = ()=>{
+
+                const img =
+                    new Image();
+
+                img.onload = ()=>{
+
+                    let w = img.width;
+                    let h = img.height;
+
+                    const scale =
+                        Math.min(
+                            1,
+                            maxSize /
+                            Math.max(w,h)
+                        );
+
+                    w = Math.round(w*scale);
+                    h = Math.round(h*scale);
+
+                    const canvas =
+                        document.createElement(
+                            "canvas"
+                        );
+
+                    canvas.width = w;
+                    canvas.height = h;
+
+                    canvas
+                        .getContext("2d")
+                        .drawImage(
+                            img,
+                            0,
+                            0,
+                            w,
+                            h
+                        );
+
+                    resolve(
+                        canvas.toDataURL(
+                            "image/jpeg",
+                            quality
+                        )
+                    );
+
+                };
+
+                img.onerror = reject;
+
+                img.src = reader.result;
+
+            };
+
+            reader.onerror = reject;
+
+            reader.readAsDataURL(file);
+
+        }
+    );
+
+}
+
+
+async function loadPhotos(event){
+
+    const files =
+        [...(event.target.files||[])]
+        .filter(
+            f=>f.type.startsWith("image/")
+        );
+
+    if(!files.length) return;
+
+    const old =
+        getPhotos(currentMonth);
+
+    const added = [];
+
+    for(const file of files){
+
+        try{
+
+            added.push(
+                await compressImage(file)
+            );
+
+        }catch{}
+
+    }
+
+    const merged =
+        [...old,...added].slice(-12);
+
+    if(
+        savePhotos(
+            currentMonth,
+            merged
+        )
+    ){
+
+        loadSavedPhotos();
+
+        renderMonths();
+
+        toast(
+            `เพิ่มรูปแล้ว ${added.length} รูป ♡`
+        );
+
+    }
+
+    event.target.value = "";
+
+}
+
+
+function loadSavedPhotos(){
+
+    const photos =
+        getPhotos(currentMonth);
+
+    const area =
+        document.getElementById("photoArea");
+
+    const image =
+        document.getElementById("monthPhoto");
+
+    const grid =
+        document.getElementById("monthGallery");
+
+    const count =
+        document.getElementById("memoryCount");
+
+    if(photos.length){
+
+        image.src = photos[0];
+
+        area.classList.add("has");
+
+        grid.innerHTML =
+            photos.map(
+                (src,i)=>`
+
+                    <button
+                        class="galleryItem"
+                        onclick="setMainPhoto(${i})"
+                    >
+
+                        <img
+                            src="${src}"
+                            alt="รูปความทรงจำเดือน ${currentMonth}"
+                        >
+
+                        <span class="galleryLabel">
+                            รูปที่ ${i+1}
+                        </span>
+
+                    </button>
+
+                `
+            ).join("");
+
+        count.textContent =
+            `${photos.length} รูปในเดือนนี้`;
+
+    }else{
+
+        image.removeAttribute("src");
+
+        area.classList.remove("has");
+
+        grid.innerHTML = "";
+
+        count.textContent =
+            "ยังไม่มีรูปในเดือนนี้";
+    }
+
+}
+
+
+function setMainPhoto(index){
+
+    const photos =
+        getPhotos(currentMonth);
+
+    if(photos[index]){
+
+        document.getElementById(
+            "monthPhoto"
+        ).src = photos[index];
+
+        document.getElementById(
+            "photoArea"
+        ).classList.add("has");
+
+    }
+
+}
+
+
+function removePhotos(){
+
+    if(
+        !getPhotos(currentMonth).length
+    ){
+
+        return toast(
+            "เดือนนี้ยังไม่มีรูป"
+        );
+    }
+
+    if(
+        !confirm(
+            "ลบรูปทั้งหมดของเดือนนี้ใช่ไหม?"
+        )
+    ) return;
+
+    localStorage.removeItem(
+        photoKey(currentMonth)
+    );
+
+    document.getElementById(
+        "photoInput"
+    ).value = "";
+
+    loadSavedPhotos();
+
+    renderMonths();
+
+    toast("ลบรูปแล้ว");
+
+}
+
+
+/* =========================
+   ALL GALLERY
+========================= */
+
+function openGallery(){
+
+    show("gallery");
+
+}
+
+
+function renderAllGallery(){
+
+    const box =
+        document.getElementById("allGallery");
+
+    const items = [];
+
+    for(
+        let month=1;
+        month<=CONFIG.totalMonths;
+        month++
+    ){
+
+        getPhotos(month)
+            .forEach(
+                (src,index)=>
+                    items.push({
+                        src,
+                        month,
+                        index
+                    })
+            );
+
+    }
+
+    if(!items.length){
+
+        box.innerHTML = `
+            <div class="emptyState">
+                ยังไม่มีรูปความทรงจำ ♡
+                <br>
+                เข้าไปที่เดือนที่เปิดแล้ว
+                แล้วกด “เพิ่มรูป” ได้เลย
+            </div>
+        `;
+
+        return;
+    }
+
+    box.innerHTML =
+        items.map(
+            item=>`
+
+                <button
+                    class="galleryItem"
+                    onclick="openMonth(${item.month})"
+                >
+
+                    <img
+                        src="${item.src}"
+                        alt="Month ${item.month}"
+                    >
+
+                    <span class="galleryLabel">
+                        Month ${item.month}
+                        · รูปที่ ${item.index+1}
+                    </span>
+
+                </button>
+
+            `
+        ).join("");
+
+}
+
+
+/* =========================
+   OUR STORY
+========================= */
+
+function openStory(){
+
+    show("story");
+
+}
+
+
+function renderStory(){
+
+    const box =
+        document.getElementById("storyList");
+
+    const items = [];
+
+    for(
+        let month=1;
+        month<=CONFIG.totalMonths;
+        month++
+    ){
+
+        const letters =
+            getLetters(month);
+
+        const photos =
+            getPhotos(month);
+
+        if(
+            isUnlocked(month) &&
+            (letters.length || photos.length)
+        ){
+
+            items.push({
+                month,
+                letters,
+                photos
+            });
 
         }
 
-
-        const info =
-          document.createElement("div");
-
-        info.className = "monthInfo";
-
-
-        info.innerHTML = `
-          <h4>${m.title}</h4>
-          <p>${m.date}</p>
-
-          <span class="status">
-            ${has ? "♡ มีความทรงจำแล้ว" : "♡ ยังว่างอยู่"}
-          </span>
-        `;
-
-
-        card.appendChild(preview);
-        card.appendChild(info);
-
-        grid.appendChild(card);
-
-      });
-
     }
 
-
-    /* =========================
-       PAGE CONTROL
-    ========================= */
-
-    function showPage(page) {
-
-      document
-        .getElementById("home")
-        .classList.add("hidden");
-
-      document
-        .getElementById("detail")
-        .classList.add("hidden");
-
-      document
-        .getElementById("story")
-        .classList.add("hidden");
-
-
-      document
-        .getElementById(page)
-        .classList.remove("hidden");
-
-
-      const back =
-        document.getElementById("backButton");
-
-
-      if (page === "home") {
-
-        back.classList.add("hidden");
-
-      } else {
-
-        back.classList.remove("hidden");
-
-      }
-
-    }
-
-
-    function goHome() {
-
-      closeLetter();
-
-      renderMonths();
-      updateCounter();
-
-      showPage("home");
-
-    }
-
-
-    /* =========================
-       OPEN MONTH
-    ========================= */
-
-    function openMonth(month) {
-
-      currentMonth = month;
-
-      const data =
-        months.find(
-          m => m.month === month
-        );
-
-
-      document.getElementById(
-        "detailTitle"
-      ).textContent = data.title;
-
-
-      document.getElementById(
-        "detailDate"
-      ).textContent = data.date;
-
-
-      /*
-        ช่อง textarea เป็นช่องสำหรับ
-        เขียนข้อความใหม่เสมอ
-      */
-
-      document.getElementById(
-        "note"
-      ).value = "";
-
-
-      renderGallery();
-
-      showPage("detail");
-
-    }
-
-
-    /* =========================
-       PHOTOS
-    ========================= */
-
-    function addPhotos(event) {
-
-      const files =
-        Array.from(event.target.files || []);
-
-
-      if (!files.length) {
-        return;
-      }
-
-
-      const photos =
-        getPhotos(currentMonth);
-
-
-      let processed = 0;
-
-
-      files.forEach(file => {
-
-        const reader =
-          new FileReader();
-
-
-        reader.onload = e => {
-
-          photos.push(e.target.result);
-
-          processed++;
-
-
-          if (processed === files.length) {
-
-            savePhotos(
-              currentMonth,
-              photos
-            );
-
-            renderGallery();
-            renderMonths();
-            updateCounter();
-
-            showToast(
-              "เพิ่มรูปเรียบร้อยแล้ว ♡"
-            );
-
-          }
-
-        };
-
-
-        reader.readAsDataURL(file);
-
-      });
-
-
-      event.target.value = "";
-
-    }
-
-
-    function renderGallery() {
-
-      const gallery =
-        document.getElementById("gallery");
-
-
-      const photos =
-        getPhotos(currentMonth);
-
-
-      gallery.innerHTML = "";
-
-
-      if (photos.length === 0) {
-
-        gallery.innerHTML = `
-          <div
-            class="empty"
-            style="grid-column:1/-1;"
-          >
-            ยังไม่มีรูปภาพในเดือนนี้ ♡
-          </div>
+    if(!items.length){
+
+        box.innerHTML = `
+            <div class="emptyState">
+                เริ่มบันทึกความทรงจำ
+                เดือนแรกของเราได้เลย ♡
+            </div>
         `;
 
         return;
-
-      }
-
-
-      photos.forEach((src, index) => {
-
-        const item =
-          document.createElement("div");
-
-        item.className = "galleryItem";
-
-
-        const img =
-          document.createElement("img");
-
-        img.src = src;
-
-
-        const del =
-          document.createElement("button");
-
-        del.className = "deletePhoto";
-
-        del.textContent = "×";
-
-        del.onclick = event => {
-
-          event.stopPropagation();
-
-          deletePhoto(index);
-
-        };
-
-
-        item.appendChild(img);
-        item.appendChild(del);
-
-        gallery.appendChild(item);
-
-      });
-
     }
 
+    box.innerHTML =
+        items.map(item=>{
 
-    function deletePhoto(index) {
+            /*
+                รวมจดหมายทั้งหมดของเดือน
+            */
+            let text = "";
 
-      if (
-        !confirm(
-          "ต้องการลบรูปนี้ใช่ไหม?"
-        )
-      ) {
-        return;
-      }
+            if(item.letters.length){
 
+                text =
+                    item.letters
+                        .map(
+                            (letter,index)=>
+                                `💌 Letter #${index+1}\n${letter.text}`
+                        )
+                        .join("\n\n");
 
-      const photos =
-        getPhotos(currentMonth);
+            }else{
 
+                text =
+                    "มีรูปความทรงจำที่บันทึกไว้";
+            }
 
-      photos.splice(index, 1);
+            return `
 
+                <div class="storyItem">
 
-      savePhotos(
-        currentMonth,
-        photos
-      );
+                    <span class="storyDot"></span>
 
+                    <div class="storyTitle">
+                        Month ${item.month}
+                        ${item.photos.length ? "♡" : ""}
+                        ${item.letters.length
+                            ? " 💌"
+                            : ""}
+                    </div>
 
-      renderGallery();
-      renderMonths();
-      updateCounter();
+                    <div class="storyDate">
+                        ${formatDate(
+                            anniversaryDate(item.month)
+                        )}
+                    </div>
 
+                    <div class="storyText">
+                        ${escapeHtml(text)}
+                    </div>
 
-      showToast(
-        "ลบรูปเรียบร้อยแล้ว"
-      );
+                </div>
 
-    }
+            `;
 
+        }).join("");
 
-    /* =========================
-       SAVE LETTER
-    ========================= */
-
-    function saveNote() {
-
-      const textarea =
-        document.getElementById("note");
-
-
-      const text =
-        textarea.value.trim();
-
-
-      if (!text) {
-
-        showToast(
-          "ลองเขียนข้อความก่อนนะ ♡"
-        );
-
-        return;
-
-      }
+}
 
 
-      const letters =
-        getLetters(currentMonth);
+/* =========================
+   SECURITY
+========================= */
+
+function escapeHtml(text){
+
+    return String(text).replace(
+        /[&<>"']/g,
+        c=>({
+            '&':'&amp;',
+            '<':'&lt;',
+            '>':'&gt;',
+            '"':'&quot;',
+            "'":'&#039;'
+        }[c])
+    );
+
+}
 
 
-      letters.push({
+/* =========================
+   MODAL
+========================= */
 
-        id:
-          Date.now().toString() +
-          "_" +
-          Math.random()
-            .toString(36)
-            .slice(2),
+function closeLetter(){
 
-        text: text,
-
-        createdAt:
-          new Date().toISOString()
-
-      });
-
-
-      /*
-        ป้องกัน localStorage
-        โตเกินไปจากการเก็บข้อความจำนวนมาก
-      */
-
-      const latestLetters =
-        letters.slice(-100);
-
-
-      saveLetters(
-        currentMonth,
-        latestLetters
-      );
-
-
-      /*
-        สำคัญ:
-        หลังบันทึกให้ช่องข้อความว่าง
-      */
-
-      textarea.value = "";
-
-
-      renderMonths();
-      updateCounter();
-
-
-      showToast(
-        "บันทึกข้อความแล้ว ♡"
-      );
-
-    }
-
-
-    /* =========================
-       OPEN LETTER
-    ========================= */
-
-    function openLetter() {
-
-      const data =
-        months.find(
-          m => m.month === currentMonth
-        );
-
-
-      document.getElementById(
-        "modalTitle"
-      ).textContent =
-        data.title + " 💌";
-
-
-      document.getElementById(
-        "modalSubtitle"
-      ).textContent =
-        data.date;
-
-
-      renderLetters();
-
-
-      document
+    document
         .getElementById("letterModal")
-        .classList.remove("hidden");
+        .classList.remove("show");
 
-    }
-
-
-    function closeLetter() {
-
-      document
-        .getElementById("letterModal")
-        .classList.add("hidden");
-
-    }
+}
 
 
-    function closeModalOutside(event) {
+function closeModal(event){
 
-      if (
-        event.target.id ===
-        "letterModal"
-      ) {
+    if(
+        event.target.id === "letterModal"
+    ){
 
         closeLetter();
 
-      }
-
     }
 
-
-    function renderLetters() {
-
-      const container =
-        document.getElementById(
-          "lettersList"
-        );
+}
 
 
-      const letters =
-        getLetters(currentMonth);
+/* =========================
+   BACKUP
+========================= */
+
+function openBackup(){
+
+    show("backup");
+
+}
 
 
-      container.innerHTML = "";
+function exportBackup(){
+
+    const data = {
+
+        version:3,
+
+        exportedAt:
+            new Date().toISOString(),
+
+        config:{
+            startDate:
+                CONFIG.startDate
+        },
+
+        memories:{}
+
+    };
 
 
-      if (letters.length === 0) {
+    for(
+        let month=1;
+        month<=CONFIG.totalMonths;
+        month++
+    ){
 
-        container.innerHTML = `
-          <div class="empty">
-            ยังไม่มีข้อความสำหรับเดือนนี้ ♡
-          </div>
-        `;
+        const photos =
+            getPhotos(month);
 
-        return;
+        const letters =
+            getLetters(month);
 
-      }
+        if(
+            photos.length ||
+            letters.length
+        ){
 
+            data.memories[month] = {
 
-      /*
-        ใหม่ล่าสุดอยู่ด้านบน
-      */
+                photos,
 
-      const reversed =
-        [...letters].reverse();
+                letters
 
-
-      reversed.forEach(
-        (letter, index) => {
-
-          const item =
-            document.createElement("div");
-
-          item.className =
-            "letterItem";
-
-
-          const date =
-            letter.createdAt
-              ? new Date(
-                  letter.createdAt
-                ).toLocaleString(
-                  "th-TH",
-                  {
-                    dateStyle: "medium",
-                    timeStyle: "short"
-                  }
-                )
-              : "";
-
-
-          item.innerHTML = `
-            <div class="letterItemHead">
-
-              <div>
-                <div class="letterNumber">
-                  💌 Letter #${letters.length - index}
-                </div>
-
-                <div class="letterDate">
-                  ${date}
-                </div>
-              </div>
-
-              <button
-                class="deleteLetter"
-                onclick="deleteLetter('${letter.id}')"
-              >
-                ลบ
-              </button>
-
-            </div>
-
-            <div class="letterText">
-              ${escapeHtml(letter.text)}
-            </div>
-          `;
-
-
-          container.appendChild(item);
+            };
 
         }
-      );
 
     }
 
 
-    function deleteLetter(id) {
-
-      if (
-        !confirm(
-          "ต้องการลบข้อความนี้ใช่ไหม?"
-        )
-      ) {
-        return;
-      }
-
-
-      const letters =
-        getLetters(currentMonth)
-          .filter(
-            letter =>
-              letter.id !== id
-          );
-
-
-      saveLetters(
-        currentMonth,
-        letters
-      );
-
-
-      renderLetters();
-      renderMonths();
-      updateCounter();
-
-
-      showToast(
-        "ลบข้อความเรียบร้อยแล้ว"
-      );
-
-    }
-
-
-    /* =========================
-       ALL MEMORIES
-    ========================= */
-
-    function openAllMemories() {
-
-      renderStory();
-
-      showPage("story");
-
-    }
-
-
-    /* =========================
-       OUR STORY
-    ========================= */
-
-    function openStory() {
-
-      renderStory();
-
-      showPage("story");
-
-    }
-
-
-    function renderStory() {
-
-      const list =
-        document.getElementById(
-          "storyList"
+    const blob =
+        new Blob(
+            [
+                JSON.stringify(data)
+            ],
+            {
+                type:"application/json"
+            }
         );
 
 
-      list.innerHTML = "";
+    const url =
+        URL.createObjectURL(blob);
+
+    const a =
+        document.createElement("a");
+
+    const stamp =
+        new Date()
+            .toISOString()
+            .slice(0,10);
+
+    a.href = url;
+
+    a.download =
+        `our-anniversary-backup-${stamp}.json`;
+
+    a.click();
+
+    URL.revokeObjectURL(url);
+
+    toast(
+        "Export Backup เรียบร้อย ♡"
+    );
+
+}
 
 
-      const memories =
-        months.filter(
-          m => hasMemory(m.month)
-        );
+async function importBackup(event){
 
+    const file =
+        event.target.files?.[0];
 
-      if (memories.length === 0) {
+    if(!file) return;
 
-        list.innerHTML = `
-          <div class="panel empty">
-            <div style="font-size:35px;">
-              ♡
-            </div>
+    try{
 
-            <div style="margin-top:8px;">
-              ยังไม่มีความทรงจำ
-            </div>
-
-            <div
-              style="
-                font-size:13px;
-                margin-top:5px;
-              "
-            >
-              ลองเพิ่มรูปหรือเขียน Memory Letter
-              กันนะ
-            </div>
-          </div>
-        `;
-
-        return;
-
-      }
-
-
-      /*
-        แสดงจากเดือนล่าสุด
-        ย้อนกลับไปเดือนแรก
-      */
-
-      [...memories]
-        .reverse()
-        .forEach(m => {
-
-          const photos =
-            getPhotos(m.month);
-
-
-          const letters =
-            getLetters(m.month);
-
-
-          const card =
-            document.createElement("div");
-
-          card.className =
-            "storyCard";
-
-
-          let photoHtml = "";
-
-
-          if (photos.length > 0) {
-
-            photoHtml =
-              `<div class="storyPhotoGrid">`;
-
-            photos.forEach(src => {
-
-              photoHtml += `
-                <img
-                  src="${src}"
-                  alt="Memory photo"
-                >
-              `;
-
-            });
-
-            photoHtml += `</div>`;
-
-          }
-
-
-          let lettersHtml = "";
-
-
-          /*
-            แสดงจดหมายใหม่ล่าสุดก่อน
-          */
-
-          [...letters]
-            .reverse()
-            .forEach(
-              (letter, index) => {
-
-                const date =
-                  letter.createdAt
-                    ? new Date(
-                        letter.createdAt
-                      ).toLocaleString(
-                        "th-TH",
-                        {
-                          dateStyle: "medium",
-                          timeStyle: "short"
-                        }
-                      )
-                    : "";
-
-
-                lettersHtml += `
-                  <div class="storyLetter">
-
-                    <div class="storyLetterTitle">
-                      💌 Letter
-                      ${letters.length - index}
-                    </div>
-
-                    ${
-                      date
-                        ? `
-                          <div
-                            style="
-                              font-size:11px;
-                              color:var(--muted);
-                              margin-bottom:7px;
-                            "
-                          >
-                            ${date}
-                          </div>
-                        `
-                        : ""
-                    }
-
-                    ${escapeHtml(letter.text)}
-
-                  </div>
-                `;
-
-              }
+        const data =
+            JSON.parse(
+                await file.text()
             );
 
+        if(
+            !data ||
+            typeof data.memories !== "object"
+        ){
 
-          card.innerHTML = `
+            throw new Error("invalid");
 
-            <h3>
-              ${m.title}
-            </h3>
+        }
 
-            <div class="storyDate">
-              ${m.date}
-            </div>
 
-            ${photoHtml}
+        if(
+            !confirm(
+                "นำเข้า Backup จะเขียนทับข้อมูลของเดือนที่มีอยู่ในไฟล์ ต้องการดำเนินการต่อไหม?"
+            )
+        ){
 
-            ${
-              lettersHtml ||
-              `
-                <div
-                  style="
-                    color:var(--muted);
-                    font-size:13px;
-                  "
-                >
-                  เดือนนี้มีรูปภาพ
-                  แต่ยังไม่มีข้อความ ♡
-                </div>
-              `
+            return;
+        }
+
+
+        Object.entries(
+            data.memories
+        ).forEach(
+            ([month,memory])=>{
+
+                const m =
+                    Number(month);
+
+                if(
+                    !Number.isInteger(m) ||
+                    m < 1 ||
+                    m > CONFIG.totalMonths
+                ){
+
+                    return;
+                }
+
+
+                /*
+                    รูป
+                */
+                if(
+                    Array.isArray(memory.photos)
+                ){
+
+                    savePhotos(
+                        m,
+                        memory.photos.slice(0,12)
+                    );
+
+                }
+
+
+                /*
+                    Memory Letter
+                    รองรับ Backup รุ่นใหม่
+                */
+                if(
+                    Array.isArray(memory.letters)
+                ){
+
+                    saveLetters(
+                        m,
+                        memory.letters
+                    );
+
+                }
+
+                /*
+                    รองรับ Backup รุ่นเก่า
+                    ที่มี note แทน letters
+                */
+                else if(
+                    typeof memory.note === "string" &&
+                    memory.note.trim()
+                ){
+
+                    saveLetters(
+                        m,
+                        [{
+                            id:
+                                Date.now().toString(),
+
+                            text:
+                                memory.note.trim(),
+
+                            createdAt:
+                                new Date().toISOString()
+                        }]
+                    );
+
+                }
+
             }
-
-          `;
-
-
-          list.appendChild(card);
-
-        });
-
-    }
+        );
 
 
-    /* =========================
-       ESCAPE HTML
-    ========================= */
+        renderMonths();
 
-    function escapeHtml(text) {
+        toast(
+            "กู้คืน Backup แล้ว ♡"
+        );
 
-      const div =
-        document.createElement("div");
+    }catch{
 
-      div.textContent = text;
-
-      return div.innerHTML;
+        alert(
+            "ไฟล์ Backup ไม่ถูกต้อง หรือไม่ใช่ไฟล์ที่สร้างจากเว็บไซต์นี้"
+        );
 
     }
 
+    event.target.value = "";
 
-    /* =========================
-       TOAST
-    ========================= */
+}
 
-    function showToast(message) {
 
-      const toast =
+/* =========================
+   TOAST
+========================= */
+
+function toast(message){
+
+    const el =
         document.getElementById("toast");
 
+    el.textContent = message;
 
-      toast.textContent =
-        message;
+    el.classList.add("show");
 
+    clearTimeout(
+        window.__toast
+    );
 
-      toast.classList.add("show");
+    window.__toast =
+        setTimeout(
+            ()=>el.classList.remove("show"),
+            2200
+        );
 
-
-      clearTimeout(
-        window.toastTimer
-      );
-
-
-      window.toastTimer =
-        setTimeout(() => {
-
-          toast.classList.remove(
-            "show"
-          );
-
-        }, 2200);
-
-    }
+}
 
 
-    /* =========================
-       START
-    ========================= */
+/* =========================
+   START
+========================= */
 
-    /*
-      ไม่ใช้ Backup แล้ว
-      ข้อมูลทั้งหมดจะอยู่ใน
-      localStorage ของ Browser เครื่องนี้
-    */
+setInterval(
+    updateCounter,
+    60000
+);
 
-  </script>
+updateCounter();
+
+</script>
 
 </body>
 </html>
