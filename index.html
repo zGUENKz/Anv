@@ -5,101 +5,4756 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#c85c78">
 <title>Our Anniversary</title>
+
 <style>
-*{box-sizing:border-box} :root{--pink:#c85c78;--pink2:#a94b65;--dark:#4b343b;--muted:#9b7781;--soft:#fff0f4;--card:rgba(255,255,255,.9);--bg1:#fffafb;--bg2:#ffeef3;--line:#efd5dd;--shadow:0 20px 65px rgba(123,70,93,.1)}
-body.dark{--dark:#f8e9ee;--muted:#c9aeb7;--soft:#432831;--card:rgba(47,29,36,.9);--bg1:#1b1216;--bg2:#301c25;--line:#5e3945;--shadow:0 20px 70px rgba(0,0,0,.35)}
-html{scroll-behavior:smooth} body{margin:0;min-height:100vh;font-family:"Segoe UI","Noto Sans Thai",sans-serif;color:var(--dark);background:linear-gradient(135deg,var(--bg1),var(--bg2));transition:.25s} button,input,textarea,select{font:inherit} button{cursor:pointer}
-.screen{display:none;min-height:100vh;padding:25px 16px;align-items:center;justify-content:center}.screen.active{display:flex;animation:pageIn .3s ease}.card{width:min(94vw,760px);background:var(--card);border:1px solid rgba(255,255,255,.75);border-radius:30px;padding:30px 22px;box-shadow:var(--shadow);backdrop-filter:blur(14px)}
-.center,.detail{text-align:center}.heart{font-size:34px;color:var(--pink);animation:beat 1.5s infinite} h1{font-size:clamp(32px,8vw,50px);margin:8px 0;font-weight:600} h2{font-size:29px;margin:7px 0 10px}.sub{color:var(--muted);font-size:15px;line-height:1.7}.small{font-size:12px;color:var(--muted);line-height:1.65}
-.pin{display:flex;justify-content:center;gap:10px;margin:23px 0 16px}.pin span{width:11px;height:11px;border:1.5px solid #cc91a0;border-radius:50%}.pin span.on{background:var(--pink)}.keypad{display:grid;grid-template-columns:repeat(3,62px);gap:9px;justify-content:center}.key{height:52px;border:0;border-radius:15px;background:var(--soft);color:var(--dark);transition:.2s}.key:hover{transform:translateY(-2px)}.key.zero{grid-column:2}.pinTools{display:flex;justify-content:center;gap:8px;margin-top:10px}.tinyBtn{border:0;background:transparent;color:var(--pink);font-size:12px}.primary,.secondary,.danger,.ghost{border:0;border-radius:999px;padding:11px 17px;transition:.2s}.primary{background:var(--pink);color:white;margin-top:16px}.secondary{background:var(--soft);color:var(--pink2)}.danger{background:#f9dde4;color:#a53e59}.ghost{background:transparent;color:var(--pink)}.primary:hover,.secondary:hover,.danger:hover,.ghost:hover{transform:translateY(-1px)}
-.error{height:22px;color:var(--pink);font-size:13px;margin-top:7px}.nav{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:20px}.navTitle{font-size:14px;color:var(--muted)}
-.homeHero{text-align:center;padding:15px 0 18px}.homeHero .date{display:inline-block;background:var(--soft);color:var(--pink2);border-radius:999px;padding:8px 16px;margin-top:10px;font-size:14px}.counter{margin:20px auto;padding:17px;background:color-mix(in srgb,var(--soft) 65%,transparent);border-radius:20px;max-width:430px;color:var(--muted)}.counter strong{display:block;font-size:28px;color:var(--pink2);margin-top:4px}.nextAnniv{margin:10px auto 0;max-width:450px;padding:12px 15px;border:1px dashed var(--line);border-radius:17px;background:color-mix(in srgb,var(--card) 85%,transparent);color:var(--muted);font-size:13px}.nextAnniv strong{color:var(--pink2)}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:10px auto 18px;max-width:620px}.stat{background:var(--soft);border-radius:18px;padding:13px 8px;text-align:center}.stat b{display:block;color:var(--pink2);font-size:18px}.stat span{font-size:11px;color:var(--muted)}
-.homeTools{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:650px;margin:0 auto 18px}.toolBtn{border:0;border-radius:17px;padding:13px 8px;background:var(--soft);color:var(--pink2);box-shadow:0 5px 18px rgba(123,70,93,.04)}.toolBtn strong,.toolBtn span{display:block}.toolBtn strong{font-size:13px}.toolBtn span{font-size:10px;color:var(--muted);margin-top:3px}
-.sectionTitle{text-align:center;margin:12px 0 18px}.months{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.month{position:relative;min-height:120px;border:0;border-radius:20px;background:var(--soft);padding:18px 8px;color:var(--dark);box-shadow:0 5px 18px rgba(123,70,93,.04);transition:.2s}.month:hover{transform:translateY(-3px)}.month.locked{opacity:.55;cursor:not-allowed}.month.unlocked{outline:1px solid #f2d1da}.month .num{font-size:11px;color:var(--muted)}.month .title{font-size:17px;margin:4px 0}.month .date{font-size:10px;color:var(--muted)}.month .status{position:absolute;top:9px;right:10px;font-size:11px}.month .thumb{width:42px;height:42px;border-radius:12px;object-fit:cover;margin:5px auto 7px;display:none;border:2px solid white}.month.hasMemory .thumb{display:block}.month.hasMemory .title{margin-top:0}
-.detailDate{display:inline-block;background:var(--soft);padding:7px 15px;border-radius:999px;color:var(--pink2);font-size:13px}.photoArea{margin:22px auto;max-width:520px;aspect-ratio:4/3;border-radius:24px;background:var(--soft);border:5px solid white;box-shadow:0 10px 30px rgba(123,70,93,.08);overflow:hidden;display:flex;align-items:center;justify-content:center;color:var(--muted)}.photoArea img{width:100%;height:100%;object-fit:cover;display:none}.photoArea.has img{display:block}.photoArea.has .placeholder{display:none}.photoControls,.detailActions,.backupArea,.formRow{display:flex;gap:9px;justify-content:center;flex-wrap:wrap}.fileBtn,.photoControls button{border:0;border-radius:999px;padding:10px 16px;background:var(--soft);color:var(--pink2);cursor:pointer;font-size:13px}.fileBtn input,.hiddenFile{display:none}.memoryCount{margin-top:7px;font-size:12px;color:var(--muted)}
-.galleryGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.galleryItem{position:relative;border-radius:17px;overflow:hidden;background:var(--soft);aspect-ratio:1;border:0;padding:0}.galleryItem img{width:100%;height:100%;object-fit:cover;display:block}.galleryLabel{position:absolute;left:7px;right:7px;bottom:7px;padding:5px 7px;border-radius:10px;background:rgba(255,255,255,.9);color:#8f5667;font-size:10px}.emptyState{padding:35px 15px;text-align:center;color:var(--muted);background:var(--soft);border-radius:20px;grid-column:1/-1}
-.filters{display:grid;grid-template-columns:1.5fr .8fr .8fr;gap:8px;margin:16px 0}.field{width:100%;border:1px solid var(--line);border-radius:14px;padding:11px 12px;background:var(--card);color:var(--dark)}
-.story{max-width:650px;margin:10px auto;text-align:left}.storyItem{position:relative;padding:0 0 20px 25px;border-left:2px solid var(--line)}.storyItem:last-child{border-left-color:transparent}.storyDot{position:absolute;left:-7px;top:1px;width:12px;height:12px;border-radius:50%;background:var(--pink);border:2px solid white}.storyCard{background:var(--soft);border-radius:18px;padding:14px}.storyTitle{font-weight:700;color:var(--pink2)}.storyDate{font-size:11px;color:var(--muted);margin:2px 0 8px}.storyText{font-size:13px;color:var(--dark);white-space:pre-wrap;line-height:1.7}.storyMeta{margin-top:8px;font-size:11px;color:var(--muted)}
-.note{margin:20px auto;max-width:540px}.noteTitle{margin:22px 0 8px;color:var(--pink2);font-size:14px;text-align:left}.textarea{width:100%;min-height:125px;border:1px solid var(--line);border-radius:16px;padding:13px;background:var(--card);resize:vertical;color:var(--dark)}
-.lettersList{display:flex;flex-direction:column;gap:12px;margin-top:18px}.letter{position:relative;padding:18px 96px 18px 18px;border-radius:20px;background:linear-gradient(145deg,var(--soft),transparent);border:1px solid var(--line);text-align:left}.letter h3{margin:0 0 6px;color:var(--pink2);font-size:15px}.letter p{margin:0;color:var(--dark);line-height:1.8;white-space:pre-wrap;word-break:break-word}.letterBtns{position:absolute;right:10px;top:10px;display:flex;gap:5px}.iconBtn{width:32px;height:32px;border:0;border-radius:50%;background:var(--soft);color:var(--pink2)}
-.modal{position:fixed;inset:0;background:rgba(30,18,23,.58);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:16px;z-index:40}.modal.show{display:flex}.modalCard{width:min(94vw,650px);max-height:90vh;overflow:auto;background:var(--card);border-radius:26px;padding:24px;box-shadow:0 20px 70px rgba(0,0,0,.25)}.modalHead{display:flex;justify-content:space-between;align-items:center;gap:10px}.closeBtn{border:0;background:var(--soft);color:var(--pink2);width:38px;height:38px;border-radius:50%}
-.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;z-index:60;align-items:center;justify-content:center;padding:18px}.lightbox.show{display:flex}.lightbox img{max-width:92vw;max-height:82vh;object-fit:contain;border-radius:16px}.lbBtn{position:absolute;border:0;background:rgba(255,255,255,.13);color:white;width:44px;height:44px;border-radius:50%;font-size:22px}.lbClose{top:18px;right:18px}.lbPrev{left:18px}.lbNext{right:18px}.lbInfo{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);color:white;background:rgba(0,0,0,.45);border-radius:999px;padding:8px 12px;font-size:12px}.lbDelete{position:absolute;top:18px;right:70px;border:0;background:rgba(200,92,120,.75);color:white;border-radius:999px;padding:9px 12px;font-size:12px}
-.settings{display:grid;gap:12px;margin-top:16px}.setting{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px;background:var(--soft);border-radius:18px}.setting .text b,.setting .text span{display:block}.setting .text span{font-size:11px;color:var(--muted);margin-top:2px}.switch{position:relative;width:48px;height:28px}.switch input{opacity:0;width:0;height:0}.slider{position:absolute;inset:0;background:#cdb0ba;border-radius:999px}.slider:before{content:"";position:absolute;width:20px;height:20px;left:4px;top:4px;background:white;border-radius:50%;transition:.2s}.switch input:checked+.slider{background:var(--pink)}.switch input:checked+.slider:before{transform:translateX(20px)}
-.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:rgba(75,52,59,.94);color:white;padding:10px 16px;border-radius:999px;font-size:13px;z-index:100;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}
-.celebrate{position:fixed;inset:0;background:rgba(255,245,248,.82);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;z-index:70}.celebrate.show{display:flex}.celebrateCard{width:min(90vw,520px);text-align:center;background:var(--card);border-radius:30px;padding:34px;box-shadow:var(--shadow);animation:pop .35s ease}.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden}.confetti i{position:absolute;top:-20px;font-style:normal;animation:fall 2.4s linear forwards}
-button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--pink);outline-offset:3px}
-@media(max-width:700px){.homeTools{grid-template-columns:repeat(2,1fr)}.filters{grid-template-columns:1fr}.months{grid-template-columns:repeat(2,1fr)}.galleryGrid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:460px){.card{padding:26px 16px}.stats{grid-template-columns:1fr 1fr 1fr}.photoArea{aspect-ratio:1}.month{min-height:112px}.lbPrev{left:8px}.lbNext{right:8px}.lbDelete{right:62px}}
-@keyframes beat{50%{transform:scale(1.12)}}@keyframes pageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}@keyframes pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}@keyframes fall{to{transform:translateY(110vh) rotate(400deg);opacity:0}}
+*{box-sizing:border-box}
+
+:root{
+    --pink:#c85c78;
+    --pink2:#a94b65;
+    --dark:#4b343b;
+    --muted:#9b7781;
+    --soft:#fff0f4;
+    --card:rgba(255,255,255,.9);
+    --bg1:#fffafb;
+    --bg2:#ffeef3;
+    --line:#efd5dd;
+    --shadow:0 20px 65px rgba(123,70,93,.1)
+}
+
+body.dark{
+    --dark:#f8e9ee;
+    --muted:#c9aeb7;
+    --soft:#432831;
+    --card:rgba(47,29,36,.9);
+    --bg1:#1b1216;
+    --bg2:#301c25;
+    --line:#5e3945;
+    --shadow:0 20px 70px rgba(0,0,0,.35)
+}
+
+html{
+    scroll-behavior:smooth
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    font-family:"Segoe UI","Noto Sans Thai",sans-serif;
+    color:var(--dark);
+    background:linear-gradient(135deg,var(--bg1),var(--bg2));
+    transition:.25s
+}
+
+button,input,textarea,select{
+    font:inherit
+}
+
+button{
+    cursor:pointer
+}
+
+.screen{
+    display:none;
+    min-height:100vh;
+    padding:25px 16px;
+    align-items:center;
+    justify-content:center
+}
+
+.screen.active{
+    display:flex;
+    animation:pageIn .3s ease
+}
+
+.card{
+    width:min(94vw,760px);
+    background:var(--card);
+    border:1px solid rgba(255,255,255,.75);
+    border-radius:30px;
+    padding:30px 22px;
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(14px)
+}
+
+.center,
+.detail{
+    text-align:center
+}
+
+.heart{
+    font-size:34px;
+    color:var(--pink);
+    animation:beat 1.5s infinite
+}
+
+h1{
+    font-size:clamp(32px,8vw,50px);
+    margin:8px 0;
+    font-weight:600
+}
+
+h2{
+    font-size:29px;
+    margin:7px 0 10px
+}
+
+.sub{
+    color:var(--muted);
+    font-size:15px;
+    line-height:1.7
+}
+
+.small{
+    font-size:12px;
+    color:var(--muted);
+    line-height:1.65
+}
+
+.pin{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin:23px 0 16px
+}
+
+.pin span{
+    width:11px;
+    height:11px;
+    border:1.5px solid #cc91a0;
+    border-radius:50%
+}
+
+.pin span.on{
+    background:var(--pink)
+}
+
+.keypad{
+    display:grid;
+    grid-template-columns:repeat(3,62px);
+    gap:9px;
+    justify-content:center
+}
+
+.key{
+    height:52px;
+    border:0;
+    border-radius:15px;
+    background:var(--soft);
+    color:var(--dark);
+    transition:.2s
+}
+
+.key:hover{
+    transform:translateY(-2px)
+}
+
+.key.zero{
+    grid-column:2
+}
+
+.pinTools{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin-top:10px
+}
+
+.tinyBtn{
+    border:0;
+    background:transparent;
+    color:var(--pink);
+    font-size:12px
+}
+
+.primary,
+.secondary,
+.danger,
+.ghost{
+    border:0;
+    border-radius:999px;
+    padding:11px 17px;
+    transition:.2s
+}
+
+.primary{
+    background:var(--pink);
+    color:white;
+    margin-top:16px
+}
+
+.secondary{
+    background:var(--soft);
+    color:var(--pink2)
+}
+
+.danger{
+    background:#f9dde4;
+    color:#a53e59
+}
+
+.ghost{
+    background:transparent;
+    color:var(--pink)
+}
+
+.primary:hover,
+.secondary:hover,
+.danger:hover,
+.ghost:hover{
+    transform:translateY(-1px)
+}
+
+.error{
+    height:22px;
+    color:var(--pink);
+    font-size:13px;
+    margin-top:7px
+}
+
+.nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-bottom:20px
+}
+
+.navTitle{
+    font-size:14px;
+    color:var(--muted)
+}
+
+.homeHero{
+    text-align:center;
+    padding:15px 0 18px
+}
+
+.homeHero .date{
+    display:inline-block;
+    background:var(--soft);
+    color:var(--pink2);
+    border-radius:999px;
+    padding:8px 16px;
+    margin-top:10px;
+    font-size:14px
+}
+
+.counter{
+    margin:20px auto;
+    padding:17px;
+    background:color-mix(in srgb,var(--soft) 65%,transparent);
+    border-radius:20px;
+    max-width:430px;
+    color:var(--muted)
+}
+
+.counter strong{
+    display:block;
+    font-size:28px;
+    color:var(--pink2);
+    margin-top:4px
+}
+
+.nextAnniv{
+    margin:10px auto 0;
+    max-width:450px;
+    padding:12px 15px;
+    border:1px dashed var(--line);
+    border-radius:17px;
+    background:color-mix(in srgb,var(--card) 85%,transparent);
+    color:var(--muted);
+    font-size:13px
+}
+
+.nextAnniv strong{
+    color:var(--pink2)
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:9px;
+    margin:10px auto 18px;
+    max-width:620px
+}
+
+.stat{
+    background:var(--soft);
+    border-radius:18px;
+    padding:13px 8px;
+    text-align:center
+}
+
+.stat b{
+    display:block;
+    color:var(--pink2);
+    font-size:18px
+}
+
+.stat span{
+    font-size:11px;
+    color:var(--muted)
+}
+
+.homeTools{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    max-width:650px;
+    margin:0 auto 18px
+}
+
+.toolBtn{
+    border:0;
+    border-radius:17px;
+    padding:13px 8px;
+    background:var(--soft);
+    color:var(--pink2);
+    box-shadow:0 5px 18px rgba(123,70,93,.04)
+}
+
+.toolBtn strong,
+.toolBtn span{
+    display:block
+}
+
+.toolBtn strong{
+    font-size:13px
+}
+
+.toolBtn span{
+    font-size:10px;
+    color:var(--muted);
+    margin-top:3px
+}
+
+.sectionTitle{
+    text-align:center;
+    margin:12px 0 18px
+}
+
+.months{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px
+}
+
+.month{
+    position:relative;
+    min-height:120px;
+    border:0;
+    border-radius:20px;
+    background:var(--soft);
+    padding:18px 8px;
+    color:var(--dark);
+    box-shadow:0 5px 18px rgba(123,70,93,.04);
+    transition:.2s
+}
+
+.month:hover{
+    transform:translateY(-3px)
+}
+
+.month.locked{
+    opacity:.55;
+    cursor:not-allowed
+}
+
+.month.unlocked{
+    outline:1px solid #f2d1da
+}
+
+.month .num{
+    font-size:11px;
+    color:var(--muted)
+}
+
+.month .title{
+    font-size:17px;
+    margin:4px 0
+}
+
+.month .date{
+    font-size:10px;
+    color:var(--muted)
+}
+
+.month .status{
+    position:absolute;
+    top:9px;
+    right:10px;
+    font-size:11px
+}
+
+.month .thumb{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    object-fit:cover;
+    margin:5px auto 7px;
+    display:none;
+    border:2px solid white
+}
+
+.month.hasMemory .thumb{
+    display:block
+}
+
+.month.hasMemory .title{
+    margin-top:0
+}
+
+.detailDate{
+    display:inline-block;
+    background:var(--soft);
+    padding:7px 15px;
+    border-radius:999px;
+    color:var(--pink2);
+    font-size:13px
+}
+
+.photoArea{
+    margin:22px auto;
+    max-width:520px;
+    aspect-ratio:4/3;
+    border-radius:24px;
+    background:var(--soft);
+    border:5px solid white;
+    box-shadow:0 10px 30px rgba(123,70,93,.08);
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--muted)
+}
+
+.photoArea img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:none
+}
+
+.photoArea.has img{
+    display:block
+}
+
+.photoArea.has .placeholder{
+    display:none
+}
+
+.photoControls,
+.detailActions,
+.backupArea,
+.formRow{
+    display:flex;
+    gap:9px;
+    justify-content:center;
+    flex-wrap:wrap
+}
+
+.fileBtn,
+.photoControls button{
+    border:0;
+    border-radius:999px;
+    padding:10px 16px;
+    background:var(--soft);
+    color:var(--pink2);
+    cursor:pointer;
+    font-size:13px
+}
+
+.fileBtn input,
+.hiddenFile{
+    display:none
+}
+
+.memoryCount{
+    margin-top:7px;
+    font-size:12px;
+    color:var(--muted)
+}
+
+.galleryGrid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:18px
+}
+
+.galleryItem{
+    position:relative;
+    border-radius:17px;
+    overflow:hidden;
+    background:var(--soft);
+    aspect-ratio:1;
+    border:0;
+    padding:0
+}
+
+.galleryItem img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block
+}
+
+.galleryLabel{
+    position:absolute;
+    left:7px;
+    right:7px;
+    bottom:7px;
+    padding:5px 7px;
+    border-radius:10px;
+    background:rgba(255,255,255,.9);
+    color:#8f5667;
+    font-size:10px
+}
+
+.emptyState{
+    padding:35px 15px;
+    text-align:center;
+    color:var(--muted);
+    background:var(--soft);
+    border-radius:20px;
+    grid-column:1/-1
+}
+
+.filters{
+    display:grid;
+    grid-template-columns:1.5fr .8fr .8fr;
+    gap:8px;
+    margin:16px 0
+}
+
+.field{
+    width:100%;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:11px 12px;
+    background:var(--card);
+    color:var(--dark)
+}
+
+.story{
+    max-width:650px;
+    margin:10px auto;
+    text-align:left
+}
+
+.storyItem{
+    position:relative;
+    padding:0 0 20px 25px;
+    border-left:2px solid var(--line)
+}
+
+.storyItem:last-child{
+    border-left-color:transparent
+}
+
+.storyDot{
+    position:absolute;
+    left:-7px;
+    top:1px;
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:var(--pink);
+    border:2px solid white
+}
+
+.storyCard{
+    background:var(--soft);
+    border-radius:18px;
+    padding:14px
+}
+
+.storyTitle{
+    font-weight:700;
+    color:var(--pink2)
+}
+
+.storyDate{
+    font-size:11px;
+    color:var(--muted);
+    margin:2px 0 8px
+}
+
+.storyText{
+    font-size:13px;
+    color:var(--dark);
+    white-space:pre-wrap;
+    line-height:1.7
+}
+
+.storyMeta{
+    margin-top:8px;
+    font-size:11px;
+    color:var(--muted)
+}
+
+.note{
+    margin:20px auto;
+    max-width:540px
+}
+
+.noteTitle{
+    margin:22px 0 8px;
+    color:var(--pink2);
+    font-size:14px;
+    text-align:left
+}
+
+.textarea{
+    width:100%;
+    min-height:125px;
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:13px;
+    background:var(--card);
+    resize:vertical;
+    color:var(--dark)
+}
+
+.lettersList{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-top:18px
+}
+
+.letter{
+    position:relative;
+    padding:18px 96px 18px 18px;
+    border-radius:20px;
+    background:linear-gradient(145deg,var(--soft),transparent);
+    border:1px solid var(--line);
+    text-align:left
+}
+
+.letter h3{
+    margin:0 0 6px;
+    color:var(--pink2);
+    font-size:15px
+}
+
+.letter p{
+    margin:0;
+    color:var(--dark);
+    line-height:1.8;
+    white-space:pre-wrap;
+    word-break:break-word
+}
+
+.letterBtns{
+    position:absolute;
+    right:10px;
+    top:10px;
+    display:flex;
+    gap:5px
+}
+
+.iconBtn{
+    width:32px;
+    height:32px;
+    border:0;
+    border-radius:50%;
+    background:var(--soft);
+    color:var(--pink2)
+}
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(30,18,23,.58);
+    backdrop-filter:blur(8px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:16px;
+    z-index:40
+}
+
+.modal.show{
+    display:flex
+}
+
+.modalCard{
+    width:min(94vw,650px);
+    max-height:90vh;
+    overflow:auto;
+    background:var(--card);
+    border-radius:26px;
+    padding:24px;
+    box-shadow:0 20px 70px rgba(0,0,0,.25)
+}
+
+.modalHead{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px
+}
+
+.closeBtn{
+    border:0;
+    background:var(--soft);
+    color:var(--pink2);
+    width:38px;
+    height:38px;
+    border-radius:50%
+}
+
+.lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.9);
+    display:none;
+    z-index:60;
+    align-items:center;
+    justify-content:center;
+    padding:18px
+}
+
+.lightbox.show{
+    display:flex
+}
+
+.lightbox img{
+    max-width:92vw;
+    max-height:82vh;
+    object-fit:contain;
+    border-radius:16px
+}
+
+.lbBtn{
+    position:absolute;
+    border:0;
+    background:rgba(255,255,255,.13);
+    color:white;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    font-size:22px
+}
+
+.lbClose{
+    top:18px;
+    right:18px
+}
+
+.lbPrev{
+    left:18px
+}
+
+.lbNext{
+    right:18px
+}
+
+.lbInfo{
+    position:absolute;
+    bottom:18px;
+    left:50%;
+    transform:translateX(-50%);
+    color:white;
+    background:rgba(0,0,0,.45);
+    border-radius:999px;
+    padding:8px 12px;
+    font-size:12px
+}
+
+.lbDelete{
+    position:absolute;
+    top:18px;
+    right:70px;
+    border:0;
+    background:rgba(200,92,120,.75);
+    color:white;
+    border-radius:999px;
+    padding:9px 12px;
+    font-size:12px
+}
+
+.settings{
+    display:grid;
+    gap:12px;
+    margin-top:16px
+}
+
+.setting{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:14px;
+    background:var(--soft);
+    border-radius:18px
+}
+
+.setting .text b,
+.setting .text span{
+    display:block
+}
+
+.setting .text span{
+    font-size:11px;
+    color:var(--muted);
+    margin-top:2px
+}
+
+.switch{
+    position:relative;
+    width:48px;
+    height:28px
+}
+
+.switch input{
+    opacity:0;
+    width:0;
+    height:0
+}
+
+.slider{
+    position:absolute;
+    inset:0;
+    background:#cdb0ba;
+    border-radius:999px
+}
+
+.slider:before{
+    content:"";
+    position:absolute;
+    width:20px;
+    height:20px;
+    left:4px;
+    top:4px;
+    background:white;
+    border-radius:50%;
+    transition:.2s
+}
+
+.switch input:checked+.slider{
+    background:var(--pink)
+}
+
+.switch input:checked+.slider:before{
+    transform:translateX(20px)
+}
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:22px;
+    transform:translate(-50%,20px);
+    opacity:0;
+    pointer-events:none;
+    background:rgba(75,52,59,.94);
+    color:white;
+    padding:10px 16px;
+    border-radius:999px;
+    font-size:13px;
+    z-index:100;
+    transition:.25s
+}
+
+.toast.show{
+    opacity:1;
+    transform:translate(-50%,0)
+}
+
+.celebrate{
+    position:fixed;
+    inset:0;
+    background:rgba(255,245,248,.82);
+    backdrop-filter:blur(6px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:70
+}
+
+.celebrate.show{
+    display:flex
+}
+
+.celebrateCard{
+    width:min(90vw,520px);
+    text-align:center;
+    background:var(--card);
+    border-radius:30px;
+    padding:34px;
+    box-shadow:var(--shadow);
+    animation:pop .35s ease
+}
+
+.confetti{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden
+}
+
+.confetti i{
+    position:absolute;
+    top:-20px;
+    font-style:normal;
+    animation:fall 2.4s linear forwards
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible{
+    outline:2px solid var(--pink);
+    outline-offset:3px
+}
+
+@media(max-width:700px){
+    .homeTools{
+        grid-template-columns:repeat(2,1fr)
+    }
+
+    .filters{
+        grid-template-columns:1fr
+    }
+
+    .months{
+        grid-template-columns:repeat(2,1fr)
+    }
+
+    .galleryGrid{
+        grid-template-columns:repeat(2,1fr)
+    }
+}
+
+@media(max-width:460px){
+    .card{
+        padding:26px 16px
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr 1fr
+    }
+
+    .photoArea{
+        aspect-ratio:1
+    }
+
+    .month{
+        min-height:112px
+    }
+
+    .lbPrev{
+        left:8px
+    }
+
+    .lbNext{
+        right:8px
+    }
+
+    .lbDelete{
+        right:62px
+    }
+}
+
+@keyframes beat{
+    50%{
+        transform:scale(1.12)
+    }
+}
+
+@keyframes pageIn{
+    from{
+        opacity:0;
+        transform:translateY(8px)
+    }
+
+    to{
+        opacity:1;
+        transform:none
+    }
+}
+
+@keyframes pop{
+    from{
+        transform:scale(.9);
+        opacity:0
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1
+    }
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(400deg);
+        opacity:0
+    }
+}
 </style>
 </head>
+
 <body>
-<section id="lock" class="screen active"><div class="card center"><div class="heart">♡</div><h1>Our Little Story</h1><div class="sub" id="lockSub">มีเรื่องราวเล็ก ๆ ที่อยากให้เธอเปิดดู</div><div class="pin" id="pin"><span></span><span></span><span></span><span></span></div><div class="keypad">
-<button class="key" onclick="press('1')">1</button><button class="key" onclick="press('2')">2</button><button class="key" onclick="press('3')">3</button><button class="key" onclick="press('4')">4</button><button class="key" onclick="press('5')">5</button><button class="key" onclick="press('6')">6</button><button class="key" onclick="press('7')">7</button><button class="key" onclick="press('8')">8</button><button class="key" onclick="press('9')">9</button><button class="key zero" onclick="press('0')">0</button></div><div class="error" id="pinError"></div></div></section>
-<section id="home" class="screen"><div class="card"><div class="nav"><span class="navTitle">Our Anniversary ♡</span><div><button class="ghost" onclick="openScreen('settings')">⚙️</button><button class="ghost" onclick="lockApp()">🔒</button></div></div><div class="homeHero"><div class="heart">♡</div><h2>Our Little Story</h2><div class="sub">ทุกเดือนมีเรื่องราวใหม่ ๆ ให้เราเก็บไว้ด้วยกัน</div><div class="date">เริ่มต้น 5 สิงหาคม 2026</div><div class="counter">เราเดินทางมาด้วยกันแล้ว<strong id="daysTogether">0 วัน</strong><div class="small" id="nextAnniv">กำลังคำนวณวันครบรอบถัดไป...</div></div></div><div class="stats"><div class="stat"><b id="photoStat">0</b><span>รูปภาพ</span></div><div class="stat"><b id="letterStat">0</b><span>จดหมาย</span></div><div class="stat"><b id="monthStat">1</b><span>เดือนที่เปิด</span></div></div><div class="homeTools"><button class="toolBtn" onclick="openScreen('gallery')"><strong>🖼️ แกลเลอรี</strong><span>รูปทั้งหมด</span></button><button class="toolBtn" onclick="openScreen('story')"><strong>📖 เรื่องราว</strong><span>ไทม์ไลน์</span></button><button class="toolBtn" onclick="openScreen('letters')"><strong>💌 จดหมาย</strong><span>ข้อความ</span></button><button class="toolBtn" onclick="openScreen('settings')"><strong>⚙️ ตั้งค่า</strong><span>จัดการข้อมูล</span></button></div><div class="sectionTitle"><h2>เดือนของเรา</h2><div class="small">เปิดได้ตามวันที่ของแต่ละเดือน</div></div><div class="months" id="months"></div></div></section>
-<section id="detail" class="screen"><div class="card"><div class="nav"><button class="ghost" onclick="openScreen('home')">← กลับ</button><span class="navTitle" id="detailNav">Month 1</span><span></span></div><div class="detail"><div class="heart">♡</div><h2 id="detailTitle">เดือนที่ 1</h2><div class="detailDate" id="detailDate">5 สิงหาคม 2026</div><div class="photoArea" id="photoArea"><div class="placeholder">ยังไม่มีรูปของเดือนนี้</div><img id="mainPhoto" alt="memory"></div><div class="photoControls"><label class="fileBtn">＋ เพิ่มรูป<input id="photoInput" type="file" accept="image/*" multiple></label></div><div class="memoryCount" id="memoryCount">0 รูป</div><div class="galleryGrid" id="monthGallery"></div><div class="note"><div class="noteTitle">เรื่องราวของเดือนนี้</div><textarea class="textarea" id="monthNote" placeholder="เขียนเรื่องราวหรือความทรงจำของเดือนนี้..."></textarea><button class="primary" onclick="saveMonthNote()">บันทึกความทรงจำ</button></div><div class="detailActions"><button class="secondary" onclick="openScreen('home')">ดูเดือนอื่น</button></div></div></div></section>
-<section id="gallery" class="screen"><div class="card"><div class="nav"><button class="ghost" onclick="openScreen('home')">← กลับ</button><span class="navTitle">แกลเลอรี</span><span></span></div><div class="sectionTitle"><h2>ความทรงจำทั้งหมด</h2><div class="small">รวมรูปจากทุกเดือน</div></div><div class="filters"><input class="field" id="gallerySearch" placeholder="ค้นหาเดือน..." oninput="renderGallery()"><select class="field" id="galleryMonth" onchange="renderGallery()"><option value="all">ทุกเดือน</option></select><select class="field" id="gallerySort" onchange="renderGallery()"><option value="asc">เก่า → ใหม่</option><option value="desc">ใหม่ → เก่า</option></select></div><div class="galleryGrid" id="allGallery"></div></div></section>
-<section id="story" class="screen"><div class="card"><div class="nav"><button class="ghost" onclick="openScreen('home')">← กลับ</button><span class="navTitle">เรื่องราว</span><span></span></div><div class="sectionTitle"><h2>Our Timeline</h2><div class="small">บันทึกทุกช่วงเวลาที่สำคัญ</div></div><div class="story" id="storyList"></div></div></section>
-<section id="letters" class="screen"><div class="card"><div class="nav"><button class="ghost" onclick="openScreen('home')">← กลับ</button><span class="navTitle">จดหมาย</span><span></span></div><div class="sectionTitle"><h2>Letters ♡</h2><div class="small">ข้อความที่อยากเก็บไว้ให้อ่านอีกครั้ง</div></div><div class="formRow"><input class="field" id="letterTitle" placeholder="หัวข้อจดหมาย"><select class="field" id="letterMonth"><option value="1">เดือนที่ 1</option></select></div><textarea class="textarea" id="letterText" placeholder="เขียนข้อความ..."></textarea><div class="formRow"><button class="primary" onclick="saveLetter()">💌 บันทึกจดหมาย</button></div><div class="lettersList" id="lettersList"></div></div></section>
-<section id="settings" class="screen"><div class="card"><div class="nav"><button class="ghost" onclick="openScreen('home')">← กลับ</button><span class="navTitle">ตั้งค่า</span><span></span></div><div class="sectionTitle"><h2>Settings</h2><div class="small">ข้อมูลจะถูกบันทึกบน Cloud</div></div><div class="settings"><div class="setting"><div class="text"><b>🌙 โหมดมืด</b><span>สลับธีมของเว็บไซต์</span></div><label class="switch"><input id="darkMode" type="checkbox" onchange="toggleDark()"><span class="slider"></span></label></div><div class="setting"><div class="text"><b>🔐 PIN</b><span>ใช้ PIN 2704 สำหรับเปิดเว็บไซต์</span></div><button class="secondary" onclick="alert('PIN ปัจจุบันคือ 2704')">ดู PIN</button></div><div class="setting"><div class="text"><b>☁️ Cloud Backup</b><span>ส่งออกข้อมูลจากฐานข้อมูล Cloud</span></div><button class="secondary" onclick="exportBackup()">Export</button></div><div class="setting"><div class="text"><b>☁️ Cloud Restore</b><span>นำเข้าจดหมายและการตั้งค่า</span></div><label class="fileBtn">Import<input class="hiddenFile" type="file" accept="application/json" onchange="importBackup(this.files[0])"></label></div><div class="setting"><div class="text"><b>⚠️ ล้างข้อมูล Cloud</b><span>ลบข้อมูลและรูปทั้งหมดของเว็บไซต์นี้</span></div><button class="danger" onclick="clearAllData()">ล้างทั้งหมด</button></div></div><div class="small" style="margin-top:20px;text-align:center">Cloud storage: Supabase · App ID: our-anniversary</div></div></section>
-<div id="modal" class="modal"><div class="modalCard"><div class="modalHead"><h2 id="modalTitle">แก้ไข</h2><button class="closeBtn" onclick="closeModal()">×</button></div><div id="modalBody"></div></div></div>
-<div id="lightbox" class="lightbox"><button class="lbBtn lbClose" onclick="closeLightbox()">×</button><button class="lbBtn lbPrev" onclick="prevPhoto()">‹</button><img id="lbImage" alt="memory"><button class="lbBtn lbNext" onclick="nextPhoto()">›</button><button class="lbDelete" onclick="deleteCurrentPhoto()">ลบรูป</button><div class="lbInfo" id="lbInfo"></div></div>
-<div id="toast" class="toast"></div><div id="celebrate" class="celebrate"><div class="celebrateCard"><div class="heart">♡</div><h2 id="celebrateTitle">Happy Anniversary</h2><p id="celebrateText" class="sub"></p><button class="primary" onclick="closeCelebrate()">♡ ไปต่อกันนะ</button></div><div class="confetti" id="confetti"></div></div>
+
+<!-- ==================== LOCK ==================== -->
+
+<section id="lock" class="screen active">
+    <div class="card center">
+
+        <div class="heart">♡</div>
+
+        <h1>Our Little Story</h1>
+
+        <div class="sub" id="lockSub">
+            มีเรื่องราวเล็ก ๆ ที่อยากให้เธอเปิดดู
+        </div>
+
+        <div class="pin" id="pin">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="keypad">
+
+            <button class="key" onclick="press('1')">1</button>
+            <button class="key" onclick="press('2')">2</button>
+            <button class="key" onclick="press('3')">3</button>
+
+            <button class="key" onclick="press('4')">4</button>
+            <button class="key" onclick="press('5')">5</button>
+            <button class="key" onclick="press('6')">6</button>
+
+            <button class="key" onclick="press('7')">7</button>
+            <button class="key" onclick="press('8')">8</button>
+            <button class="key" onclick="press('9')">9</button>
+
+            <button class="key zero" onclick="press('0')">0</button>
+
+        </div>
+
+        <div class="error" id="pinError"></div>
+
+    </div>
+</section>
+
+
+<!-- ==================== HOME ==================== -->
+
+<section id="home" class="screen">
+
+    <div class="card">
+
+        <div class="nav">
+
+            <span class="navTitle">
+                Our Anniversary ♡
+            </span>
+
+            <div>
+                <button class="ghost" onclick="openScreen('settings')">
+                    ⚙️
+                </button>
+
+                <button class="ghost" onclick="lockApp()">
+                    🔒
+                </button>
+            </div>
+
+        </div>
+
+
+        <div class="homeHero">
+
+            <div class="heart">♡</div>
+
+            <h2>Our Little Story</h2>
+
+            <div class="sub">
+                ทุกเดือนมีเรื่องราวใหม่ ๆ ให้เราเก็บไว้ด้วยกัน
+            </div>
+
+            <div class="date">
+                เริ่มต้น 5 สิงหาคม 2026
+            </div>
+
+            <div class="counter">
+
+                เราเดินทางมาด้วยกันแล้ว
+
+                <strong id="daysTogether">
+                    0 วัน
+                </strong>
+
+                <div class="small" id="nextAnniv">
+                    กำลังคำนวณวันครบรอบถัดไป...
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="stats">
+
+            <div class="stat">
+                <b id="photoStat">0</b>
+                <span>รูปภาพ</span>
+            </div>
+
+            <div class="stat">
+                <b id="letterStat">0</b>
+                <span>จดหมาย</span>
+            </div>
+
+            <div class="stat">
+                <b id="monthStat">1</b>
+                <span>เดือนที่เปิด</span>
+            </div>
+
+        </div>
+
+
+        <div class="homeTools">
+
+            <button class="toolBtn" onclick="openScreen('gallery')">
+                <strong>🖼️ แกลเลอรี</strong>
+                <span>รูปทั้งหมด</span>
+            </button>
+
+            <button class="toolBtn" onclick="openScreen('story')">
+                <strong>📖 เรื่องราว</strong>
+                <span>ไทม์ไลน์</span>
+            </button>
+
+            <button class="toolBtn" onclick="openScreen('letters')">
+                <strong>💌 จดหมาย</strong>
+                <span>ข้อความ</span>
+            </button>
+
+            <button class="toolBtn" onclick="openScreen('settings')">
+                <strong>⚙️ ตั้งค่า</strong>
+                <span>จัดการข้อมูล</span>
+            </button>
+
+        </div>
+
+
+        <div class="sectionTitle">
+
+            <h2>เดือนของเรา</h2>
+
+            <div class="small">
+                เปิดได้ตามวันที่ของแต่ละเดือน
+            </div>
+
+        </div>
+
+
+        <div class="months" id="months"></div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================== MONTH DETAIL ==================== -->
+
+<section id="detail" class="screen">
+
+    <div class="card">
+
+        <div class="nav">
+
+            <button class="ghost" onclick="openScreen('home')">
+                ← กลับ
+            </button>
+
+            <span class="navTitle" id="detailNav">
+                Month 1
+            </span>
+
+            <span></span>
+
+        </div>
+
+
+        <div class="detail">
+
+            <div class="heart">♡</div>
+
+            <h2 id="detailTitle">
+                เดือนที่ 1
+            </h2>
+
+            <div class="detailDate" id="detailDate">
+                5 สิงหาคม 2026
+            </div>
+
+
+            <div class="photoArea" id="photoArea">
+
+                <div class="placeholder">
+                    ยังไม่มีรูปของเดือนนี้
+                </div>
+
+                <img id="mainPhoto" alt="memory">
+
+            </div>
+
+
+            <div class="photoControls">
+
+                <label class="fileBtn">
+
+                    ＋ เพิ่มรูป
+
+                    <input
+                        id="photoInput"
+                        type="file"
+                        accept="image/*"
+                        multiple
+                    >
+
+                </label>
+
+            </div>
+
+
+            <div class="memoryCount" id="memoryCount">
+                0 รูป
+            </div>
+
+
+            <div class="galleryGrid" id="monthGallery"></div>
+
+
+            <div class="note">
+
+                <div class="noteTitle">
+                    เรื่องราวของเดือนนี้
+                </div>
+
+                <textarea
+                    class="textarea"
+                    id="monthNote"
+                    placeholder="เขียนเรื่องราวหรือความทรงจำของเดือนนี้..."
+                ></textarea>
+
+                <button
+                    class="primary"
+                    onclick="saveMonthNote()"
+                >
+                    บันทึกความทรงจำ
+                </button>
+
+            </div>
+
+
+            <div class="detailActions">
+
+                <button
+                    class="secondary"
+                    onclick="openScreen('home')"
+                >
+                    ดูเดือนอื่น
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================== GALLERY ==================== -->
+
+<section id="gallery" class="screen">
+
+    <div class="card">
+
+        <div class="nav">
+
+            <button class="ghost" onclick="openScreen('home')">
+                ← กลับ
+            </button>
+
+            <span class="navTitle">
+                แกลเลอรี
+            </span>
+
+            <span></span>
+
+        </div>
+
+
+        <div class="sectionTitle">
+
+            <h2>ความทรงจำทั้งหมด</h2>
+
+            <div class="small">
+                รวมรูปจากทุกเดือน
+            </div>
+
+        </div>
+
+
+        <div class="filters">
+
+            <input
+                class="field"
+                id="gallerySearch"
+                placeholder="ค้นหาเดือน..."
+                oninput="renderGallery()"
+            >
+
+            <select
+                class="field"
+                id="galleryMonth"
+                onchange="renderGallery()"
+            >
+                <option value="all">
+                    ทุกเดือน
+                </option>
+            </select>
+
+            <select
+                class="field"
+                id="gallerySort"
+                onchange="renderGallery()"
+            >
+                <option value="asc">
+                    เก่า → ใหม่
+                </option>
+
+                <option value="desc">
+                    ใหม่ → เก่า
+                </option>
+            </select>
+
+        </div>
+
+
+        <div
+            class="galleryGrid"
+            id="allGallery"
+        ></div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================== STORY ==================== -->
+
+<section id="story" class="screen">
+
+    <div class="card">
+
+        <div class="nav">
+
+            <button class="ghost" onclick="openScreen('home')">
+                ← กลับ
+            </button>
+
+            <span class="navTitle">
+                เรื่องราว
+            </span>
+
+            <span></span>
+
+        </div>
+
+
+        <div class="sectionTitle">
+
+            <h2>Our Timeline</h2>
+
+            <div class="small">
+                บันทึกทุกช่วงเวลาที่สำคัญ
+            </div>
+
+        </div>
+
+
+        <div
+            class="story"
+            id="storyList"
+        ></div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================== LETTERS ==================== -->
+
+<section id="letters" class="screen">
+
+    <div class="card">
+
+        <div class="nav">
+
+            <button class="ghost" onclick="openScreen('home')">
+                ← กลับ
+            </button>
+
+            <span class="navTitle">
+                จดหมาย
+            </span>
+
+            <span></span>
+
+        </div>
+
+
+        <div class="sectionTitle">
+
+            <h2>Letters ♡</h2>
+
+            <div class="small">
+                ข้อความที่อยากเก็บไว้ให้อ่านอีกครั้ง
+            </div>
+
+        </div>
+
+
+        <div class="formRow">
+
+            <input
+                class="field"
+                id="letterTitle"
+                placeholder="หัวข้อจดหมาย"
+            >
+
+            <select
+                class="field"
+                id="letterMonth"
+            >
+                <option value="1">
+                    เดือนที่ 1
+                </option>
+            </select>
+
+        </div>
+
+
+        <textarea
+            class="textarea"
+            id="letterText"
+            placeholder="เขียนข้อความ..."
+        ></textarea>
+
+
+        <div class="formRow">
+
+            <button
+                class="primary"
+                onclick="saveLetter()"
+            >
+                💌 บันทึกจดหมาย
+            </button>
+
+        </div>
+
+
+        <div
+            class="lettersList"
+            id="lettersList"
+        ></div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================== SETTINGS ==================== -->
+
+<section id="settings" class="screen">
+
+    <div class="card">
+
+        <div class="nav">
+
+            <button class="ghost" onclick="openScreen('home')">
+                ← กลับ
+            </button>
+
+            <span class="navTitle">
+                ตั้งค่า
+            </span>
+
+            <span></span>
+
+        </div>
+
+
+        <div class="sectionTitle">
+
+            <h2>Settings</h2>
+
+            <div class="small">
+                ข้อมูลจะถูกบันทึกบน Cloud
+            </div>
+
+        </div>
+
+
+        <div class="settings">
+
+
+            <!-- DARK MODE -->
+
+            <div class="setting">
+
+                <div class="text">
+
+                    <b>🌙 โหมดมืด</b>
+
+                    <span>
+                        สลับธีมของเว็บไซต์
+                    </span>
+
+                </div>
+
+
+                <label class="switch">
+
+                    <input
+                        id="darkMode"
+                        type="checkbox"
+                        onchange="toggleDark()"
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <!-- PIN -->
+
+            <div class="setting">
+
+                <div class="text">
+
+                    <b>🔐 PIN</b>
+
+                    <span>
+                        ใช้ PIN 2704 สำหรับเปิดเว็บไซต์
+                    </span>
+
+                </div>
+
+                <button
+                    class="secondary"
+                    onclick="alert('PIN ปัจจุบันคือ 2704')"
+                >
+                    ดู PIN
+                </button>
+
+            </div>
+
+
+            <!-- EXPORT -->
+
+            <div class="setting">
+
+                <div class="text">
+
+                    <b>☁️ Cloud Backup</b>
+
+                    <span>
+                        ส่งออกข้อมูลจากฐานข้อมูล Cloud
+                    </span>
+
+                </div>
+
+                <button
+                    class="secondary"
+                    onclick="exportBackup()"
+                >
+                    Export
+                </button>
+
+            </div>
+
+
+            <!-- IMPORT -->
+
+            <div class="setting">
+
+                <div class="text">
+
+                    <b>☁️ Cloud Restore</b>
+
+                    <span>
+                        นำเข้าจดหมายและการตั้งค่า
+                    </span>
+
+                </div>
+
+
+                <label class="fileBtn">
+
+                    Import
+
+                    <input
+                        class="hiddenFile"
+                        type="file"
+                        accept="application/json"
+                        onchange="importBackup(this.files[0])"
+                    >
+
+                </label>
+
+            </div>
+
+
+            <!-- CLEAR -->
+
+            <div class="setting">
+
+                <div class="text">
+
+                    <b>⚠️ ล้างข้อมูล Cloud</b>
+
+                    <span>
+                        ลบข้อมูลและรูปทั้งหมดของเว็บไซต์นี้
+                    </span>
+
+                </div>
+
+                <button
+                    class="danger"
+                    onclick="clearAllData()"
+                >
+                    ล้างทั้งหมด
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="small"
+            style="margin-top:20px;text-align:center"
+        >
+            Cloud storage: Supabase · App ID: our-anniversary
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================== MODAL ==================== -->
+
+<div id="modal" class="modal">
+
+    <div class="modalCard">
+
+        <div class="modalHead">
+
+            <h2 id="modalTitle">
+                แก้ไข
+            </h2>
+
+            <button
+                class="closeBtn"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div id="modalBody"></div>
+
+    </div>
+
+</div>
+
+
+<!-- ==================== LIGHTBOX ==================== -->
+
+<div id="lightbox" class="lightbox">
+
+    <button
+        class="lbBtn lbClose"
+        onclick="closeLightbox()"
+    >
+        ×
+    </button>
+
+    <button
+        class="lbBtn lbPrev"
+        onclick="prevPhoto()"
+    >
+        ‹
+    </button>
+
+    <img
+        id="lbImage"
+        alt="memory"
+    >
+
+    <button
+        class="lbBtn lbNext"
+        onclick="nextPhoto()"
+    >
+        ›
+    </button>
+
+    <button
+        class="lbDelete"
+        onclick="deleteCurrentPhoto()"
+    >
+        ลบรูป
+    </button>
+
+    <div
+        class="lbInfo"
+        id="lbInfo"
+    ></div>
+
+</div>
+
+
+<!-- ==================== TOAST ==================== -->
+
+<div
+    id="toast"
+    class="toast"
+></div>
+
+
+<!-- ==================== CELEBRATION ==================== -->
+
+<div
+    id="celebrate"
+    class="celebrate"
+>
+
+    <div class="celebrateCard">
+
+        <div class="heart">
+            ♡
+        </div>
+
+        <h2 id="celebrateTitle">
+            Happy Anniversary
+        </h2>
+
+        <p
+            id="celebrateText"
+            class="sub"
+        ></p>
+
+        <button
+            class="primary"
+            onclick="closeCelebrate()"
+        >
+            ♡ ไปต่อกันนะ
+        </button>
+
+    </div>
+
+    <div
+        class="confetti"
+        id="confetti"
+    ></div>
+
+</div>
+
+
+<!-- ==================== SUPABASE ==================== -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
 <script>
-const CONFIG={password:"2704",startDate:"2026-08-05",totalMonths:60,supabaseUrl:"YOUR_SUPABASE_URL",supabaseAnonKey:"YOUR_SUPABASE_ANON_KEY",appId:"our-anniversary"};
-let supabaseClient=null,currentMonth=1,currentPhotos=[],currentPhotoIndex=0,pinValue="",settings={dark:false},allPhotos=[],allLetters=[];
-const monthNames=["เดือนที่ 1","เดือนที่ 2","เดือนที่ 3","เดือนที่ 4","เดือนที่ 5","เดือนที่ 6","เดือนที่ 7","เดือนที่ 8","เดือนที่ 9","เดือนที่ 10","เดือนที่ 11","เดือนที่ 12","เดือนที่ 13","เดือนที่ 14","เดือนที่ 15","เดือนที่ 16","เดือนที่ 17","เดือนที่ 18","เดือนที่ 19","เดือนที่ 20","เดือนที่ 21","เดือนที่ 22","เดือนที่ 23","เดือนที่ 24","เดือนที่ 25","เดือนที่ 26","เดือนที่ 27","เดือนที่ 28","เดือนที่ 29","เดือนที่ 30","เดือนที่ 31","เดือนที่ 32","เดือนที่ 33","เดือนที่ 34","เดือนที่ 35","เดือนที่ 36","เดือนที่ 37","เดือนที่ 38","เดือนที่ 39","เดือนที่ 40","เดือนที่ 41","เดือนที่ 42","เดือนที่ 43","เดือนที่ 44","เดือนที่ 45","เดือนที่ 46","เดือนที่ 47","เดือนที่ 48","เดือนที่ 49","เดือนที่ 50","เดือนที่ 51","เดือนที่ 52","เดือนที่ 53","เดือนที่ 54","เดือนที่ 55","เดือนที่ 56","เดือนที่ 57","เดือนที่ 58","เดือนที่ 59","เดือนที่ 60"];
-function $(id){return document.getElementById(id)}
-function toast(msg){const t=$("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2400)}
-function escapeHtml(s=""){return s.replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;","\"":"&quot;"}[c]))}
-function cloudReady(){return CONFIG.supabaseUrl.startsWith("https://")&&CONFIG.supabaseAnonKey&&CONFIG.supabaseAnonKey!=="YOUR_SUPABASE_ANON_KEY"}
-function initCloud(){if(!cloudReady()){toast("กรุณาใส่ Supabase URL และ Publishable/Anon Key ใน CONFIG");return false}supabaseClient=window.supabase.createClient(CONFIG.supabaseUrl,CONFIG.supabaseAnonKey);return true}
-async function loadCloud(){if(!supabaseClient)return;const [{data:ps,error:pe},{data:ls,error:le},{data:ss,error:se}]=await Promise.all([supabaseClient.from("photos").select("*").eq("app_id",CONFIG.appId).order("month").order("index"),supabaseClient.from("letters").select("*").eq("app_id",CONFIG.appId).order("created_at",{ascending:false}),supabaseClient.from("settings").select("key,value").eq("app_id",CONFIG.appId)]);if(pe||le||se){console.error(pe||le||se);toast("โหลดข้อมูล Cloud ไม่สำเร็จ");return}allPhotos=ps||[];allLetters=ls||[];const st=ss||[];const dark=st.find(x=>x.key==="dark");settings.dark=!!dark?.value;document.body.classList.toggle("dark",settings.dark);$("darkMode").checked=settings.dark;renderMonths();renderStats();}
-async function uploadPhoto(file){const compressed=await compressImage(file,1600,.82);const path=`${CONFIG.appId}/${currentMonth}/${Date.now()}-${Math.random().toString(36).slice(2)}.jpg`;const {error:ue}=await supabaseClient.storage.from("memories").upload(path,compressed,{contentType:"image/jpeg",upsert:false});if(ue)throw ue;const {data:urlData}=supabaseClient.storage.from("memories").getPublicUrl(path);const {data:maxRows}=await supabaseClient.from("photos").select("index").eq("app_id",CONFIG.appId).eq("month",currentMonth).order("index",{ascending:false}).limit(1);const nextIndex=(maxRows?.[0]?.index??-1)+1;const {error:ie}=await supabaseClient.from("photos").insert({app_id:CONFIG.appId,month:currentMonth,index:nextIndex,url:urlData.publicUrl,storage_path:path});if(ie){await supabaseClient.storage.from("memories").remove([path]);throw ie}}
-function compressImage(file,maxSide=1600,quality=.82){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>{const img=new Image();img.onload=()=>{const scale=Math.min(1,maxSide/Math.max(img.width,img.height)),c=document.createElement("canvas");c.width=Math.round(img.width*scale);c.height=Math.round(img.height*scale);c.getContext("2d").drawImage(img,0,0,c.width,c.height);c.toBlob(b=>b?resolve(b):reject(new Error("compress failed")),"image/jpeg",quality)};img.onerror=reject;img.src=r.result};r.onerror=reject;r.readAsDataURL(file)})}
-async function deletePhoto(photo){if(!supabaseClient)return;const ok=confirm("ลบรูปนี้จาก Cloud ใช่ไหม?");if(!ok)return;try{if(photo.storage_path)await supabaseClient.storage.from("memories").remove([photo.storage_path]);const {error}=await supabaseClient.from("photos").delete().eq("id",photo.id);if(error)throw error;toast("ลบรูปแล้ว");await loadCloud();await openMonth(currentMonth);await renderGallery();await renderStory()}catch(e){console.error(e);toast("ลบรูปไม่สำเร็จ")}}
-async function saveMonthNote(){if(!supabaseClient)return;const text=$("monthNote").value.trim();if(!text){toast("ยังไม่ได้เขียนความทรงจำ");return}const key=`note_${currentMonth}`;const {error}=await supabaseClient.from("settings").upsert({app_id:CONFIG.appId,key,value:{text}},{onConflict:"app_id,key"});if(error){console.error(error);toast("บันทึกไม่สำเร็จ");return}toast("บันทึกความทรงจำแล้ว");await loadCloud();}
-async function loadMonthNote(){if(!supabaseClient){$("monthNote").value="";return}const {data}=await supabaseClient.from("settings").select("value").eq("app_id",CONFIG.appId).eq("key",`note_${currentMonth}`).maybeSingle();$("monthNote").value=data?.value?.text||""}
-async function saveLetter(){if(!supabaseClient)return;const title=$("letterTitle").value.trim()||"จดหมายของเรา";const text=$("letterText").value.trim();const month=Number($("letterMonth").value);if(!text){toast("กรุณาเขียนข้อความก่อน");return}const {error}=await supabaseClient.from("letters").insert({app_id:CONFIG.appId,month,title,text});if(error){console.error(error);toast("บันทึกจดหมายไม่สำเร็จ");return}$("letterTitle").value="";$("letterText").value="";toast("บันทึกจดหมายแล้ว");await loadCloud();renderLetters();}
-async function deleteLetter(id){if(!confirm("ลบจดหมายนี้ไหม?"))return;const {error}=await supabaseClient.from("letters").delete().eq("id",id);if(error){toast("ลบไม่สำเร็จ");return}await loadCloud();renderLetters()}
-async function editLetter(id){const l=allLetters.find(x=>x.id===id);if(!l)return;$("modalTitle").textContent="แก้ไขจดหมาย";$("modalBody").innerHTML=`<input class="field" id="editLetterTitle" value="${escapeHtml(l.title)}"><textarea class="textarea" id="editLetterText">${escapeHtml(l.text)}</textarea><div class="formRow"><button class="primary" onclick="updateLetter('${id}')">บันทึก</button></div>`;$("modal").classList.add("show")}
-async function updateLetter(id){const title=$("editLetterTitle").value.trim()||"จดหมายของเรา";const text=$("editLetterText").value.trim();const {error}=await supabaseClient.from("letters").update({title,text}).eq("id",id);if(error){toast("แก้ไขไม่สำเร็จ");return}closeModal();await loadCloud();renderLetters();toast("แก้ไขจดหมายแล้ว")}
-function closeModal(){$("modal").classList.remove("show")}
-function openScreen(id){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));$(id).classList.add("active");if(id==="home")renderMonths();if(id==="gallery")renderGallery();if(id==="story")renderStory();if(id==="letters")renderLetters();if(id==="settings")$("darkMode").checked=settings.dark;window.scrollTo({top:0,behavior:"smooth"})}
-function press(n){if(pinValue.length>=4)return;pinValue+=n;updatePin();if(pinValue.length===4)setTimeout(checkPin,100)}
-function updatePin(){$("pin").querySelectorAll("span").forEach((s,i)=>s.classList.toggle("on",i<pinValue.length))}
-function checkPin(){if(pinValue===CONFIG.password){pinValue="";updatePin();$("pinError").textContent="";openScreen("home")}else{$("pinError").textContent="PIN ไม่ถูกต้อง";pinValue="";updatePin()}}
-function lockApp(){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));$("lock").classList.add("active")}
-function monthDate(index){const d=new Date(CONFIG.startDate+"T00:00:00");d.setMonth(d.getMonth()+index-1);return d}
-function formatDate(d){return d.toLocaleDateString("th-TH",{day:"numeric",month:"long",year:"numeric"})}
-function unlocked(index){const now=new Date();const d=monthDate(index);return now>=d}
-function renderMonths(){const wrap=$("months");if(!wrap)return;wrap.innerHTML="";for(let i=1;i<=CONFIG.totalMonths;i++){const photos=allPhotos.filter(p=>p.month===i);const b=document.createElement("button");b.className=`month ${unlocked(i)?"unlocked":"locked"} ${photos.length?"hasMemory":""}`;b.innerHTML=`<div class="status">${unlocked(i)?"♡":"🔒"}</div>${photos[0]?`<img class="thumb" src="${escapeHtml(photos[0].url)}" alt="">`:``}<div class="num">MONTH ${i}</div><div class="title">${monthNames[i-1]}</div><div class="date">${formatDate(monthDate(i))}</div>`;if(unlocked(i))b.onclick=()=>openMonth(i);wrap.appendChild(b)}}
-async function openMonth(index){if(!unlocked(index))return;currentMonth=index;openScreen("detail");$("detailNav").textContent=`Month ${index}`;$("detailTitle").textContent=monthNames[index-1];$("detailDate").textContent=formatDate(monthDate(index));currentPhotos=allPhotos.filter(p=>p.month===index).sort((a,b)=>a.index-b.index);renderMonthPhotos();await loadMonthNote()}
-function renderMonthPhotos(){const area=$("photoArea"),img=$("mainPhoto"),grid=$("monthGallery");if(currentPhotos.length){area.classList.add("has");img.src=currentPhotos[0].url}else{area.classList.remove("has");img.removeAttribute("src")}$("memoryCount").textContent=`${currentPhotos.length} รูป`;grid.innerHTML=currentPhotos.map((p,i)=>`<button class="galleryItem" onclick="openLightbox(${i})"><img src="${escapeHtml(p.url)}" alt=""><span class="galleryLabel">รูปที่ ${i+1}</span></button>`).join("")||`<div class="emptyState">เพิ่มรูปแรกของเดือนนี้ได้เลย ♡</div>`}
-async function handlePhotos(files){if(!files?.length||!supabaseClient)return;const btn=document.querySelector(".fileBtn");try{toast("กำลังอัปโหลดรูปขึ้น Cloud...");for(const f of files)await uploadPhoto(f);toast("อัปโหลดรูปเรียบร้อยแล้ว ♡");await loadCloud();await openMonth(currentMonth)}catch(e){console.error(e);toast("อัปโหลดไม่สำเร็จ: "+(e.message||"unknown error"))}}
-function openLightbox(i){currentPhotoIndex=i;$("lbImage").src=currentPhotos[i].url;$("lbInfo").textContent=`${i+1} / ${currentPhotos.length}`;$("lightbox").classList.add("show")}
-function closeLightbox(){$("lightbox").classList.remove("show")}
-function prevPhoto(){if(!currentPhotos.length)return;currentPhotoIndex=(currentPhotoIndex-1+currentPhotos.length)%currentPhotos.length;openLightbox(currentPhotoIndex)}
-function nextPhoto(){if(!currentPhotos.length)return;currentPhotoIndex=(currentPhotoIndex+1)%currentPhotos.length;openLightbox(currentPhotoIndex)}
-async function deleteCurrentPhoto(){const p=currentPhotos[currentPhotoIndex];if(!p)return;closeLightbox();await deletePhoto(p)}
-function renderGallery(){const wrap=$("allGallery");if(!wrap)return;const q=($("gallerySearch")?.value||"").toLowerCase();const m=$("galleryMonth")?.value||"all";const sort=$("gallerySort")?.value||"asc";let list=allPhotos.filter(p=>(m==="all"||String(p.month)===m)&&(`เดือนที่ ${p.month}`.includes(q)||formatDate(monthDate(p.month)).toLowerCase().includes(q)));list.sort((a,b)=>sort==="asc"?(a.month-b.month||a.index-b.index):(b.month-a.month||b.index-a.index));wrap.innerHTML=list.map(p=>`<button class="galleryItem" onclick="openGalleryLightbox('${p.id}')"><img src="${escapeHtml(p.url)}" alt=""><span class="galleryLabel">เดือนที่ ${p.month}</span></button>`).join("")||`<div class="emptyState">ยังไม่มีรูปบน Cloud</div>`}
-function openGalleryLightbox(id){const idx=currentPhotos.findIndex(p=>p.id===id);if(idx>=0){openLightbox(idx);return}const p=allPhotos.find(x=>x.id===id);if(!p)return;currentPhotos=[p];openLightbox(0)}
-function renderStory(){const wrap=$("storyList");if(!wrap)return;const notes=Object.keys(settings).filter(k=>k.startsWith("note_"));const items=[];for(let i=1;i<=CONFIG.totalMonths;i++){const photos=allPhotos.filter(p=>p.month===i);const letters=allLetters.filter(l=>l.month===i);const note=settings[`note_${i}`]?.text||"";if(photos.length||letters.length||note)items.push({i,photos,letters,note})}wrap.innerHTML=items.map(x=>`<div class="storyItem"><div class="storyDot"></div><div class="storyCard"><div class="storyTitle">${monthNames[x.i-1]}</div><div class="storyDate">${formatDate(monthDate(x.i))}</div>${x.note?`<div class="storyText">${escapeHtml(x.note)}</div>`:""}<div class="storyMeta">${x.photos.length} รูป · ${x.letters.length} จดหมาย</div></div></div>`).join("")||`<div class="emptyState">ยังไม่มีเรื่องราวที่บันทึกไว้</div>`}
-function renderLetters(){const wrap=$("lettersList");if(!wrap)return;const opts=Array.from({length:CONFIG.totalMonths},(_,i)=>`<option value="${i+1}">เดือนที่ ${i+1}</option>`).join("");$("letterMonth").innerHTML=opts;wrap.innerHTML=allLetters.map(l=>`<div class="letter"><h3>${escapeHtml(l.title)} · เดือนที่ ${l.month}</h3><p>${escapeHtml(l.text)}</p><div class="letterBtns"><button class="iconBtn" onclick="editLetter('${l.id}')">✎</button><button class="iconBtn" onclick="deleteLetter('${l.id}')">×</button></div></div>`).join("")||`<div class="emptyState">ยังไม่มีจดหมาย ♡</div>`}
-async function toggleDark(){settings.dark=$("darkMode").checked;document.body.classList.toggle("dark",settings.dark);await supabaseClient.from("settings").upsert({app_id:CONFIG.appId,key:"dark",value:settings.dark},{onConflict:"app_id,key"})}
-async function exportBackup(){if(!supabaseClient)return;const {data:ss}=await supabaseClient.from("settings").select("key,value").eq("app_id",CONFIG.appId);const payload={version:1,appId:CONFIG.appId,exportedAt:new Date().toISOString(),letters:allLetters,settings:ss||[],photos:allPhotos.map(p=>({month:p.month,index:p.index,url:p.url,storage_path:p.storage_path}))};const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`our-anniversary-cloud-${new Date().toISOString().slice(0,10)}.json`;a.click();URL.revokeObjectURL(a.href)}
-async function importBackup(file){if(!file||!supabaseClient)return;try{const data=JSON.parse(await file.text());for(const l of data.letters||[])await supabaseClient.from("letters").upsert({id:l.id,app_id:CONFIG.appId,month:l.month,title:l.title,text:l.text},{onConflict:"id"});for(const s of data.settings||[])await supabaseClient.from("settings").upsert({app_id:CONFIG.appId,key:s.key,value:s.value},{onConflict:"app_id,key"});await loadCloud();toast("นำเข้าข้อมูล Cloud แล้ว (รูปเดิมยังใช้ URL เดิม)")}catch(e){console.error(e);toast("Import ไม่สำเร็จ")}}
-async function clearAllData(){if(!confirm("ลบข้อมูล Cloud ทั้งหมดของเว็บไซต์นี้จริงไหม?"))return;if(!supabaseClient)return;try{const {data:photos}=await supabaseClient.from("photos").select("id,storage_path").eq("app_id",CONFIG.appId);const paths=(photos||[]).map(p=>p.storage_path).filter(Boolean);if(paths.length)await supabaseClient.storage.from("memories").remove(paths);await supabaseClient.from("photos").delete().eq("app_id",CONFIG.appId);await supabaseClient.from("letters").delete().eq("app_id",CONFIG.appId);await supabaseClient.from("settings").delete().eq("app_id",CONFIG.appId);allPhotos=[];allLetters=[];settings={dark:false};document.body.classList.remove("dark");await loadCloud();toast("ล้างข้อมูล Cloud แล้ว")}catch(e){console.error(e);toast("ล้างข้อมูลไม่สำเร็จ")}}
-function renderStats(){$("photoStat").textContent=allPhotos.length;$('letterStat').textContent=allLetters.length;$('monthStat').textContent=allPhotos.length||allLetters.length?new Set([...allPhotos.map(p=>p.month),...allLetters.map(l=>l.month)]).size:1}
-function updateCounter(){const start=new Date(CONFIG.startDate+"T00:00:00"),now=new Date();const days=Math.max(0,Math.floor((now-start)/86400000));$("daysTogether").textContent=`${days} วัน`;let next=new Date(start);while(next<=now)next.setMonth(next.getMonth()+1);const diff=Math.ceil((next-now)/86400000);$("nextAnniv").innerHTML=`ครบรอบถัดไปอีก <strong>${diff} วัน</strong> · ${formatDate(next)}`}
-function maybeCelebration(){const now=new Date();const start=new Date(CONFIG.startDate+"T00:00:00");if(now.getDate()===start.getDate()){const key=`celebrate-${now.getFullYear()}-${now.getMonth()}`;if(localStorage.getItem(key)!==CONFIG.appId){localStorage.setItem(key,CONFIG.appId);$("celebrateTitle").textContent="Happy Anniversary ♡";$("celebrateText").textContent="อีกหนึ่งเดือนที่เราเดินมาด้วยกันแล้ว";$("celebrate").classList.add("show");makeConfetti()}}}
-function closeCelebrate(){$("celebrate").classList.remove("show")}
-function makeConfetti(){const c=$("confetti");c.innerHTML="";for(let i=0;i<35;i++){const x=document.createElement("i");x.textContent=["♡","✦","•"][i%3];x.style.left=Math.random()*100+"%";x.style.animationDelay=Math.random()*.8+"s";x.style.fontSize=10+Math.random()*16+"px";c.appendChild(x)}}
-$("photoInput").addEventListener("change",e=>handlePhotos(e.target.files));
-async function init(){updateCounter();maybeCelebration();if(!initCloud())return;await loadCloud();renderGallery();renderStory();renderLetters()}
+
+/* =========================================================
+   CONFIGURATION
+========================================================= */
+
+const CONFIG = {
+
+    password: "2704",
+
+    startDate: "2026-08-05",
+
+    totalMonths: 60,
+
+    supabaseUrl:
+        "https://pupfpjxxzzuancakjorf.supabase.co",
+
+    supabaseAnonKey:
+        "sb_publishable_lwuqTK-HRG_e0y3N8VGMSg_j6S3CnvB",
+
+    appId:
+        "our-anniversary"
+
+};
+
+
+/* =========================================================
+   GLOBAL VARIABLES
+========================================================= */
+
+let supabaseClient = null;
+
+let currentMonth = 1;
+
+let currentPhotos = [];
+
+let currentPhotoIndex = 0;
+
+let pinValue = "";
+
+let settings = {
+    dark: false
+};
+
+let allPhotos = [];
+
+let allLetters = [];
+
+
+/* =========================================================
+   MONTH NAMES
+========================================================= */
+
+const monthNames = Array.from(
+    {length: CONFIG.totalMonths},
+    (_, i) => `เดือนที่ ${i + 1}`
+);
+
+
+/* =========================================================
+   SHORT DOM HELPER
+========================================================= */
+
+function $(id){
+    return document.getElementById(id);
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function toast(msg){
+
+    const t = $("toast");
+
+    t.textContent = msg;
+
+    t.classList.add("show");
+
+    setTimeout(() => {
+        t.classList.remove("show");
+    }, 2400);
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(s = ""){
+
+    return String(s).replace(
+        /[&<>'"]/g,
+        c => ({
+            "&":"&amp;",
+            "<":"&lt;",
+            ">":"&gt;",
+            "'":"&#39;",
+            "\"":"&quot;"
+        }[c])
+    );
+
+}
+
+
+/* =========================================================
+   CLOUD READY
+========================================================= */
+
+function cloudReady(){
+
+    return (
+        CONFIG.supabaseUrl.startsWith("https://") &&
+        CONFIG.supabaseAnonKey &&
+        CONFIG.supabaseAnonKey !== "YOUR_SUPABASE_ANON_KEY"
+    );
+
+}
+
+
+/* =========================================================
+   INITIALIZE SUPABASE
+========================================================= */
+
+function initCloud(){
+
+    if(!cloudReady()){
+
+        toast(
+            "กรุณาใส่ Supabase URL และ Publishable/Anon Key ใน CONFIG"
+        );
+
+        return false;
+    }
+
+    if(!window.supabase){
+
+        toast(
+            "ไม่พบ Supabase Library"
+        );
+
+        return false;
+    }
+
+    supabaseClient =
+        window.supabase.createClient(
+            CONFIG.supabaseUrl,
+            CONFIG.supabaseAnonKey
+        );
+
+    return true;
+}
+
+
+/* =========================================================
+   LOAD CLOUD DATA
+========================================================= */
+
+async function loadCloud(){
+
+    if(!supabaseClient){
+        return;
+    }
+
+    try{
+
+        const [
+            photosResult,
+            lettersResult,
+            settingsResult
+        ] = await Promise.all([
+
+            supabaseClient
+                .from("photos")
+                .select("*")
+                .eq("app_id", CONFIG.appId)
+                .order("month")
+                .order("index"),
+
+            supabaseClient
+                .from("letters")
+                .select("*")
+                .eq("app_id", CONFIG.appId)
+                .order("created_at", {
+                    ascending:false
+                }),
+
+            supabaseClient
+                .from("settings")
+                .select("key,value")
+                .eq("app_id", CONFIG.appId)
+
+        ]);
+
+
+        if(
+            photosResult.error ||
+            lettersResult.error ||
+            settingsResult.error
+        ){
+
+            console.error(
+                "Cloud Load Error:",
+                photosResult.error ||
+                lettersResult.error ||
+                settingsResult.error
+            );
+
+            toast(
+                "โหลดข้อมูล Cloud ไม่สำเร็จ"
+            );
+
+            return;
+        }
+
+
+        allPhotos =
+            photosResult.data || [];
+
+        allLetters =
+            lettersResult.data || [];
+
+
+        /*
+            โหลด settings ทั้งหมด
+            รวมถึง dark และ note_1 ... note_60
+        */
+
+        settings = {
+            dark:false
+        };
+
+
+        for(
+            const row of (settingsResult.data || [])
+        ){
+
+            settings[row.key] =
+                row.value;
+
+        }
+
+
+        settings.dark =
+            settings.dark === true;
+
+
+        document.body.classList.toggle(
+            "dark",
+            settings.dark
+        );
+
+
+        $("darkMode").checked =
+            settings.dark;
+
+
+        renderMonths();
+
+        renderStats();
+
+        renderGallery();
+
+        renderStory();
+
+        renderLetters();
+
+    }
+    catch(error){
+
+        console.error(
+            "Cloud Exception:",
+            error
+        );
+
+        toast(
+            "เกิดข้อผิดพลาดในการโหลด Cloud"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   UPLOAD PHOTO
+========================================================= */
+
+async function uploadPhoto(file){
+
+    if(!supabaseClient){
+
+        throw new Error(
+            "Supabase ยังไม่ได้เชื่อมต่อ"
+        );
+
+    }
+
+
+    const compressed =
+        await compressImage(
+            file,
+            1600,
+            .82
+        );
+
+
+    const path =
+        `${CONFIG.appId}/${currentMonth}/${Date.now()}-${Math.random().toString(36).slice(2)}.jpg`;
+
+
+    const {
+        error: uploadError
+    } =
+        await supabaseClient
+            .storage
+            .from("memories")
+            .upload(
+                path,
+                compressed,
+                {
+                    contentType:"image/jpeg",
+                    upsert:false
+                }
+            );
+
+
+    if(uploadError){
+        throw uploadError;
+    }
+
+
+    const {
+        data:urlData
+    } =
+        supabaseClient
+            .storage
+            .from("memories")
+            .getPublicUrl(path);
+
+
+    if(!urlData?.publicUrl){
+
+        throw new Error(
+            "ไม่สามารถสร้าง Public URL ของรูปได้"
+        );
+
+    }
+
+
+    const {
+        data:maxRows,
+        error:maxError
+    } =
+        await supabaseClient
+            .from("photos")
+            .select("index")
+            .eq("app_id", CONFIG.appId)
+            .eq("month", currentMonth)
+            .order("index", {
+                ascending:false
+            })
+            .limit(1);
+
+
+    if(maxError){
+
+        await supabaseClient
+            .storage
+            .from("memories")
+            .remove([path]);
+
+        throw maxError;
+    }
+
+
+    const nextIndex =
+        (maxRows?.[0]?.index ?? -1) + 1;
+
+
+    const {
+        error:insertError
+    } =
+        await supabaseClient
+            .from("photos")
+            .insert({
+
+                app_id:CONFIG.appId,
+
+                month:currentMonth,
+
+                index:nextIndex,
+
+                url:urlData.publicUrl,
+
+                storage_path:path
+
+            });
+
+
+    if(insertError){
+
+        await supabaseClient
+            .storage
+            .from("memories")
+            .remove([path]);
+
+        throw insertError;
+    }
+
+}
+
+
+/* =========================================================
+   IMAGE COMPRESSION
+========================================================= */
+
+function compressImage(
+    file,
+    maxSide = 1600,
+    quality = .82
+){
+
+    return new Promise(
+        (resolve,reject) => {
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload = () => {
+
+                const img =
+                    new Image();
+
+
+                img.onload = () => {
+
+                    const scale =
+                        Math.min(
+                            1,
+                            maxSide /
+                            Math.max(
+                                img.width,
+                                img.height
+                            )
+                        );
+
+
+                    const canvas =
+                        document.createElement(
+                            "canvas"
+                        );
+
+
+                    canvas.width =
+                        Math.round(
+                            img.width * scale
+                        );
+
+
+                    canvas.height =
+                        Math.round(
+                            img.height * scale
+                        );
+
+
+                    const ctx =
+                        canvas.getContext(
+                            "2d"
+                        );
+
+
+                    ctx.drawImage(
+                        img,
+                        0,
+                        0,
+                        canvas.width,
+                        canvas.height
+                    );
+
+
+                    canvas.toBlob(
+                        blob => {
+
+                            if(blob){
+
+                                resolve(blob);
+
+                            }
+                            else{
+
+                                reject(
+                                    new Error(
+                                        "compress failed"
+                                    )
+                                );
+
+                            }
+
+                        },
+                        "image/jpeg",
+                        quality
+                    );
+
+                };
+
+
+                img.onerror = reject;
+
+                img.src = reader.result;
+
+            };
+
+
+            reader.onerror = reject;
+
+            reader.readAsDataURL(file);
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   DELETE PHOTO
+========================================================= */
+
+async function deletePhoto(photo){
+
+    if(!supabaseClient){
+        return;
+    }
+
+
+    const ok =
+        confirm(
+            "ลบรูปนี้จาก Cloud ใช่ไหม?"
+        );
+
+
+    if(!ok){
+        return;
+    }
+
+
+    try{
+
+        if(photo.storage_path){
+
+            const {
+                error:storageError
+            } =
+                await supabaseClient
+                    .storage
+                    .from("memories")
+                    .remove([
+                        photo.storage_path
+                    ]);
+
+
+            if(storageError){
+                console.warn(
+                    "Storage delete warning:",
+                    storageError
+                );
+            }
+
+        }
+
+
+        const {
+            error
+        } =
+            await supabaseClient
+                .from("photos")
+                .delete()
+                .eq("id", photo.id);
+
+
+        if(error){
+            throw error;
+        }
+
+
+        toast(
+            "ลบรูปแล้ว"
+        );
+
+
+        await loadCloud();
+
+        await openMonth(
+            currentMonth
+        );
+
+
+        renderGallery();
+
+        renderStory();
+
+    }
+    catch(e){
+
+        console.error(e);
+
+        toast(
+            "ลบรูปไม่สำเร็จ"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   SAVE MONTH NOTE
+========================================================= */
+
+async function saveMonthNote(){
+
+    if(!supabaseClient){
+
+        toast(
+            "Supabase ยังไม่ได้เชื่อมต่อ"
+        );
+
+        return;
+    }
+
+
+    const text =
+        $("monthNote")
+            .value
+            .trim();
+
+
+    if(!text){
+
+        toast(
+            "ยังไม่ได้เขียนความทรงจำ"
+        );
+
+        return;
+    }
+
+
+    const key =
+        `note_${currentMonth}`;
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+            .from("settings")
+            .upsert(
+                {
+                    app_id:CONFIG.appId,
+                    key:key,
+                    value:{
+                        text:text
+                    }
+                },
+                {
+                    onConflict:"app_id,key"
+                }
+            );
+
+
+    if(error){
+
+        console.error(error);
+
+        toast(
+            "บันทึกไม่สำเร็จ"
+        );
+
+        return;
+    }
+
+
+    /*
+        อัปเดต local settings ทันที
+    */
+
+    settings[key] = {
+        text:text
+    };
+
+
+    toast(
+        "บันทึกความทรงจำแล้ว ♡"
+    );
+
+
+    renderStory();
+
+}
+
+
+/* =========================================================
+   LOAD MONTH NOTE
+========================================================= */
+
+async function loadMonthNote(){
+
+    if(!supabaseClient){
+
+        $("monthNote").value = "";
+
+        return;
+    }
+
+
+    const key =
+        `note_${currentMonth}`;
+
+
+    /*
+        ใช้ local settings ก่อน
+    */
+
+    if(settings[key]){
+
+        $("monthNote").value =
+            settings[key]?.text || "";
+
+        return;
+
+    }
+
+
+    /*
+        fallback: query Cloud
+    */
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .from("settings")
+            .select("value")
+            .eq("app_id", CONFIG.appId)
+            .eq("key", key)
+            .maybeSingle();
+
+
+    if(error){
+
+        console.error(
+            "Load note error:",
+            error
+        );
+
+        $("monthNote").value = "";
+
+        return;
+    }
+
+
+    $("monthNote").value =
+        data?.value?.text || "";
+
+}
+
+
+/* =========================================================
+   SAVE LETTER
+========================================================= */
+
+async function saveLetter(){
+
+    if(!supabaseClient){
+
+        toast(
+            "Supabase ยังไม่ได้เชื่อมต่อ"
+        );
+
+        return;
+    }
+
+
+    const title =
+        $("letterTitle")
+            .value
+            .trim()
+        ||
+        "จดหมายของเรา";
+
+
+    const text =
+        $("letterText")
+            .value
+            .trim();
+
+
+    const month =
+        Number(
+            $("letterMonth").value
+        );
+
+
+    if(!text){
+
+        toast(
+            "กรุณาเขียนข้อความก่อน"
+        );
+
+        return;
+    }
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+            .from("letters")
+            .insert({
+
+                app_id:CONFIG.appId,
+
+                month:month,
+
+                title:title,
+
+                text:text
+
+            });
+
+
+    if(error){
+
+        console.error(error);
+
+        toast(
+            "บันทึกจดหมายไม่สำเร็จ"
+        );
+
+        return;
+    }
+
+
+    $("letterTitle").value = "";
+
+    $("letterText").value = "";
+
+
+    toast(
+        "บันทึกจดหมายแล้ว ♡"
+    );
+
+
+    await loadCloud();
+
+    renderLetters();
+
+}
+
+
+/* =========================================================
+   DELETE LETTER
+========================================================= */
+
+async function deleteLetter(id){
+
+    if(
+        !confirm(
+            "ลบจดหมายนี้ไหม?"
+        )
+    ){
+        return;
+    }
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+            .from("letters")
+            .delete()
+            .eq("id", id);
+
+
+    if(error){
+
+        console.error(error);
+
+        toast(
+            "ลบไม่สำเร็จ"
+        );
+
+        return;
+    }
+
+
+    await loadCloud();
+
+    renderLetters();
+
+}
+
+
+/* =========================================================
+   EDIT LETTER
+========================================================= */
+
+async function editLetter(id){
+
+    const l =
+        allLetters.find(
+            x => String(x.id) === String(id)
+        );
+
+
+    if(!l){
+        return;
+    }
+
+
+    $("modalTitle").textContent =
+        "แก้ไขจดหมาย";
+
+
+    $("modalBody").innerHTML = `
+
+        <input
+            class="field"
+            id="editLetterTitle"
+            value="${escapeHtml(l.title)}"
+        >
+
+        <textarea
+            class="textarea"
+            id="editLetterText"
+        >${escapeHtml(l.text)}</textarea>
+
+        <div class="formRow">
+
+            <button
+                class="primary"
+                onclick="updateLetter('${id}')"
+            >
+                บันทึก
+            </button>
+
+        </div>
+    `;
+
+
+    $("modal").classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   UPDATE LETTER
+========================================================= */
+
+async function updateLetter(id){
+
+    const title =
+        $("editLetterTitle")
+            .value
+            .trim()
+        ||
+        "จดหมายของเรา";
+
+
+    const text =
+        $("editLetterText")
+            .value
+            .trim();
+
+
+    if(!text){
+
+        toast(
+            "กรุณาเขียนข้อความก่อน"
+        );
+
+        return;
+    }
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+            .from("letters")
+            .update({
+                title:title,
+                text:text
+            })
+            .eq("id",id);
+
+
+    if(error){
+
+        console.error(error);
+
+        toast(
+            "แก้ไขไม่สำเร็จ"
+        );
+
+        return;
+    }
+
+
+    closeModal();
+
+    await loadCloud();
+
+    renderLetters();
+
+    toast(
+        "แก้ไขจดหมายแล้ว"
+    );
+
+}
+
+
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
+
+function closeModal(){
+
+    $("modal")
+        .classList
+        .remove("show");
+
+}
+
+
+/* =========================================================
+   OPEN SCREEN
+========================================================= */
+
+function openScreen(id){
+
+    document
+        .querySelectorAll(".screen")
+        .forEach(
+            x => x.classList.remove("active")
+        );
+
+
+    $(id)
+        .classList
+        .add("active");
+
+
+    if(id === "home"){
+        renderMonths();
+    }
+
+
+    if(id === "gallery"){
+        renderGallery();
+    }
+
+
+    if(id === "story"){
+        renderStory();
+    }
+
+
+    if(id === "letters"){
+        renderLetters();
+    }
+
+
+    if(id === "settings"){
+        $("darkMode").checked =
+            settings.dark === true;
+    }
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================================================
+   PIN
+========================================================= */
+
+function press(n){
+
+    if(pinValue.length >= 4){
+        return;
+    }
+
+
+    pinValue += n;
+
+    updatePin();
+
+
+    if(pinValue.length === 4){
+
+        setTimeout(
+            checkPin,
+            100
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   UPDATE PIN DISPLAY
+========================================================= */
+
+function updatePin(){
+
+    $("pin")
+        .querySelectorAll("span")
+        .forEach(
+            (s,i) =>
+                s.classList.toggle(
+                    "on",
+                    i < pinValue.length
+                )
+        );
+
+}
+
+
+/* =========================================================
+   CHECK PIN
+========================================================= */
+
+function checkPin(){
+
+    if(
+        pinValue === CONFIG.password
+    ){
+
+        pinValue = "";
+
+        updatePin();
+
+        $("pinError").textContent = "";
+
+        openScreen("home");
+
+    }
+    else{
+
+        $("pinError").textContent =
+            "PIN ไม่ถูกต้อง";
+
+        pinValue = "";
+
+        updatePin();
+
+    }
+
+}
+
+
+/* =========================================================
+   LOCK APP
+========================================================= */
+
+function lockApp(){
+
+    document
+        .querySelectorAll(".screen")
+        .forEach(
+            x => x.classList.remove("active")
+        );
+
+
+    $("lock")
+        .classList
+        .add("active");
+
+}
+
+
+/* =========================================================
+   MONTH DATE
+========================================================= */
+
+function monthDate(index){
+
+    const d =
+        new Date(
+            CONFIG.startDate +
+            "T00:00:00"
+        );
+
+
+    d.setMonth(
+        d.getMonth() +
+        index -
+        1
+    );
+
+
+    return d;
+
+}
+
+
+/* =========================================================
+   FORMAT DATE
+========================================================= */
+
+function formatDate(d){
+
+    return d.toLocaleDateString(
+        "th-TH",
+        {
+            day:"numeric",
+            month:"long",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+/* =========================================================
+   UNLOCKED MONTH
+========================================================= */
+
+function unlocked(index){
+
+    const now =
+        new Date();
+
+
+    const d =
+        monthDate(index);
+
+
+    return now >= d;
+
+}
+
+
+/* =========================================================
+   RENDER MONTHS
+========================================================= */
+
+function renderMonths(){
+
+    const wrap =
+        $("months");
+
+
+    if(!wrap){
+        return;
+    }
+
+
+    wrap.innerHTML = "";
+
+
+    for(
+        let i=1;
+        i<=CONFIG.totalMonths;
+        i++
+    ){
+
+        const photos =
+            allPhotos.filter(
+                p =>
+                    Number(p.month) === i
+            );
+
+
+        const b =
+            document.createElement(
+                "button"
+            );
+
+
+        const isUnlocked =
+            unlocked(i);
+
+
+        b.className =
+            `month ${
+                isUnlocked
+                ? "unlocked"
+                : "locked"
+            } ${
+                photos.length
+                ? "hasMemory"
+                : ""
+            }`;
+
+
+        b.innerHTML = `
+
+            <div class="status">
+                ${isUnlocked ? "♡" : "🔒"}
+            </div>
+
+            ${
+                photos[0]
+                ?
+                `
+                <img
+                    class="thumb"
+                    src="${escapeHtml(photos[0].url)}"
+                    alt=""
+                >
+                `
+                :
+                ""
+            }
+
+            <div class="num">
+                MONTH ${i}
+            </div>
+
+            <div class="title">
+                ${monthNames[i-1]}
+            </div>
+
+            <div class="date">
+                ${formatDate(monthDate(i))}
+            </div>
+        `;
+
+
+        if(isUnlocked){
+
+            b.onclick =
+                () => openMonth(i);
+
+        }
+
+
+        wrap.appendChild(b);
+
+    }
+
+}
+
+
+/* =========================================================
+   OPEN MONTH
+========================================================= */
+
+async function openMonth(index){
+
+    if(!unlocked(index)){
+        return;
+    }
+
+
+    currentMonth = index;
+
+
+    openScreen("detail");
+
+
+    $("detailNav").textContent =
+        `Month ${index}`;
+
+
+    $("detailTitle").textContent =
+        monthNames[index-1];
+
+
+    $("detailDate").textContent =
+        formatDate(
+            monthDate(index)
+        );
+
+
+    currentPhotos =
+        allPhotos
+            .filter(
+                p =>
+                    Number(p.month) === index
+            )
+            .sort(
+                (a,b) =>
+                    Number(a.index) -
+                    Number(b.index)
+            );
+
+
+    renderMonthPhotos();
+
+
+    await loadMonthNote();
+
+}
+
+
+/* =========================================================
+   RENDER MONTH PHOTOS
+========================================================= */
+
+function renderMonthPhotos(){
+
+    const area =
+        $("photoArea");
+
+
+    const img =
+        $("mainPhoto");
+
+
+    const grid =
+        $("monthGallery");
+
+
+    if(currentPhotos.length){
+
+        area.classList.add("has");
+
+        img.src =
+            currentPhotos[0].url;
+
+    }
+    else{
+
+        area.classList.remove("has");
+
+        img.removeAttribute(
+            "src"
+        );
+
+    }
+
+
+    $("memoryCount").textContent =
+        `${currentPhotos.length} รูป`;
+
+
+    grid.innerHTML =
+        currentPhotos
+            .map(
+                (p,i) =>
+                    `
+
+                    <button
+                        class="galleryItem"
+                        onclick="openLightbox(${i})"
+                    >
+
+                        <img
+                            src="${escapeHtml(p.url)}"
+                            alt=""
+                        >
+
+                        <span class="galleryLabel">
+                            รูปที่ ${i+1}
+                        </span>
+
+                    </button>
+
+                    `
+            )
+            .join("")
+        ||
+        `
+        <div class="emptyState">
+            เพิ่มรูปแรกของเดือนนี้ได้เลย ♡
+        </div>
+        `;
+
+}
+
+
+/* =========================================================
+   HANDLE PHOTO UPLOAD
+========================================================= */
+
+async function handlePhotos(files){
+
+    if(
+        !files?.length ||
+        !supabaseClient
+    ){
+        return;
+    }
+
+
+    try{
+
+        toast(
+            "กำลังอัปโหลดรูปขึ้น Cloud..."
+        );
+
+
+        for(
+            const f of files
+        ){
+
+            if(!f.type.startsWith("image/")){
+                continue;
+            }
+
+
+            await uploadPhoto(f);
+
+        }
+
+
+        toast(
+            "อัปโหลดรูปเรียบร้อยแล้ว ♡"
+        );
+
+
+        await loadCloud();
+
+
+        await openMonth(
+            currentMonth
+        );
+
+    }
+    catch(e){
+
+        console.error(
+            "Upload Error:",
+            e
+        );
+
+
+        toast(
+            "อัปโหลดไม่สำเร็จ: " +
+            (e.message || "unknown error")
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   LIGHTBOX
+========================================================= */
+
+function openLightbox(i){
+
+    if(!currentPhotos.length){
+        return;
+    }
+
+
+    currentPhotoIndex = i;
+
+
+    $("lbImage").src =
+        currentPhotos[i].url;
+
+
+    $("lbInfo").textContent =
+        `${i+1} / ${currentPhotos.length}`;
+
+
+    $("lightbox")
+        .classList
+        .add("show");
+
+}
+
+
+/* =========================================================
+   CLOSE LIGHTBOX
+========================================================= */
+
+function closeLightbox(){
+
+    $("lightbox")
+        .classList
+        .remove("show");
+
+}
+
+
+/* =========================================================
+   PREVIOUS PHOTO
+========================================================= */
+
+function prevPhoto(){
+
+    if(!currentPhotos.length){
+        return;
+    }
+
+
+    currentPhotoIndex =
+        (
+            currentPhotoIndex -
+            1 +
+            currentPhotos.length
+        )
+        %
+        currentPhotos.length;
+
+
+    openLightbox(
+        currentPhotoIndex
+    );
+
+}
+
+
+/* =========================================================
+   NEXT PHOTO
+========================================================= */
+
+function nextPhoto(){
+
+    if(!currentPhotos.length){
+        return;
+    }
+
+
+    currentPhotoIndex =
+        (
+            currentPhotoIndex +
+            1
+        )
+        %
+        currentPhotos.length;
+
+
+    openLightbox(
+        currentPhotoIndex
+    );
+
+}
+
+
+/* =========================================================
+   DELETE CURRENT PHOTO
+========================================================= */
+
+async function deleteCurrentPhoto(){
+
+    const p =
+        currentPhotos[
+            currentPhotoIndex
+        ];
+
+
+    if(!p){
+        return;
+    }
+
+
+    closeLightbox();
+
+
+    await deletePhoto(p);
+
+}
+
+
+/* =========================================================
+   RENDER GALLERY
+========================================================= */
+
+function renderGallery(){
+
+    const wrap =
+        $("allGallery");
+
+
+    if(!wrap){
+        return;
+    }
+
+
+    const q =
+        (
+            $("gallerySearch")
+                ?.value ||
+            ""
+        )
+        .toLowerCase()
+        .trim();
+
+
+    const m =
+        $("galleryMonth")
+            ?.value ||
+        "all";
+
+
+    const sort =
+        $("gallerySort")
+            ?.value ||
+        "asc";
+
+
+    let list =
+        allPhotos.filter(
+            p => {
+
+                const month =
+                    Number(p.month);
+
+
+                const matchesMonth =
+                    m === "all" ||
+                    String(month) === m;
+
+
+                const searchable =
+                    `เดือนที่ ${month} ${
+                        formatDate(
+                            monthDate(month)
+                        )
+                    }`
+                    .toLowerCase();
+
+
+                const matchesSearch =
+                    !q ||
+                    searchable.includes(q);
+
+
+                return (
+                    matchesMonth &&
+                    matchesSearch
+                );
+
+            }
+        );
+
+
+    list.sort(
+        (a,b) =>
+            sort === "asc"
+            ?
+            (
+                Number(a.month) -
+                Number(b.month)
+                ||
+                Number(a.index) -
+                Number(b.index)
+            )
+            :
+            (
+                Number(b.month) -
+                Number(a.month)
+                ||
+                Number(b.index) -
+                Number(a.index)
+            )
+    );
+
+
+    wrap.innerHTML =
+        list
+            .map(
+                p =>
+                    `
+
+                    <button
+                        class="galleryItem"
+                        onclick="openGalleryLightbox('${String(p.id)}')"
+                    >
+
+                        <img
+                            src="${escapeHtml(p.url)}"
+                            alt=""
+                        >
+
+                        <span class="galleryLabel">
+                            เดือนที่ ${Number(p.month)}
+                        </span>
+
+                    </button>
+
+                    `
+            )
+            .join("")
+        ||
+        `
+        <div class="emptyState">
+            ยังไม่มีรูปบน Cloud
+        </div>
+        `;
+
+}
+
+
+/* =========================================================
+   POPULATE GALLERY MONTH SELECT
+========================================================= */
+
+function populateMonthSelects(){
+
+    const galleryMonth =
+        $("galleryMonth");
+
+
+    const letterMonth =
+        $("letterMonth");
+
+
+    if(galleryMonth){
+
+        galleryMonth.innerHTML =
+            `
+            <option value="all">
+                ทุกเดือน
+            </option>
+            ` +
+            Array.from(
+                {length:CONFIG.totalMonths},
+                (_,i) =>
+                    `
+                    <option value="${i+1}">
+                        เดือนที่ ${i+1}
+                    </option>
+                    `
+            ).join("");
+
+    }
+
+
+    if(letterMonth){
+
+        letterMonth.innerHTML =
+            Array.from(
+                {length:CONFIG.totalMonths},
+                (_,i) =>
+                    `
+                    <option value="${i+1}">
+                        เดือนที่ ${i+1}
+                    </option>
+                    `
+            ).join("");
+
+    }
+
+}
+
+
+/* =========================================================
+   OPEN GALLERY LIGHTBOX
+========================================================= */
+
+function openGalleryLightbox(id){
+
+    const photo =
+        allPhotos.find(
+            x =>
+                String(x.id) === String(id)
+        );
+
+
+    if(!photo){
+        return;
+    }
+
+
+    const month =
+        Number(photo.month);
+
+
+    currentPhotos =
+        allPhotos
+            .filter(
+                x =>
+                    Number(x.month) === month
+            )
+            .sort(
+                (a,b) =>
+                    Number(a.index) -
+                    Number(b.index)
+            );
+
+
+    const index =
+        currentPhotos.findIndex(
+            x =>
+                String(x.id) === String(id)
+        );
+
+
+    if(index >= 0){
+
+        currentPhotoIndex =
+            index;
+
+        openLightbox(index);
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER STORY
+========================================================= */
+
+function renderStory(){
+
+    const wrap =
+        $("storyList");
+
+
+    if(!wrap){
+        return;
+    }
+
+
+    const items = [];
+
+
+    for(
+        let i=1;
+        i<=CONFIG.totalMonths;
+        i++
+    ){
+
+        const photos =
+            allPhotos.filter(
+                p =>
+                    Number(p.month) === i
+            );
+
+
+        const letters =
+            allLetters.filter(
+                l =>
+                    Number(l.month) === i
+            );
+
+
+        const note =
+            settings[
+                `note_${i}`
+            ]?.text ||
+            "";
+
+
+        if(
+            photos.length ||
+            letters.length ||
+            note
+        ){
+
+            items.push({
+                i,
+                photos,
+                letters,
+                note
+            });
+
+        }
+
+    }
+
+
+    wrap.innerHTML =
+        items
+            .map(
+                x =>
+                    `
+
+                    <div class="storyItem">
+
+                        <div class="storyDot"></div>
+
+                        <div class="storyCard">
+
+                            <div class="storyTitle">
+                                ${monthNames[x.i-1]}
+                            </div>
+
+                            <div class="storyDate">
+                                ${formatDate(
+                                    monthDate(x.i)
+                                )}
+                            </div>
+
+                            ${
+                                x.note
+                                ?
+                                `
+                                <div class="storyText">
+                                    ${escapeHtml(x.note)}
+                                </div>
+                                `
+                                :
+                                ""
+                            }
+
+                            <div class="storyMeta">
+                                ${x.photos.length} รูป
+                                ·
+                                ${x.letters.length} จดหมาย
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    `
+            )
+            .join("")
+        ||
+        `
+        <div class="emptyState">
+            ยังไม่มีเรื่องราวที่บันทึกไว้
+        </div>
+        `;
+
+}
+
+
+/* =========================================================
+   RENDER LETTERS
+========================================================= */
+
+function renderLetters(){
+
+    const wrap =
+        $("lettersList");
+
+
+    if(!wrap){
+        return;
+    }
+
+
+    populateMonthSelects();
+
+
+    wrap.innerHTML =
+        allLetters
+            .map(
+                l =>
+                    `
+
+                    <div class="letter">
+
+                        <h3>
+                            ${escapeHtml(l.title)}
+                            ·
+                            เดือนที่ ${Number(l.month)}
+                        </h3>
+
+                        <p>
+                            ${escapeHtml(l.text)}
+                        </p>
+
+                        <div class="letterBtns">
+
+                            <button
+                                class="iconBtn"
+                                onclick="editLetter('${String(l.id)}')"
+                            >
+                                ✎
+                            </button>
+
+                            <button
+                                class="iconBtn"
+                                onclick="deleteLetter('${String(l.id)}')"
+                            >
+                                ×
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    `
+            )
+            .join("")
+        ||
+        `
+        <div class="emptyState">
+            ยังไม่มีจดหมาย ♡
+        </div>
+        `;
+
+}
+
+
+/* =========================================================
+   TOGGLE DARK MODE
+========================================================= */
+
+async function toggleDark(){
+
+    settings.dark =
+        $("darkMode").checked;
+
+
+    document.body.classList.toggle(
+        "dark",
+        settings.dark
+    );
+
+
+    if(!supabaseClient){
+        return;
+    }
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+            .from("settings")
+            .upsert(
+                {
+                    app_id:CONFIG.appId,
+                    key:"dark",
+                    value:settings.dark
+                },
+                {
+                    onConflict:"app_id,key"
+                }
+            );
+
+
+    if(error){
+
+        console.error(
+            "Dark mode save error:",
+            error
+        );
+
+        toast(
+            "บันทึกโหมดมืดไม่สำเร็จ"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   EXPORT BACKUP
+========================================================= */
+
+async function exportBackup(){
+
+    if(!supabaseClient){
+
+        toast(
+            "Supabase ยังไม่ได้เชื่อมต่อ"
+        );
+
+        return;
+    }
+
+
+    const {
+        data:ss,
+        error
+    } =
+        await supabaseClient
+            .from("settings")
+            .select("key,value")
+            .eq("app_id", CONFIG.appId);
+
+
+    if(error){
+
+        console.error(error);
+
+        toast(
+            "Export ไม่สำเร็จ"
+        );
+
+        return;
+    }
+
+
+    const payload = {
+
+        version:1,
+
+        appId:CONFIG.appId,
+
+        exportedAt:
+            new Date().toISOString(),
+
+        letters:allLetters,
+
+        settings:ss || [],
+
+        photos:
+            allPhotos.map(
+                p => ({
+                    month:p.month,
+                    index:p.index,
+                    url:p.url,
+                    storage_path:p.storage_path
+                })
+            )
+
+    };
+
+
+    const blob =
+        new Blob(
+            [
+                JSON.stringify(
+                    payload,
+                    null,
+                    2
+                )
+            ],
+            {
+                type:"application/json"
+            }
+        );
+
+
+    const a =
+        document.createElement("a");
+
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    a.href = url;
+
+
+    a.download =
+        `our-anniversary-cloud-${
+            new Date()
+                .toISOString()
+                .slice(0,10)
+        }.json`;
+
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    a.remove();
+
+
+    setTimeout(
+        () => URL.revokeObjectURL(url),
+        1000
+    );
+
+
+    toast(
+        "Export สำเร็จ"
+    );
+
+}
+
+
+/* =========================================================
+   IMPORT BACKUP
+========================================================= */
+
+async function importBackup(file){
+
+    if(
+        !file ||
+        !supabaseClient
+    ){
+        return;
+    }
+
+
+    try{
+
+        const data =
+            JSON.parse(
+                await file.text()
+            );
+
+
+        /*
+            Import letters
+        */
+
+        for(
+            const l of data.letters || []
+        ){
+
+            const {
+                error
+            } =
+                await supabaseClient
+                    .from("letters")
+                    .upsert(
+                        {
+                            id:l.id,
+                            app_id:CONFIG.appId,
+                            month:l.month,
+                            title:l.title,
+                            text:l.text
+                        },
+                        {
+                            onConflict:"id"
+                        }
+                    );
+
+
+            if(error){
+                console.warn(
+                    "Letter import error:",
+                    error
+                );
+            }
+
+        }
+
+
+        /*
+            Import settings
+        */
+
+        for(
+            const s of data.settings || []
+        ){
+
+            const {
+                error
+            } =
+                await supabaseClient
+                    .from("settings")
+                    .upsert(
+                        {
+                            app_id:CONFIG.appId,
+                            key:s.key,
+                            value:s.value
+                        },
+                        {
+                            onConflict:"app_id,key"
+                        }
+                    );
+
+
+            if(error){
+                console.warn(
+                    "Settings import error:",
+                    error
+                );
+            }
+
+        }
+
+
+        await loadCloud();
+
+
+        toast(
+            "นำเข้าข้อมูล Cloud แล้ว ♡"
+        );
+
+
+    }
+    catch(e){
+
+        console.error(e);
+
+        toast(
+            "Import ไม่สำเร็จ"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   CLEAR ALL CLOUD DATA
+========================================================= */
+
+async function clearAllData(){
+
+    if(
+        !confirm(
+            "ลบข้อมูล Cloud ทั้งหมดของเว็บไซต์นี้จริงไหม?"
+        )
+    ){
+        return;
+    }
+
+
+    if(!supabaseClient){
+        return;
+    }
+
+
+    try{
+
+        /*
+            Find all photos
+        */
+
+        const {
+            data:photos,
+            error:photoError
+        } =
+            await supabaseClient
+                .from("photos")
+                .select("id,storage_path")
+                .eq(
+                    "app_id",
+                    CONFIG.appId
+                );
+
+
+        if(photoError){
+            throw photoError;
+        }
+
+
+        const paths =
+            (photos || [])
+                .map(
+                    p => p.storage_path
+                )
+                .filter(Boolean);
+
+
+        /*
+            Delete storage
+        */
+
+        if(paths.length){
+
+            const {
+                error:storageError
+            } =
+                await supabaseClient
+                    .storage
+                    .from("memories")
+                    .remove(paths);
+
+
+            if(storageError){
+
+                console.warn(
+                    "Storage clear warning:",
+                    storageError
+                );
+
+            }
+
+        }
+
+
+        /*
+            Delete photos
+        */
+
+        const {
+            error:deletePhotosError
+        } =
+            await supabaseClient
+                .from("photos")
+                .delete()
+                .eq(
+                    "app_id",
+                    CONFIG.appId
+                );
+
+
+        if(deletePhotosError){
+            throw deletePhotosError;
+        }
+
+
+        /*
+            Delete letters
+        */
+
+        const {
+            error:deleteLettersError
+        } =
+            await supabaseClient
+                .from("letters")
+                .delete()
+                .eq(
+                    "app_id",
+                    CONFIG.appId
+                );
+
+
+        if(deleteLettersError){
+            throw deleteLettersError;
+        }
+
+
+        /*
+            Delete settings
+        */
+
+        const {
+            error:deleteSettingsError
+        } =
+            await supabaseClient
+                .from("settings")
+                .delete()
+                .eq(
+                    "app_id",
+                    CONFIG.appId
+                );
+
+
+        if(deleteSettingsError){
+            throw deleteSettingsError;
+        }
+
+
+        allPhotos = [];
+
+        allLetters = [];
+
+        settings = {
+            dark:false
+        };
+
+
+        document.body.classList.remove(
+            "dark"
+        );
+
+
+        await loadCloud();
+
+
+        toast(
+            "ล้างข้อมูล Cloud แล้ว"
+        );
+
+    }
+    catch(e){
+
+        console.error(e);
+
+        toast(
+            "ล้างข้อมูลไม่สำเร็จ"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER STATS
+========================================================= */
+
+function renderStats(){
+
+    $("photoStat").textContent =
+        allPhotos.length;
+
+
+    $("letterStat").textContent =
+        allLetters.length;
+
+
+    const months =
+        new Set([
+            ...allPhotos.map(
+                p => Number(p.month)
+            ),
+            ...allLetters.map(
+                l => Number(l.month)
+            )
+        ]);
+
+
+    $("monthStat").textContent =
+        months.size || 1;
+
+}
+
+
+/* =========================================================
+   UPDATE COUNTER
+========================================================= */
+
+function updateCounter(){
+
+    const start =
+        new Date(
+            CONFIG.startDate +
+            "T00:00:00"
+        );
+
+
+    const now =
+        new Date();
+
+
+    const days =
+        Math.max(
+            0,
+            Math.floor(
+                (now-start) /
+                86400000
+            )
+        );
+
+
+    $("daysTogether").textContent =
+        `${days} วัน`;
+
+
+    let next =
+        new Date(start);
+
+
+    while(next <= now){
+
+        next.setMonth(
+            next.getMonth() + 1
+        );
+
+    }
+
+
+    const diff =
+        Math.ceil(
+            (next-now) /
+            86400000
+        );
+
+
+    $("nextAnniv").innerHTML = `
+
+        ครบรอบถัดไปอีก
+        <strong>
+            ${diff} วัน
+        </strong>
+
+        ·
+
+        ${formatDate(next)}
+
+    `;
+
+}
+
+
+/* =========================================================
+   ANNIVERSARY CELEBRATION
+========================================================= */
+
+function maybeCelebration(){
+
+    const now =
+        new Date();
+
+
+    const start =
+        new Date(
+            CONFIG.startDate +
+            "T00:00:00"
+        );
+
+
+    if(
+        now.getDate() ===
+        start.getDate()
+    ){
+
+        const key =
+            `celebrate-${
+                now.getFullYear()
+            }-${
+                now.getMonth()
+            }`;
+
+
+        if(
+            localStorage.getItem(key)
+            !==
+            CONFIG.appId
+        ){
+
+            localStorage.setItem(
+                key,
+                CONFIG.appId
+            );
+
+
+            $("celebrateTitle")
+                .textContent =
+                "Happy Anniversary ♡";
+
+
+            $("celebrateText")
+                .textContent =
+                "อีกหนึ่งเดือนที่เราเดินมาด้วยกันแล้ว";
+
+
+            $("celebrate")
+                .classList
+                .add("show");
+
+
+            makeConfetti();
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   CLOSE CELEBRATION
+========================================================= */
+
+function closeCelebrate(){
+
+    $("celebrate")
+        .classList
+        .remove("show");
+
+}
+
+
+/* =========================================================
+   CONFETTI
+========================================================= */
+
+function makeConfetti(){
+
+    const c =
+        $("confetti");
+
+
+    c.innerHTML = "";
+
+
+    for(
+        let i=0;
+        i<35;
+        i++
+    ){
+
+        const x =
+            document.createElement("i");
+
+
+        x.textContent =
+            ["♡","✦","•"][i%3];
+
+
+        x.style.left =
+            Math.random()*100 +
+            "%";
+
+
+        x.style.animationDelay =
+            Math.random()*.8 +
+            "s";
+
+
+        x.style.fontSize =
+            10 +
+            Math.random()*16 +
+            "px";
+
+
+        c.appendChild(x);
+
+    }
+
+}
+
+
+/* =========================================================
+   PHOTO INPUT
+========================================================= */
+
+$("photoInput")
+    .addEventListener(
+        "change",
+        e => {
+
+            handlePhotos(
+                e.target.files
+            );
+
+            /*
+                Reset input เพื่อให้เลือกไฟล์เดิมซ้ำได้
+            */
+
+            e.target.value = "";
+
+        }
+    );
+
+
+/* =========================================================
+   KEYBOARD SUPPORT
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    e => {
+
+        /*
+            PIN
+        */
+
+        if(
+            $("lock")
+                .classList
+                .contains("active")
+        ){
+
+            if(
+                /^[0-9]$/.test(e.key)
+            ){
+
+                press(e.key);
+
+            }
+
+        }
+
+
+        /*
+            Lightbox
+        */
+
+        if(
+            $("lightbox")
+                .classList
+                .contains("show")
+        ){
+
+            if(e.key === "Escape"){
+                closeLightbox();
+            }
+
+            if(e.key === "ArrowLeft"){
+                prevPhoto();
+            }
+
+            if(e.key === "ArrowRight"){
+                nextPhoto();
+            }
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   MODAL CLICK OUTSIDE
+========================================================= */
+
+$("modal")
+    .addEventListener(
+        "click",
+        e => {
+
+            if(
+                e.target === $("modal")
+            ){
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   LIGHTBOX CLICK OUTSIDE
+========================================================= */
+
+$("lightbox")
+    .addEventListener(
+        "click",
+        e => {
+
+            if(
+                e.target === $("lightbox")
+            ){
+
+                closeLightbox();
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   INITIALIZATION
+========================================================= */
+
+async function init(){
+
+    /*
+        Basic UI
+    */
+
+    updateCounter();
+
+    maybeCelebration();
+
+    populateMonthSelects();
+
+
+    /*
+        Initialize Cloud
+    */
+
+    if(!initCloud()){
+
+        console.warn(
+            "Supabase is not configured."
+        );
+
+        return;
+
+    }
+
+
+    /*
+        Load data from Supabase
+    */
+
+    await loadCloud();
+
+
+    /*
+        Final rendering
+    */
+
+    renderMonths();
+
+    renderGallery();
+
+    renderStory();
+
+    renderLetters();
+
+}
+
+
+/* =========================================================
+   START APP
+========================================================= */
+
 init();
+
 </script>
+
 </body>
 </html>
