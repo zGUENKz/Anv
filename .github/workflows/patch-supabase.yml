@@ -16,54 +16,10 @@ jobs:
           from pathlib import Path
           p = Path('index.html')
           s = p.read_text(encoding='utf-8')
-
-          # Fix the Supabase publishable key typo that caused 401 / Invalid Compact JWS.
-          s = s.replace(
-              'sb_publishable_lwuqTK-HRG_e0y3N8VGMSg_j6S3CnvB',
-              'sb_publishable_lwuqTKH-RG_e0y3N8VGMSg_j6S3CnvB'
-          )
-
-          old = '''    supabaseClient =
-        window.supabase.createClient(
-            CONFIG.supabaseUrl,
-            CONFIG.supabaseAnonKey
-        );'''
-          new = '''    // This site uses the public Supabase API directly and does not use Supabase Auth.
-    // Disable persisted auth sessions so stale/invalid JWT state cannot interfere with requests.
-    supabaseClient =
-        window.supabase.createClient(
-            CONFIG.supabaseUrl,
-            CONFIG.supabaseAnonKey,
-            {
-                auth:{
-                    persistSession:false,
-                    autoRefreshToken:false,
-                    detectSessionInUrl:false
-                }
-            }
-        );'''
+          old = 'd.setMonth(d.getMonth()+month-1);'
+          new = 'd.setMonth(d.getMonth()+month);'
           if old in s:
               s = s.replace(old, new, 1)
-
-          # Anniversary months unlock on the actual monthly anniversary date.
-          # Relationship start: 2026-08-05
-          # Month 1: 2026-09-05, Month 2: 2026-10-05, etc.
-          old_lock = '''function isMonthUnlocked(month){
-    if(month === 1) return new Date() >= new Date(CONFIG.startDate+"T00:00:00");
-    return new Date() >= monthDate(month+1);
-}'''
-          new_lock = '''function isMonthUnlocked(month){
-    return new Date() >= monthDate(month);
-}'''
-          if old_lock in s:
-              s = s.replace(old_lock, new_lock, 1)
-          else:
-              old_lock2 = '''function isMonthUnlocked(month){
-    return new Date() >= monthDate(month+1);
-}'''
-              if old_lock2 in s:
-                  s = s.replace(old_lock2, new_lock, 1)
-
           p.write_text(s, encoding='utf-8')
           PY
       - name: Commit patch
@@ -72,5 +28,5 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add index.html
           git diff --cached --quiet && exit 0
-          git commit -m 'Fix Supabase client key and anniversary dates [skip ci]'
+          git commit -m 'Fix monthly anniversary dates [skip ci]'
           git push
