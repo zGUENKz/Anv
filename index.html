@@ -1225,47 +1225,56 @@ $("lightbox").addEventListener("click",e=>{if(e.target.id==="lightbox") closeLig
 /* =========================================================
    COUNTER
 ========================================================= */
+    
 function updateCounter(){
     const start = new Date(CONFIG.startDate + "T00:00:00");
     const now = new Date();
 
-    // นับจำนวนเดือนที่คบกัน
-    let months =
-        (now.getFullYear() - start.getFullYear()) * 12 +
-        (now.getMonth() - start.getMonth());
-
-    // ถ้ายังไม่ถึงวันที่ 5 ของเดือนปัจจุบัน
-    if (now.getDate() < start.getDate()) {
-        months--;
-    }
-
-    months = Math.max(0, months);
-
-    $("daysTogether").textContent = `${months} เดือน`;
-
-    // หาวันครบรอบเดือนถัดไป
-    let next = new Date(
+    // ตัดเวลาออก เพื่อให้นับเป็นจำนวน "วัน" จริง ๆ
+    const today = new Date(
         now.getFullYear(),
         now.getMonth(),
+        now.getDate()
+    );
+
+    const startDay = new Date(
+        start.getFullYear(),
+        start.getMonth(),
         start.getDate()
     );
 
-    // ถ้าครบรอบเดือนนี้ผ่านไปแล้ว ให้เป็นเดือนถัดไป
-    if (now >= next) {
+    // จำนวนวันที่เดินทางมาด้วยกัน
+    const diff = Math.max(
+        0,
+        Math.floor((today - startDay) / 86400000)
+    );
+
+    $("daysTogether").textContent = `${diff} วัน`;
+
+    // หาวันครบรอบเดือนถัดไป
+    let next = new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        start.getDate()
+    );
+
+    // ถ้าครบรอบของเดือนนี้ผ่านไปแล้ว
+    if (today >= next) {
         next = new Date(
-            now.getFullYear(),
-            now.getMonth() + 1,
+            today.getFullYear(),
+            today.getMonth() + 1,
             start.getDate()
         );
     }
 
-    // จำนวนเดือนจนถึงครบรอบถัดไป
-    let nextMonths =
-        (next.getFullYear() - now.getFullYear()) * 12 +
-        (next.getMonth() - now.getMonth());
+    // จำนวนวันจนถึงครบรอบถัดไป
+    const days = Math.max(
+        0,
+        Math.round((next - today) / 86400000)
+    );
 
     $("nextAnniv").innerHTML =
-        `ครบรอบถัดไปใน <strong>${nextMonths} เดือน</strong> · ${formatThaiDate(next)}`;
+        `ครบรอบถัดไปใน <strong>${days} วัน</strong> · ${formatThaiDate(next)}`;
 }
 
 /* =========================================================
