@@ -16,10 +16,7 @@ jobs:
           from pathlib import Path
           p = Path('index.html')
           s = p.read_text(encoding='utf-8')
-          old = 'd.setMonth(d.getMonth()+month-1);'
-          new = 'd.setMonth(d.getMonth()+month);'
-          if old in s:
-              s = s.replace(old, new, 1)
+          s = s.replace('d.setMonth(d.getMonth()+month-1);','d.setMonth(d.getMonth()+month);',1)
           p.write_text(s, encoding='utf-8')
           PY
       - name: Commit patch
