@@ -16,6 +16,13 @@ jobs:
           from pathlib import Path
           p = Path('index.html')
           s = p.read_text(encoding='utf-8')
+
+          # Fix the Supabase publishable key typo that caused 401 / Invalid Compact JWS.
+          s = s.replace(
+              'sb_publishable_lwuqTK-HRG_e0y3N8VGMSg_j6S3CnvB',
+              'sb_publishable_lwuqTKH-RG_e0y3N8VGMSg_j6S3CnvB'
+          )
+
           old = '''    supabaseClient =
         window.supabase.createClient(
             CONFIG.supabaseUrl,
@@ -35,26 +42,9 @@ jobs:
                 }
             }
         );'''
-          if old not in s:
-              raise SystemExit('Target createClient block not found')
-          s = s.replace(old, new, 1)
-          old = '''    d.setMonth(
-        d.getMonth() +
-        index
-    );'''
-          if old not in s:
-              raise SystemExit('Month date block not found')
-          old = '''    d.setMonth(
-        d.getMonth() +
-        index
-    );'''
-          new = '''    // Month 1 = 1-month anniversary
-    // Month 2 = 2-month anniversary
-    d.setMonth(
-        d.getMonth() +
-        index
-    );'''
-          s = s.replace(old, new, 1)
+          if old in s:
+              s = s.replace(old, new, 1)
+
           p.write_text(s, encoding='utf-8')
           PY
       - name: Commit patch
@@ -63,5 +53,5 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add index.html
           git diff --cached --quiet && exit 0
-          git commit -m 'Fix Supabase client auth state [skip ci]'
+          git commit -m 'Fix Supabase client key and auth state [skip ci]'
           git push
