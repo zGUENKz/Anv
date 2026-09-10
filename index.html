@@ -951,7 +951,7 @@ async function clearAllData(){
 ========================================================= */
 function monthDate(month){
     const d = new Date(CONFIG.startDate+"T00:00:00");
-    d.setMonth(d.getMonth()+month-1);
+    d.setMonth(d.getMonth()+month);
     return d;
 }
 function formatThaiDate(date){
