@@ -1,0 +1,51 @@
+name: Inject Anv enhancements
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'anv-enhancements.js'
+      - '.github/workflows/inject-anv-enhancements.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  inject:
+    if: "!contains(github.event.head_commit.message, '[anv-enhancements]')"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Inject enhancement script
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          text = p.read_text(encoding='utf-8')
+          tag = '<script src="./anv-enhancements.js"></script>'
+          if tag not in text:
+              marker = '</body>'
+              if marker not in text:
+                  raise SystemExit('Could not find </body> in index.html')
+              text = text.replace(marker, f'{tag}\n{marker}', 1)
+              p.write_text(text, encoding='utf-8')
+              print('Enhancement script injected.')
+          else:
+              print('Enhancement script already present.')
+          PY
+
+      - name: Commit injected script
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          if git diff --cached --quiet; then
+            echo 'No changes to commit.'
+            exit 0
+          fi
+          git commit -m 'chore: inject Anv enhancements [anv-enhancements]'
+          git push
