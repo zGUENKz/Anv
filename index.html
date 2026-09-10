@@ -2987,10 +2987,11 @@ function monthDate(index){
         );
 
 
+    // Month 1 = 1-month anniversary
+    // Month 2 = 2-month anniversary
     d.setMonth(
         d.getMonth() +
-        index -
-        1
+        index
     );
 
 
@@ -4359,19 +4360,16 @@ function renderStats(){
         allLetters.length;
 
 
-    const months =
-        new Set([
-            ...allPhotos.map(
-                p => Number(p.month)
-            ),
-            ...allLetters.map(
-                l => Number(l.month)
-            )
-        ]);
+    let unlockedCount = 0;
 
+    for(let i = 1; i <= CONFIG.totalMonths; i++){
+        if(unlocked(i)){
+            unlockedCount++;
+        }
+    }
 
     $("monthStat").textContent =
-        months.size || 1;
+        unlockedCount;
 
 }
 
