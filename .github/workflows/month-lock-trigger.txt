@@ -1,1 +1,1 @@
-Temporary trigger for anniversary month lock fix.
+Trigger month lock patch.
