@@ -45,6 +45,25 @@ jobs:
           if old in s:
               s = s.replace(old, new, 1)
 
+          # Anniversary months unlock on the actual monthly anniversary date.
+          # Relationship start: 2026-08-05
+          # Month 1: 2026-09-05, Month 2: 2026-10-05, etc.
+          old_lock = '''function isMonthUnlocked(month){
+    if(month === 1) return new Date() >= new Date(CONFIG.startDate+"T00:00:00");
+    return new Date() >= monthDate(month+1);
+}'''
+          new_lock = '''function isMonthUnlocked(month){
+    return new Date() >= monthDate(month);
+}'''
+          if old_lock in s:
+              s = s.replace(old_lock, new_lock, 1)
+          else:
+              old_lock2 = '''function isMonthUnlocked(month){
+    return new Date() >= monthDate(month+1);
+}'''
+              if old_lock2 in s:
+                  s = s.replace(old_lock2, new_lock, 1)
+
           p.write_text(s, encoding='utf-8')
           PY
       - name: Commit patch
@@ -53,5 +72,5 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add index.html
           git diff --cached --quiet && exit 0
-          git commit -m 'Fix Supabase client key and auth state [skip ci]'
+          git commit -m 'Fix Supabase client key and anniversary dates [skip ci]'
           git push
