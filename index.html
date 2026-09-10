@@ -1226,33 +1226,15 @@ $("lightbox").addEventListener("click",e=>{if(e.target.id==="lightbox") closeLig
    COUNTER
 ========================================================= */
 function updateCounter(){
-    const now=new Date();
     const start=new Date(CONFIG.startDate+"T00:00:00");
-
-    let diff=now-start;
-    const days=Math.floor(diff/86400000);
-
-    const hours=Math.floor(diff/3600000);
-    const minutes=Math.floor((diff%3600000)/60000);
-    const seconds=Math.floor((diff%60000)/1000);
-
-    $("daysTogether").textContent=days;
-    $("timeTogether").textContent=
-        `${hours%24} ชม. ${minutes} นาที ${seconds} วินาที`;
-
-    // Find the next monthly anniversary
-    let nextMonth = 1;
-
-    while(monthDate(nextMonth) <= now){
-        nextMonth++;
-    }
-
-    const next = monthDate(nextMonth);
-    const nextDiff = next - now;
-    const nextDays = Math.ceil(nextDiff / 86400000);
-
-    $("nextAnniv").innerHTML =
-        `อีก <strong>${nextDays} วัน</strong> · ${formatThaiDate(next)}`;
+    const now=new Date();
+    const diff=Math.max(0,Math.floor((now-start)/86400000));
+    $("daysTogether").textContent=`${diff} วัน`;
+    const thisYear=new Date(now.getFullYear(),7,5);
+    let next=thisYear;
+    if(now>=next) next=new Date(now.getFullYear()+1,7,5);
+    const days=Math.max(0,Math.ceil((next-now)/86400000));
+    $("nextAnniv").innerHTML=`ครบรอบถัดไปใน <strong>${days} วัน</strong> · ${formatThaiDate(next)}`;
 }
 
 /* =========================================================
