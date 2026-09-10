@@ -1,33 +1,36 @@
-name: Patch Supabase client
-on: [push]
+name: Patch Anniversary Code
+
+on:
+  push:
+    branches:
+      - main
+
 permissions:
   contents: write
+
 jobs:
   patch:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Patch index.html
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fix anniversary calculations
+        shell: bash
         run: |
-          case "${GITHUB_EVENT_HEAD_COMMIT_MESSAGE:-}" in
-            *"[skip ci]"*) echo "skip"; exit 0 ;;
-          esac
           python3 - <<'PY'
           from pathlib import Path
-          p = Path('index.html')
-          s = p.read_text(encoding='utf-8')
+          p = Path("index.html")
+          s = p.read_text(encoding="utf-8")
 
-          # Fix monthly anniversary date helper:
-          # Month 1 = 5 Sep 2026, Month 2 = 5 Oct 2026, etc.
+          # Month 1 = Sep 5, Month 2 = Oct 5, etc.
           s = s.replace(
               'd.setMonth(d.getMonth()+month-1);',
               'd.setMonth(d.getMonth()+month);',
               1
           )
 
-          # Fix the "next anniversary" counter so it shows the next monthly
-          # anniversary instead of jumping to the next yearly anniversary.
-          old_counter = '''function updateCounter(){
+          old = '''function updateCounter(){
     const start=new Date(CONFIG.startDate+"T00:00:00");
     const now=new Date();
     const diff=Math.max(0,Math.floor((now-start)/86400000));
@@ -38,31 +41,35 @@ jobs:
     const days=Math.max(0,Math.ceil((next-now)/86400000));
     $("nextAnniv").innerHTML=`ครบรอบถัดไปใน <strong>${days} วัน</strong> · ${formatThaiDate(next)}`;
 }'''
-          new_counter = '''function updateCounter(){
+
+          new = '''function updateCounter(){
     const start=new Date(CONFIG.startDate+"T00:00:00");
     const now=new Date();
     const diff=Math.max(0,Math.floor((now-start)/86400000));
     $("daysTogether").textContent=`${diff} วัน`;
 
-    // Show the next monthly anniversary, not the next yearly anniversary.
+    // Next anniversary is always the next monthly anniversary.
     let nextMonth=1;
     while(monthDate(nextMonth) <= now && nextMonth < CONFIG.totalMonths) nextMonth++;
     const next=monthDate(nextMonth);
     const days=Math.max(0,Math.ceil((next-now)/86400000));
     $("nextAnniv").innerHTML=`ครบรอบถัดไปใน <strong>${days} วัน</strong> · ${formatThaiDate(next)}`;
 }'''
-          if old_counter in s:
-              s = s.replace(old_counter, new_counter, 1)
-          else:
-              print('updateCounter target not found; no counter replacement made')
 
-          p.write_text(s, encoding='utf-8')
+          if old not in s:
+              raise SystemExit("updateCounter target not found")
+          s = s.replace(old, new, 1)
+          p.write_text(s, encoding="utf-8")
           PY
-      - name: Commit patch
+
+      - name: Commit fixed index.html
         run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git diff --cached --quiet && exit 0
-          git commit -m 'Fix next monthly anniversary counter [skip ci]'
+          if git diff --cached --quiet; then
+            echo "No changes needed"
+            exit 0
+          fi
+          git commit -m "Fix next monthly anniversary counter [skip ci]"
           git push
