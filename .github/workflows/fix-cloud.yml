@@ -1,7 +1,8 @@
 name: Fix cloud client
 
 on:
-  workflow_dispatch:
+  push:
+    branches: [main]
 
 jobs:
   fix:
@@ -45,6 +46,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
+          if git diff --cached --quiet; then
+            echo "No changes needed"
+            exit 0
+          fi
           git commit -m "Fix Supabase invalid JWT session issue"
           git push
       - name: Remove temporary workflow
