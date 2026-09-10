@@ -1,0 +1,67 @@
+name: Patch Supabase client
+on: [push]
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch index.html
+        run: |
+          case "${GITHUB_EVENT_HEAD_COMMIT_MESSAGE:-}" in
+            *"[skip ci]"*) echo "skip"; exit 0 ;;
+          esac
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          old = '''    supabaseClient =
+        window.supabase.createClient(
+            CONFIG.supabaseUrl,
+            CONFIG.supabaseAnonKey
+        );'''
+          new = '''    // This site uses the public Supabase API directly and does not use Supabase Auth.
+    // Disable persisted auth sessions so stale/invalid JWT state cannot interfere with requests.
+    supabaseClient =
+        window.supabase.createClient(
+            CONFIG.supabaseUrl,
+            CONFIG.supabaseAnonKey,
+            {
+                auth:{
+                    persistSession:false,
+                    autoRefreshToken:false,
+                    detectSessionInUrl:false
+                }
+            }
+        );'''
+          if old not in s:
+              raise SystemExit('Target createClient block not found')
+          s = s.replace(old, new, 1)
+          old = '''    d.setMonth(
+        d.getMonth() +
+        index
+    );'''
+          if old not in s:
+              raise SystemExit('Month date block not found')
+          old = '''    d.setMonth(
+        d.getMonth() +
+        index
+    );'''
+          new = '''    // Month 1 = 1-month anniversary
+    // Month 2 = 2-month anniversary
+    d.setMonth(
+        d.getMonth() +
+        index
+    );'''
+          s = s.replace(old, new, 1)
+          p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit patch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git diff --cached --quiet && exit 0
+          git commit -m 'Fix Supabase client auth state [skip ci]'
+          git push
