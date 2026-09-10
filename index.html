@@ -958,7 +958,8 @@ function formatThaiDate(date){
     return date.toLocaleDateString("th-TH",{day:"numeric",month:"long",year:"numeric"});
 }
 function isMonthUnlocked(month){
-    return new Date() >= monthDate(month);
+    if(month === 1) return new Date() >= new Date(CONFIG.startDate+"T00:00:00");
+    return new Date() >= monthDate(month+1);
 }
 function currentUnlockedMonth(){
     let n=0;
