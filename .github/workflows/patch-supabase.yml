@@ -52,3 +52,5 @@ jobs:
           git add index.html
           git commit -m 'Fix Supabase client auth state [skip ci]'
           git push
+
+# trigger workflow
