@@ -20,29 +20,23 @@ jobs:
         run: |
           python3 - <<'PY'
           from pathlib import Path
+          import re
+
           p = Path("index.html")
           s = p.read_text(encoding="utf-8")
+          original = s
 
-          # Month 1 = Sep 5, Month 2 = Oct 5, etc.
+          # Month 1 must be exactly one month after the start date.
+          # This replaces either the old -1 version or an already-fixed version safely.
           s = s.replace(
               'd.setMonth(d.getMonth()+month-1);',
               'd.setMonth(d.getMonth()+month);',
               1
           )
 
-          old = '''function updateCounter(){
-    const start=new Date(CONFIG.startDate+"T00:00:00");
-    const now=new Date();
-    const diff=Math.max(0,Math.floor((now-start)/86400000));
-    $("daysTogether").textContent=`${diff} วัน`;
-    const thisYear=new Date(now.getFullYear(),7,5);
-    let next=thisYear;
-    if(now>=next) next=new Date(now.getFullYear()+1,7,5);
-    const days=Math.max(0,Math.ceil((next-now)/86400000));
-    $("nextAnniv").innerHTML=`ครบรอบถัดไปใน <strong>${days} วัน</strong> · ${formatThaiDate(next)}`;
-}'''
-
-          new = '''function updateCounter(){
+          # Replace updateCounter() without depending on the exact whitespace or
+          # formatting of the surrounding JavaScript.
+          new_counter = '''function updateCounter(){
     const start=new Date(CONFIG.startDate+"T00:00:00");
     const now=new Date();
     const diff=Math.max(0,Math.floor((now-start)/86400000));
@@ -50,16 +44,29 @@ jobs:
 
     // Next anniversary is always the next monthly anniversary.
     let nextMonth=1;
-    while(monthDate(nextMonth) <= now && nextMonth < CONFIG.totalMonths) nextMonth++;
+    while(nextMonth < CONFIG.totalMonths && monthDate(nextMonth) <= now) nextMonth++;
     const next=monthDate(nextMonth);
     const days=Math.max(0,Math.ceil((next-now)/86400000));
     $("nextAnniv").innerHTML=`ครบรอบถัดไปใน <strong>${days} วัน</strong> · ${formatThaiDate(next)}`;
 }'''
 
-          if old not in s:
-              raise SystemExit("updateCounter target not found")
-          s = s.replace(old, new, 1)
+          pattern = re.compile(
+              r'function\s+updateCounter\s*\(\s*\)\s*\{.*?\n\}\s*(?=\nfunction\s+|\n/\*|\n</script>)',
+              re.DOTALL
+          )
+
+          match = pattern.search(s)
+          if match:
+              s = s[:match.start()] + new_counter + s[match.end():]
+          else:
+              raise SystemExit("updateCounter() was not found in index.html")
+
+          if s == original:
+              print("No changes needed")
+              raise SystemExit(0)
+
           p.write_text(s, encoding="utf-8")
+          print("Anniversary calculation patch applied")
           PY
 
       - name: Commit fixed index.html
