@@ -227,34 +227,27 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
 @keyframes beat{50%{transform:scale(1.12)}}
 @keyframes pageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @keyframes pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
-@keyframes fall{to{transform:translateY(110vh) rotate(400deg);opacity:0}}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
 </style>
-</head>
 
+</head>
 <body>
 
 <!-- ==================== LOCK ==================== -->
 <section id="lock" class="screen active">
     <div class="card center">
         <div class="heart">♡</div>
-        <h1>Our Little Story</h1>
-        <div class="sub" id="lockSub">มีเรื่องราวเล็ก ๆ ที่อยากให้เธอเปิดดู</div>
-        <div class="pin" id="pin">
-            <span></span><span></span><span></span><span></span>
-        </div>
+        <h1>Our Anniversary</h1>
+        <div class="sub">พื้นที่เล็ก ๆ สำหรับเก็บเรื่องราวของเรา</div>
+        <div class="pin" id="pin"><span></span><span></span><span></span><span></span></div>
         <div class="keypad">
-            <button class="key" onclick="press('1')">1</button>
-            <button class="key" onclick="press('2')">2</button>
-            <button class="key" onclick="press('3')">3</button>
-            <button class="key" onclick="press('4')">4</button>
-            <button class="key" onclick="press('5')">5</button>
-            <button class="key" onclick="press('6')">6</button>
-            <button class="key" onclick="press('7')">7</button>
-            <button class="key" onclick="press('8')">8</button>
-            <button class="key" onclick="press('9')">9</button>
+            <button class="key" onclick="press('1')">1</button><button class="key" onclick="press('2')">2</button><button class="key" onclick="press('3')">3</button>
+            <button class="key" onclick="press('4')">4</button><button class="key" onclick="press('5')">5</button><button class="key" onclick="press('6')">6</button>
+            <button class="key" onclick="press('7')">7</button><button class="key" onclick="press('8')">8</button><button class="key" onclick="press('9')">9</button>
             <button class="key zero" onclick="press('0')">0</button>
         </div>
-        <div class="error" id="pinError"></div>
+        <div class="pinTools"><button class="tinyBtn" onclick="clearPin()">ล้าง</button></div>
+        <div id="pinError" class="error"></div>
     </div>
 </section>
 
@@ -263,72 +256,46 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
     <div class="card">
         <div class="nav">
             <span class="navTitle">Our Anniversary ♡</span>
-            <div>
-                <button class="ghost" onclick="openScreen('settings')">⚙️</button>
-                <button class="ghost" onclick="lockApp()">🔒</button>
+            <div class="formRow">
+                <button class="ghost" onclick="openScreen('gallery')">แกลเลอรี</button>
+                <button class="ghost" onclick="openScreen('story')">เรื่องราว</button>
+                <button class="ghost" onclick="openScreen('letters')">จดหมาย</button>
+                <button class="ghost" onclick="openScreen('settings')">ตั้งค่า</button>
             </div>
         </div>
         <div class="homeHero">
             <div class="heart">♡</div>
-            <h2>Our Little Story</h2>
-            <div class="sub">ทุกเดือนมีเรื่องราวใหม่ ๆ ให้เราเก็บไว้ด้วยกัน</div>
-            <div class="date">เริ่มต้น 5 สิงหาคม 2026</div>
-            <div class="counter">
-                เราเดินทางมาด้วยกันแล้ว
-                <strong id="daysTogether">0 วัน</strong>
-                <div class="small" id="nextAnniv">กำลังคำนวณวันครบรอบถัดไป...</div>
-            </div>
+            <h2>เราเดินทางมาด้วยกันแล้ว</h2>
+            <div class="counter"><strong id="daysTogether">0 วัน</strong><div>ตั้งแต่ 5 สิงหาคม 2569</div></div>
+            <div class="nextAnniv" id="nextAnniv">ครบรอบถัดไป</div>
         </div>
         <div class="stats">
-            <div class="stat"><b id="photoStat">0</b><span>รูปภาพ</span></div>
+            <div class="stat"><b id="monthStat">0</b><span>เดือนที่เปิดแล้ว</span></div>
+            <div class="stat"><b id="photoStat">0</b><span>รูปความทรงจำ</span></div>
             <div class="stat"><b id="letterStat">0</b><span>จดหมาย</span></div>
-            <div class="stat"><b id="monthStat">1</b><span>เดือนที่เปิด</span></div>
         </div>
         <div class="homeTools">
-            <button class="toolBtn" onclick="openScreen('gallery')"><strong>🖼️ แกลเลอรี</strong><span>รูปทั้งหมด</span></button>
-            <button class="toolBtn" onclick="openScreen('story')"><strong>📖 เรื่องราว</strong><span>ไทม์ไลน์</span></button>
-            <button class="toolBtn" onclick="openScreen('letters')"><strong>💌 จดหมาย</strong><span>ข้อความ</span></button>
-            <button class="toolBtn" onclick="openScreen('settings')"><strong>⚙️ ตั้งค่า</strong><span>จัดการข้อมูล</span></button>
+            <button class="toolBtn" onclick="showDailyFood()"><strong>🍜 วันนี้กินอะไรดี?</strong><span>สุ่มเมนู</span></button>
+            <button class="toolBtn" onclick="showDailyActivity()"><strong>✨ วันนี้ทำอะไรด้วยกันดี?</strong><span>สุ่มกิจกรรม</span></button>
+            <button class="toolBtn" onclick="showDeepTalk()"><strong>💬 วันนี้คุยอะไรกันดี?</strong><span>สุ่มคำถาม</span></button>
+            <button class="toolBtn" onclick="showDailyMessage()"><strong>💌 ข้อความวันนี้</strong><span>กำลังใจเล็ก ๆ</span></button>
         </div>
-        <div class="sectionTitle">
-            <h2>เดือนของเรา</h2>
-            <div class="small">เปิดได้ตามวันที่ของแต่ละเดือน</div>
-        </div>
+        <div class="sectionTitle"><h2>Monthly Memories</h2><div class="small">แต่ละเดือนจะเปิดเมื่อถึงวันครบรอบ</div></div>
         <div class="months" id="months"></div>
+        <div class="formRow" style="margin-top:18px"><button class="secondary" onclick="showCelebrate()">♡ เปิดข้อความพิเศษ</button><button class="danger" onclick="lockApp()">ล็อกเว็บไซต์</button></div>
     </div>
 </section>
 
-<!-- ==================== MONTH DETAIL ==================== -->
+<!-- ==================== DETAIL ==================== -->
 <section id="detail" class="screen">
     <div class="card">
-        <div class="nav">
-            <button class="ghost" onclick="openScreen('home')">← กลับ</button>
-            <span class="navTitle" id="detailNav">Month 1</span>
-            <span></span>
-        </div>
+        <div class="nav"><button class="ghost" onclick="openScreen('home')">← กลับ</button><span class="navTitle" id="detailNav">Month 1</span><span></span></div>
         <div class="detail">
-            <div class="heart">♡</div>
-            <h2 id="detailTitle">เดือนที่ 1</h2>
-            <div class="detailDate" id="detailDate">5 กันยายน 2026</div>
-            <div class="photoArea" id="photoArea">
-                <div class="placeholder">ยังไม่มีรูปของเดือนนี้</div>
-                <img id="mainPhoto" alt="memory">
-            </div>
-            <div class="photoControls">
-                <label class="fileBtn">＋ เพิ่มรูป
-                    <input id="photoInput" type="file" accept="image/*" multiple>
-                </label>
-            </div>
-            <div class="memoryCount" id="memoryCount">0 รูป</div>
+            <div class="heart">♡</div><h2 id="detailTitle">เดือนที่ 1</h2><div class="detailDate" id="detailDate">5 กันยายน 2026</div>
+            <div class="photoArea" id="photoArea"><div class="placeholder">ยังไม่มีรูปความทรงจำ</div><img id="mainPhoto" alt="รูปความทรงจำ"></div>
+            <div class="photoControls"><label class="fileBtn">เพิ่มรูป<input id="photoInput" type="file" accept="image/*" multiple></label><span class="memoryCount" id="memoryCount">0 รูป</span></div>
             <div class="galleryGrid" id="monthGallery"></div>
-            <div class="note">
-                <div class="noteTitle">เรื่องราวของเดือนนี้</div>
-                <textarea class="textarea" id="monthNote" placeholder="เขียนเรื่องราวหรือความทรงจำของเดือนนี้..."></textarea>
-                <button class="primary" onclick="saveMonthNote()">บันทึกความทรงจำ</button>
-            </div>
-            <div class="detailActions">
-                <button class="secondary" onclick="openScreen('home')">ดูเดือนอื่น</button>
-            </div>
+            <div class="note"><div class="noteTitle">ความทรงจำของเดือนนี้</div><textarea class="textarea" id="monthNote" placeholder="เขียนเรื่องที่อยากเก็บไว้..."></textarea><div class="formRow"><button class="primary" onclick="saveMonthNote()">บันทึกความทรงจำ</button></div></div>
         </div>
     </div>
 </section>
@@ -336,23 +303,9 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
 <!-- ==================== GALLERY ==================== -->
 <section id="gallery" class="screen">
     <div class="card">
-        <div class="nav">
-            <button class="ghost" onclick="openScreen('home')">← กลับ</button>
-            <span class="navTitle">แกลเลอรี</span>
-            <span></span>
-        </div>
-        <div class="sectionTitle">
-            <h2>ความทรงจำทั้งหมด</h2>
-            <div class="small">รวมรูปจากทุกเดือน</div>
-        </div>
-        <div class="filters">
-            <input class="field" id="gallerySearch" placeholder="ค้นหาเดือน..." oninput="renderGallery()">
-            <select class="field" id="galleryMonth" onchange="renderGallery()"><option value="all">ทุกเดือน</option></select>
-            <select class="field" id="gallerySort" onchange="renderGallery()">
-                <option value="asc">เก่า → ใหม่</option>
-                <option value="desc">ใหม่ → เก่า</option>
-            </select>
-        </div>
+        <div class="nav"><button class="ghost" onclick="openScreen('home')">← กลับ</button><span class="navTitle">แกลเลอรี</span><span></span></div>
+        <div class="sectionTitle"><h2>All Memories</h2><div class="small">รวมรูปจากทุกเดือน</div></div>
+        <div class="filters"><input class="field" id="gallerySearch" placeholder="ค้นหาเดือน..." oninput="renderGallery()"><select class="field" id="galleryMonth" onchange="renderGallery()"><option value="all">ทุกเดือน</option></select><select class="field" id="gallerySort" onchange="renderGallery()"><option value="asc">เก่า → ใหม่</option><option value="desc">ใหม่ → เก่า</option></select></div>
         <div class="galleryGrid" id="allGallery"></div>
     </div>
 </section>
@@ -360,15 +313,8 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
 <!-- ==================== STORY ==================== -->
 <section id="story" class="screen">
     <div class="card">
-        <div class="nav">
-            <button class="ghost" onclick="openScreen('home')">← กลับ</button>
-            <span class="navTitle">เรื่องราว</span>
-            <span></span>
-        </div>
-        <div class="sectionTitle">
-            <h2>Our Timeline</h2>
-            <div class="small">บันทึกทุกช่วงเวลาที่สำคัญ</div>
-        </div>
+        <div class="nav"><button class="ghost" onclick="openScreen('home')">← กลับ</button><span class="navTitle">เรื่องราว</span><span></span></div>
+        <div class="sectionTitle"><h2>Our Timeline</h2><div class="small">บันทึกทุกช่วงเวลาที่สำคัญ</div></div>
         <div class="story" id="storyList"></div>
     </div>
 </section>
@@ -376,23 +322,11 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
 <!-- ==================== LETTERS ==================== -->
 <section id="letters" class="screen">
     <div class="card">
-        <div class="nav">
-            <button class="ghost" onclick="openScreen('home')">← กลับ</button>
-            <span class="navTitle">จดหมาย</span>
-            <span></span>
-        </div>
-        <div class="sectionTitle">
-            <h2>Letters ♡</h2>
-            <div class="small">ข้อความที่อยากเก็บไว้ให้อ่านอีกครั้ง</div>
-        </div>
-        <div class="formRow">
-            <input class="field" id="letterTitle" placeholder="หัวข้อจดหมาย">
-            <select class="field" id="letterMonth"><option value="1">เดือนที่ 1</option></select>
-        </div>
+        <div class="nav"><button class="ghost" onclick="openScreen('home')">← กลับ</button><span class="navTitle">จดหมาย</span><span></span></div>
+        <div class="sectionTitle"><h2>Letters ♡</h2><div class="small">ข้อความที่อยากเก็บไว้ให้อ่านอีกครั้ง</div></div>
+        <div class="formRow"><input class="field" id="letterTitle" placeholder="หัวข้อจดหมาย"><select class="field" id="letterMonth"><option value="1">เดือนที่ 1</option></select></div>
         <textarea class="textarea" id="letterText" placeholder="เขียนข้อความ..."></textarea>
-        <div class="formRow">
-            <button class="primary" onclick="saveLetter()">💌 บันทึกจดหมาย</button>
-        </div>
+        <div class="formRow"><button class="primary" onclick="saveLetter()">💌 บันทึกจดหมาย</button></div>
         <div class="lettersList" id="lettersList"></div>
     </div>
 </section>
@@ -400,926 +334,94 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
 <!-- ==================== SETTINGS ==================== -->
 <section id="settings" class="screen">
     <div class="card">
-        <div class="nav">
-            <button class="ghost" onclick="openScreen('home')">← กลับ</button>
-            <span class="navTitle">ตั้งค่า</span>
-            <span></span>
-        </div>
-        <div class="sectionTitle">
-            <h2>Settings</h2>
-            <div class="small">ข้อมูลจะถูกบันทึกบน Cloud</div>
-        </div>
+        <div class="nav"><button class="ghost" onclick="openScreen('home')">← กลับ</button><span class="navTitle">ตั้งค่า</span><span></span></div>
+        <div class="sectionTitle"><h2>Settings</h2><div class="small">ข้อมูลจะถูกบันทึกบน Cloud</div></div>
         <div class="settings">
-            <div class="setting">
-                <div class="text"><b>🌙 โหมดมืด</b><span>สลับธีมของเว็บไซต์</span></div>
-                <label class="switch"><input id="darkMode" type="checkbox" onchange="toggleDark()"><span class="slider"></span></label>
-            </div>
-            <div class="setting">
-                <div class="text"><b>🔐 PIN</b><span>ใช้ PIN 2704 สำหรับเปิดเว็บไซต์</span></div>
-                <button class="secondary" onclick="alert('PIN ปัจจุบันคือ 2704')">ดู PIN</button>
-            </div>
-            <div class="setting">
-                <div class="text"><b>☁️ Cloud Backup</b><span>ส่งออกข้อมูลจากฐานข้อมูล Cloud</span></div>
-                <button class="secondary" onclick="exportBackup()">Export</button>
-            </div>
-            <div class="setting">
-                <div class="text"><b>☁️ Cloud Restore</b><span>นำเข้าจดหมายและการตั้งค่า</span></div>
-                <label class="fileBtn">Import
-                    <input class="hiddenFile" type="file" accept="application/json" onchange="importBackup(this.files[0])">
-                </label>
-            </div>
-            <div class="setting">
-                <div class="text"><b>⚠️ ล้างข้อมูล Cloud</b><span>ลบข้อมูลและรูปทั้งหมดของเว็บไซต์นี้</span></div>
-                <button class="danger" onclick="clearAllData()">ล้างทั้งหมด</button>
-            </div>
+            <div class="setting"><div class="text"><b>🌙 โหมดมืด</b><span>สลับธีมของเว็บไซต์</span></div><label class="switch"><input id="darkMode" type="checkbox" onchange="toggleDark()"><span class="slider"></span></label></div>
+            <div class="setting"><div class="text"><b>🔐 PIN</b><span>ใช้ PIN 2704 สำหรับเปิดเว็บไซต์</span></div><button class="secondary" onclick="alert('PIN ปัจจุบันคือ 2704')">ดู PIN</button></div>
+            <div class="setting"><div class="text"><b>☁️ Cloud Backup</b><span>ส่งออกข้อมูลจากฐานข้อมูล Cloud</span></div><button class="secondary" onclick="exportBackup()">Export</button></div>
+            <div class="setting"><div class="text"><b>☁️ Cloud Restore</b><span>นำเข้าจดหมายและการตั้งค่า</span></div><label class="fileBtn">Import<input class="hiddenFile" type="file" accept="application/json" onchange="importBackup(this.files[0])"></label></div>
+            <div class="setting"><div class="text"><b>⚠️ ล้างข้อมูล Cloud</b><span>ลบข้อมูลและรูปทั้งหมดของเว็บไซต์นี้</span></div><button class="danger" onclick="clearAllData()">ล้างทั้งหมด</button></div>
         </div>
         <div class="small" style="margin-top:20px;text-align:center">Cloud storage: Supabase · App ID: our-anniversary</div>
     </div>
 </section>
 
 <!-- ==================== MODAL ==================== -->
-<div id="modal" class="modal">
-    <div class="modalCard">
-        <div class="modalHead">
-            <h2 id="modalTitle">แก้ไข</h2>
-            <button class="closeBtn" onclick="closeModal()">×</button>
-        </div>
-        <div id="modalBody"></div>
-    </div>
-</div>
+<div id="modal" class="modal"><div class="modalCard"><div class="modalHead"><h2 id="modalTitle">แก้ไข</h2><button class="closeBtn" onclick="closeModal()">×</button></div><div id="modalBody"></div></div></div>
 
 <!-- ==================== LIGHTBOX ==================== -->
-<div id="lightbox" class="lightbox">
-    <button class="lbBtn lbClose" onclick="closeLightbox()">×</button>
-    <button class="lbBtn lbPrev" onclick="prevPhoto()">‹</button>
-    <img id="lbImage" alt="memory">
-    <button class="lbBtn lbNext" onclick="nextPhoto()">›</button>
-    <button class="lbDelete" onclick="deleteCurrentPhoto()">ลบรูป</button>
-    <div class="lbInfo" id="lbInfo"></div>
-</div>
+<div id="lightbox" class="lightbox"><button class="lbBtn lbClose" onclick="closeLightbox()">×</button><button class="lbBtn lbPrev" onclick="prevPhoto()">‹</button><img id="lbImage" alt="memory"><button class="lbBtn lbNext" onclick="nextPhoto()">›</button><button class="lbDelete" onclick="deleteCurrentPhoto()">ลบรูป</button><div class="lbInfo" id="lbInfo"></div></div>
 
 <!-- ==================== TOAST ==================== -->
 <div id="toast" class="toast"></div>
 
 <!-- ==================== CELEBRATION ==================== -->
-<div id="celebrate" class="celebrate">
-    <div class="celebrateCard">
-        <div class="heart">♡</div>
-        <h2 id="celebrateTitle">Happy Anniversary</h2>
-        <p id="celebrateText" class="sub"></p>
-        <button class="primary" onclick="closeCelebrate()">♡ ไปต่อกันนะ</button>
-    </div>
-    <div class="confetti" id="confetti"></div>
-</div>
+<div id="celebrate" class="celebrate"><div class="celebrateCard"><div class="heart">♡</div><h2 id="celebrateTitle">Happy Anniversary</h2><p id="celebrateText" class="sub"></p><button class="primary" onclick="closeCelebrate()">♡ ไปต่อกันนะ</button></div><div class="confetti" id="confetti"></div></div>
 
-<!-- ==================== SUPABASE ==================== -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script>
-/* =========================================================
-   CONFIGURATION
-========================================================= */
-const CONFIG = {
-    password: "2704",
-    startDate: "2026-08-05",
-    totalMonths: 60,
-    supabaseUrl:
-        "https://pupfpjxxzzuancakjorf.supabase.co",
-    supabaseAnonKey:
-        "sb_publishable_lwuqTKH-RG_e0y3N8VGMSg_j6S3CnvB",
-    appId:
-        "our-anniversary"
-};
-
-/* =========================================================
-   GLOBAL VARIABLES
-========================================================= */
-let supabaseClient = null;
-let currentMonth = 1;
-let currentPhotos = [];
-let currentPhotoIndex = 0;
-let pinValue = "";
-let settings = { dark: false };
-let allPhotos = [];
-let allLetters = [];
-
-/* =========================================================
-   MONTH NAMES
-========================================================= */
-const monthNames = Array.from(
-    {length: CONFIG.totalMonths},
-    (_, i) => `เดือนที่ ${i + 1}`
-);
-
-/* =========================================================
-   SHORT DOM HELPER
-========================================================= */
-function $(id){
-    return document.getElementById(id);
-}
-
-/* =========================================================
-   TOAST
-========================================================= */
-function toast(msg){
-    const t = $("toast");
-    t.textContent = msg;
-    t.classList.add("show");
-    setTimeout(() => t.classList.remove("show"), 2400);
-}
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-function escapeHtml(s = ""){
-    return String(s).replace(
-        /[&<>'"]/g,
-        c => ({
-            "&":"&amp;",
-            "<":"&lt;",
-            ">":"&gt;",
-            "'":"&#39;",
-            "\"":"&quot;"
-        }[c])
-    );
-}
-
-/* =========================================================
-   CLOUD READY
-========================================================= */
-function cloudReady(){
-    return (
-        CONFIG.supabaseUrl.startsWith("https://") &&
-        CONFIG.supabaseAnonKey &&
-        CONFIG.supabaseAnonKey !== "YOUR_SUPABASE_ANON_KEY"
-    );
-}
-
-/* =========================================================
-   INITIALIZE SUPABASE
-========================================================= */
-function initCloud(){
-    if(!cloudReady()){
-        toast("กรุณาใส่ Supabase URL และ Publishable/Anon Key ใน CONFIG");
-        return false;
-    }
-    if(!window.supabase){
-        toast("ไม่พบ Supabase Library");
-        return false;
-    }
-    supabaseClient = window.supabase.createClient(
-        CONFIG.supabaseUrl,
-        CONFIG.supabaseAnonKey
-    );
-    return true;
-}
-
-/* =========================================================
-   LOAD CLOUD DATA
-========================================================= */
-async function loadCloud(){
-    if(!supabaseClient) return;
-    try{
-        const [photosResult,lettersResult,settingsResult] = await Promise.all([
-            supabaseClient.from("photos").select("*").eq("app_id", CONFIG.appId).order("month").order("index"),
-            supabaseClient.from("letters").select("*").eq("app_id", CONFIG.appId).order("created_at", {ascending:false}),
-            supabaseClient.from("settings").select("key,value").eq("app_id", CONFIG.appId)
-        ]);
-        if(photosResult.error || lettersResult.error || settingsResult.error){
-            console.error("Cloud Load Error:", photosResult.error || lettersResult.error || settingsResult.error);
-            toast("โหลดข้อมูล Cloud ไม่สำเร็จ");
-            return;
-        }
-        allPhotos = photosResult.data || [];
-        allLetters = lettersResult.data || [];
-        settings = {dark:false};
-        for(const row of (settingsResult.data || [])) settings[row.key] = row.value;
-        settings.dark = settings.dark === true;
-        document.body.classList.toggle("dark", settings.dark);
-        $("darkMode").checked = settings.dark;
-        renderMonths();
-        renderStats();
-        renderGallery();
-        renderStory();
-        renderLetters();
-    }catch(error){
-        console.error("Cloud Exception:", error);
-        toast("เกิดข้อผิดพลาดในการโหลด Cloud");
-    }
-}
-
-/* =========================================================
-   UPLOAD PHOTO
-========================================================= */
-async function uploadPhoto(file){
-    if(!supabaseClient) throw new Error("Supabase ยังไม่ได้เชื่อมต่อ");
-    const compressed = await compressImage(file,1600,.82);
-    const path = `${CONFIG.appId}/${currentMonth}/${Date.now()}-${Math.random().toString(36).slice(2)}.jpg`;
-    const {error:uploadError} = await supabaseClient.storage.from("memories").upload(
-        path,compressed,{contentType:"image/jpeg",upsert:false}
-    );
-    if(uploadError) throw uploadError;
-    const {data:urlData} = supabaseClient.storage.from("memories").getPublicUrl(path);
-    if(!urlData?.publicUrl) throw new Error("ไม่สามารถสร้าง Public URL ของรูปได้");
-    const {data:maxRows,error:maxError} = await supabaseClient.from("photos").select("index").eq("app_id",CONFIG.appId).eq("month",currentMonth).order("index",{ascending:false}).limit(1);
-    if(maxError){
-        await supabaseClient.storage.from("memories").remove([path]);
-        throw maxError;
-    }
-    const nextIndex = (maxRows?.[0]?.index ?? -1) + 1;
-    const {error:insertError} = await supabaseClient.from("photos").insert({
-        app_id:CONFIG.appId,
-        month:currentMonth,
-        index:nextIndex,
-        url:urlData.publicUrl,
-        storage_path:path
-    });
-    if(insertError){
-        await supabaseClient.storage.from("memories").remove([path]);
-        throw insertError;
-    }
-}
-
-/* =========================================================
-   IMAGE COMPRESSION
-========================================================= */
-function compressImage(file,maxSide=1600,quality=.82){
-    return new Promise((resolve,reject)=>{
-        const reader = new FileReader();
-        reader.onload = () => {
-            const img = new Image();
-            img.onload = () => {
-                const scale = Math.min(1,maxSide/Math.max(img.width,img.height));
-                const canvas = document.createElement("canvas");
-                canvas.width = Math.round(img.width*scale);
-                canvas.height = Math.round(img.height*scale);
-                const ctx = canvas.getContext("2d");
-                ctx.drawImage(img,0,0,canvas.width,canvas.height);
-                canvas.toBlob(blob=>{
-                    if(blob) resolve(blob);
-                    else reject(new Error("compress failed"));
-                },"image/jpeg",quality);
-            };
-            img.onerror = reject;
-            img.src = reader.result;
-        };
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-    });
-}
-
-/* =========================================================
-   DELETE PHOTO
-========================================================= */
-async function deletePhoto(photo){
-    if(!supabaseClient) return;
-    const ok = confirm("ลบรูปนี้จาก Cloud ใช่ไหม?");
-    if(!ok) return;
-    try{
-        if(photo.storage_path){
-            const {error:storageError} = await supabaseClient.storage.from("memories").remove([photo.storage_path]);
-            if(storageError) console.warn("Storage delete warning:",storageError);
-        }
-        const {error} = await supabaseClient.from("photos").delete().eq("id",photo.id);
-        if(error) throw error;
-        toast("ลบรูปแล้ว");
-        await loadCloud();
-        await openMonth(currentMonth);
-        renderGallery();
-        renderStory();
-    }catch(e){
-        console.error(e);
-        toast("ลบรูปไม่สำเร็จ");
-    }
-}
-
-/* =========================================================
-   SAVE MONTH NOTE
-========================================================= */
-async function saveMonthNote(){
-    if(!supabaseClient){
-        toast("Supabase ยังไม่ได้เชื่อมต่อ");
-        return;
-    }
-    const text = $("monthNote").value.trim();
-    if(!text){
-        toast("ยังไม่ได้เขียนความทรงจำ");
-        return;
-    }
-    const key = `note_${currentMonth}`;
-    const {error} = await supabaseClient.from("settings").upsert(
-        {app_id:CONFIG.appId,key:key,value:{text:text}},
-        {onConflict:"app_id,key"}
-    );
-    if(error){
-        console.error(error);
-        toast("บันทึกไม่สำเร็จ");
-        return;
-    }
-    settings[key] = {text:text};
-    toast("บันทึกความทรงจำแล้ว ♡");
-    renderStory();
-}
-
-/* =========================================================
-   LOAD MONTH NOTE
-========================================================= */
-async function loadMonthNote(){
-    if(!supabaseClient){
-        $("monthNote").value = "";
-        return;
-    }
-    const key = `note_${currentMonth}`;
-    if(settings[key]){
-        $("monthNote").value = settings[key]?.text || "";
-        return;
-    }
-    const {data,error} = await supabaseClient.from("settings").select("value").eq("app_id",CONFIG.appId).eq("key",key).maybeSingle();
-    if(error){
-        console.error("Load note error:",error);
-        $("monthNote").value = "";
-        return;
-    }
-    $("monthNote").value = data?.value?.text || "";
-}
-
-/* =========================================================
-   SAVE LETTER
-========================================================= */
-async function saveLetter(){
-    if(!supabaseClient){
-        toast("Supabase ยังไม่ได้เชื่อมต่อ");
-        return;
-    }
-    const title = $("letterTitle").value.trim() || "จดหมายของเรา";
-    const text = $("letterText").value.trim();
-    const month = Number($("letterMonth").value);
-    if(!text){
-        toast("กรุณาเขียนข้อความก่อน");
-        return;
-    }
-    const {error} = await supabaseClient.from("letters").insert({app_id:CONFIG.appId,month:month,title:title,text:text});
-    if(error){
-        console.error(error);
-        toast("บันทึกจดหมายไม่สำเร็จ");
-        return;
-    }
-    $("letterTitle").value = "";
-    $("letterText").value = "";
-    toast("บันทึกจดหมายแล้ว ♡");
-    await loadCloud();
-    renderLetters();
-}
-
-/* =========================================================
-   DELETE LETTER
-========================================================= */
-async function deleteLetter(id){
-    if(!confirm("ลบจดหมายนี้ไหม?")) return;
-    const {error} = await supabaseClient.from("letters").delete().eq("id",id);
-    if(error){
-        console.error(error);
-        toast("ลบไม่สำเร็จ");
-        return;
-    }
-    await loadCloud();
-    renderLetters();
-}
-
-/* =========================================================
-   EDIT LETTER
-========================================================= */
-async function editLetter(id){
-    const letter = allLetters.find(x=>String(x.id)===String(id));
-    if(!letter) return;
-    $("modalTitle").textContent = "แก้ไขจดหมาย";
-    $("modalBody").innerHTML = `
-        <input class="field" id="editLetterTitle" value="${escapeHtml(letter.title||"")}" placeholder="หัวข้อจดหมาย">
-        <select class="field" id="editLetterMonth" style="margin-top:9px">${monthNames.map((n,i)=>`<option value="${i+1}" ${Number(letter.month)==i+1?"selected":""}>${n}</option>`).join("")}</select>
-        <textarea class="textarea" id="editLetterText" style="margin-top:9px">${escapeHtml(letter.text||"")}</textarea>
-        <div class="formRow"><button class="primary" onclick="updateLetter('${String(id)}')">บันทึกการแก้ไข</button></div>
-    `;
-    $("modal").classList.add("show");
-}
-
-/* =========================================================
-   UPDATE LETTER
-========================================================= */
-async function updateLetter(id){
-    const title = $("editLetterTitle").value.trim() || "จดหมายของเรา";
-    const month = Number($("editLetterMonth").value);
-    const text = $("editLetterText").value.trim();
-    if(!text){
-        toast("กรุณาเขียนข้อความก่อน");
-        return;
-    }
-    const {error} = await supabaseClient.from("letters").update({title:title,month:month,text:text}).eq("id",id);
-    if(error){
-        console.error(error);
-        toast("แก้ไขไม่สำเร็จ");
-        return;
-    }
-    closeModal();
-    await loadCloud();
-    renderLetters();
-    toast("แก้ไขจดหมายแล้ว");
-}
-
-/* =========================================================
-   TOGGLE DARK MODE
-========================================================= */
-async function toggleDark(){
-    const enabled = $("darkMode").checked;
-    document.body.classList.toggle("dark",enabled);
-    settings.dark = enabled;
-    if(!supabaseClient){
-        toast("Supabase ยังไม่ได้เชื่อมต่อ");
-        return;
-    }
-    const {error} = await supabaseClient.from("settings").upsert(
-        {app_id:CONFIG.appId,key:"dark",value:enabled},
-        {onConflict:"app_id,key"}
-    );
-    if(error){
-        console.error("Dark mode save error:",error);
-        toast("บันทึกโหมดมืดไม่สำเร็จ");
-        return;
-    }
-    toast(enabled?"เปิดโหมดมืดแล้ว":"ปิดโหมดมืดแล้ว");
-}
-
-/* =========================================================
-   EXPORT BACKUP
-========================================================= */
-async function exportBackup(){
-    if(!supabaseClient){
-        toast("Supabase ยังไม่ได้เชื่อมต่อ");
-        return;
-    }
-    try{
-        const [photos,letters,settingsRows] = await Promise.all([
-            supabaseClient.from("photos").select("*").eq("app_id",CONFIG.appId),
-            supabaseClient.from("letters").select("*").eq("app_id",CONFIG.appId),
-            supabaseClient.from("settings").select("*").eq("app_id",CONFIG.appId)
-        ]);
-        if(photos.error||letters.error||settingsRows.error) throw (photos.error||letters.error||settingsRows.error);
-        const payload = {
-            app_id:CONFIG.appId,
-            exported_at:new Date().toISOString(),
-            photos:photos.data||[],
-            letters:letters.data||[],
-            settings:settingsRows.data||[]
-        };
-        const blob = new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `our-anniversary-backup-${new Date().toISOString().slice(0,10)}.json`;
-        a.click();
-        URL.revokeObjectURL(url);
-        toast("Export ข้อมูลแล้ว");
-    }catch(e){
-        console.error(e);
-        toast("Export ไม่สำเร็จ");
-    }
-}
-
-/* =========================================================
-   IMPORT BACKUP
-========================================================= */
-async function importBackup(file){
-    if(!file || !supabaseClient) return;
-    try{
-        const data = JSON.parse(await file.text());
-        if(data.app_id && data.app_id !== CONFIG.appId){
-            toast("ไฟล์นี้ไม่ใช่ข้อมูลของเว็บไซต์นี้");
-            return;
-        }
-        if(Array.isArray(data.letters)){
-            for(const letter of data.letters){
-                await supabaseClient.from("letters").insert({app_id:CONFIG.appId,month:Number(letter.month)||1,title:letter.title||"จดหมายของเรา",text:letter.text||""});
-            }
-        }
-        if(Array.isArray(data.settings)){
-            for(const row of data.settings){
-                await supabaseClient.from("settings").upsert({app_id:CONFIG.appId,key:row.key,value:row.value},{onConflict:"app_id,key"});
-            }
-        }
-        await loadCloud();
-        toast("Restore ข้อมูลแล้ว");
-    }catch(e){
-        console.error(e);
-        toast("Restore ไม่สำเร็จ");
-    }
-}
-
-/* =========================================================
-   CLEAR ALL DATA
-========================================================= */
-async function clearAllData(){
-    if(!supabaseClient) return;
-    if(!confirm("ต้องการลบข้อมูลและรูปทั้งหมดจาก Cloud จริงหรือไม่?")) return;
-    try{
-        const {data:files,error:listError} = await supabaseClient.storage.from("memories").list(CONFIG.appId,{limit:1000});
-        if(listError) console.warn(listError);
-        if(Array.isArray(files)&&files.length){
-            const paths=[];
-            for(const item of files){
-                const monthPath=`${CONFIG.appId}/${item.name}`;
-                const {data:monthFiles}=await supabaseClient.storage.from("memories").list(monthPath,{limit:1000});
-                if(Array.isArray(monthFiles)) for(const f of monthFiles) paths.push(`${monthPath}/${f.name}`);
-            }
-            if(paths.length) await supabaseClient.storage.from("memories").remove(paths);
-        }
-        await supabaseClient.from("photos").delete().eq("app_id",CONFIG.appId);
-        await supabaseClient.from("letters").delete().eq("app_id",CONFIG.appId);
-        await supabaseClient.from("settings").delete().eq("app_id",CONFIG.appId);
-        settings={dark:false};
-        document.body.classList.remove("dark");
-        $("darkMode").checked=false;
-        await loadCloud();
-        if($("detail").classList.contains("active")) await openMonth(currentMonth);
-        toast("ล้างข้อมูล Cloud แล้ว");
-    }catch(e){
-        console.error(e);
-        toast("ล้างข้อมูลไม่สำเร็จ");
-    }
-}
-
-/* =========================================================
-   DATE HELPERS
-========================================================= */
-function monthDate(month){
-    const d = new Date(CONFIG.startDate+"T00:00:00");
-    d.setMonth(d.getMonth()+month);
-    return d;
-}
-function formatThaiDate(date){
-    return date.toLocaleDateString("th-TH",{day:"numeric",month:"long",year:"numeric"});
-}
-function isMonthUnlocked(month){
-    return new Date() >= monthDate(month);
-}
-function currentUnlockedMonth(){
-    let n=0;
-    for(let i=1;i<=CONFIG.totalMonths;i++) if(isMonthUnlocked(i)) n=i;
-    return n;
-}
-
-/* =========================================================
-   RENDER MONTHS
-========================================================= */
-function renderMonths(){
-    const unlocked=currentUnlockedMonth();
-    $("monthStat").textContent=unlocked;
-    $("months").innerHTML=monthNames.map((name,i)=>{
-        const m=i+1;
-        const unlockedMonth=isMonthUnlocked(m);
-        const photos=allPhotos.filter(p=>Number(p.month)===m);
-        const thumb=photos[0]?.url||"";
-        return `
-            <button class="month ${unlockedMonth?"unlocked":"locked"} ${photos.length?"hasMemory":""}" ${unlockedMonth?`onclick="openMonth(${m})"`:"disabled"}>
-                <span class="status">${unlockedMonth?(photos.length?"♡":"○"):"🔒"}</span>
-                ${thumb?`<img class="thumb" src="${escapeHtml(thumb)}" alt="">`:``}
-                <div class="num">MONTH ${m}</div>
-                <div class="title">${name}</div>
-                <div class="date">${formatThaiDate(monthDate(m))}</div>
-            </button>
-        `;
-    }).join("");
-}
-
-/* =========================================================
-   OPEN MONTH
-========================================================= */
-async function openMonth(month){
-    if(!isMonthUnlocked(month)){
-        toast("เดือนนี้ยังไม่ถึงวันเปิด");
-        return;
-    }
-    currentMonth=month;
-    $("detailNav").textContent=`Month ${month}`;
-    $("detailTitle").textContent=monthNames[month-1];
-    $("detailDate").textContent=formatThaiDate(monthDate(month));
-    currentPhotos=allPhotos.filter(p=>Number(p.month)===month);
-    $("memoryCount").textContent=`${currentPhotos.length} รูป`;
-    const first=currentPhotos[0];
-    $("photoArea").classList.toggle("has",!!first);
-    $("mainPhoto").src=first?.url||"";
-    renderMonthGallery();
-    await loadMonthNote();
-    openScreen("detail");
-}
-
-/* =========================================================
-   RENDER MONTH GALLERY
-========================================================= */
-function renderMonthGallery(){
-    if(!currentPhotos.length){
-        $("monthGallery").innerHTML=`<div class="emptyState">ยังไม่มีรูปในเดือนนี้</div>`;
-        return;
-    }
-    $("monthGallery").innerHTML=currentPhotos.map((p,i)=>`
-        <button class="galleryItem" onclick="openLightbox(${i})">
-            <img src="${escapeHtml(p.url)}" alt="memory">
-        </button>
-    `).join("");
-}
-
-/* =========================================================
-   PHOTO INPUT
-========================================================= */
-$("photoInput").addEventListener("change",async e=>{
-    const files=[...(e.target.files||[])];
-    if(!files.length) return;
-    try{
-        for(const file of files) await uploadPhoto(file);
-        toast(`${files.length} รูปถูกบันทึกแล้ว`);
-        await loadCloud();
-        await openMonth(currentMonth);
-    }catch(err){
-        console.error(err);
-        toast("อัปโหลดรูปไม่สำเร็จ");
-    }finally{
-        e.target.value="";
-    }
-});
-
-/* =========================================================
-   GALLERY
-========================================================= */
-function renderGallery(){
-    const q=($( "gallerySearch")?.value||"").trim().toLowerCase();
-    const m=$( "galleryMonth")?.value||"all";
-    const sort=$( "gallerySort")?.value||"asc";
-    let list=[...allPhotos];
-    if(q) list=list.filter(p=>monthNames[(Number(p.month)||1)-1].toLowerCase().includes(q));
-    if(m!=="all") list=list.filter(p=>Number(p.month)===Number(m));
-    list.sort((a,b)=>{
-        const ma=Number(a.month)||0,mb=Number(b.month)||0;
-        if(ma!==mb) return sort==="asc"?ma-mb:mb-ma;
-        return sort==="asc"?(Number(a.index)||0)-(Number(b.index)||0):(Number(b.index)||0)-(Number(a.index)||0);
-    });
-    $("allGallery").innerHTML=list.length?list.map(p=>`
-        <button class="galleryItem" onclick="openGalleryPhoto(${JSON.stringify(p.id)})">
-            <img src="${escapeHtml(p.url)}" alt="memory">
-            <div class="galleryLabel">${escapeHtml(monthNames[(Number(p.month)||1)-1])}</div>
-        </button>
-    `).join(""):`<div class="emptyState">ยังไม่มีรูปภาพ</div>`;
-}
-function populateGalleryMonth(){
-    const select=$( "galleryMonth");
-    if(!select) return;
-    select.innerHTML=`<option value="all">ทุกเดือน</option>`+monthNames.map((n,i)=>`<option value="${i+1}">${n}</option>`).join("");
-}
-function openGalleryPhoto(id){
-    const photo=allPhotos.find(p=>String(p.id)===String(id));
-    if(!photo) return;
-    currentPhotos=allPhotos.filter(p=>Number(p.month)===Number(photo.month));
-    currentMonth=Number(photo.month);
-    currentPhotoIndex=currentPhotos.findIndex(p=>String(p.id)===String(photo.id));
-    showLightbox();
-}
-
-/* =========================================================
-   STORY
-========================================================= */
-function renderStory(){
-    const items=[];
-    for(let m=1;m<=currentUnlockedMonth();m++){
-        const note=settings[`note_${m}`]?.text||"";
-        const photos=allPhotos.filter(p=>Number(p.month)===m);
-        if(note||photos.length){
-            items.push(`
-                <div class="storyItem">
-                    <div class="storyDot"></div>
-                    <div class="storyCard">
-                        <div class="storyTitle">${escapeHtml(monthNames[m-1])}</div>
-                        <div class="storyDate">${formatThaiDate(monthDate(m))}</div>
-                        ${note?`<div class="storyText">${escapeHtml(note)}</div>`:""}
-                        <div class="storyMeta">${photos.length} รูป</div>
-                    </div>
-                </div>
-            `);
-        }
-    }
-    $("storyList").innerHTML=items.length?items.join(""):`<div class="emptyState">ยังไม่มีบันทึกเรื่องราว</div>`;
-}
-
-/* =========================================================
-   LETTERS
-========================================================= */
-function renderLetters(){
-    $("lettersList").innerHTML=allLetters.length?allLetters.map(letter=>`
-        <div class="letter">
-            <div class="letterBtns">
-                <button class="iconBtn" onclick="editLetter('${String(letter.id)}')">✎</button>
-                <button class="iconBtn" onclick="deleteLetter('${String(letter.id)}')">×</button>
-            </div>
-            <h3>${escapeHtml(letter.title||"จดหมายของเรา")}</h3>
-            <p>${escapeHtml(letter.text||"")}</p>
-            <div class="small" style="margin-top:8px">${escapeHtml(monthNames[(Number(letter.month)||1)-1])}</div>
-        </div>
-    `).join(""):`<div class="emptyState">ยังไม่มีจดหมาย</div>`;
-}
-function populateLetterMonths(){
-    $("letterMonth").innerHTML=monthNames.map((n,i)=>`<option value="${i+1}">${n}</option>`).join("");
-}
-
-/* =========================================================
-   STATS
-========================================================= */
-function renderStats(){
-    $("photoStat").textContent=allPhotos.length;
-    $("letterStat").textContent=allLetters.length;
-    $("monthStat").textContent=currentUnlockedMonth();
-}
-
-/* =========================================================
-   LIGHTBOX
-========================================================= */
-function openLightbox(index){
-    currentPhotoIndex=index;
-    showLightbox();
-}
-function showLightbox(){
-    const photo=currentPhotos[currentPhotoIndex];
-    if(!photo) return;
-    $("lbImage").src=photo.url;
-    $("lbInfo").textContent=`${currentMonth} / ${currentPhotoIndex+1} / ${currentPhotos.length}`;
-    $("lightbox").classList.add("show");
-}
+const CONFIG={password:"2704",startDate:"2026-08-05",totalMonths:60,supabaseUrl:"https://pupfpjxxzzuancakjorf.supabase.co",supabaseAnonKey:"sb_publishable_lwuqTK-HR_G-e0y3N8VGMSg_j6S3CnvB",appId:"our-anniversary"};
+let supabaseClient=null,currentMonth=1,currentPhotos=[],currentPhotoIndex=0,pinValue="",settings={dark:false},allPhotos=[],allLetters=[];
+const monthNames=Array.from({length:CONFIG.totalMonths},(_,i)=>`เดือนที่ ${i+1}`);
+function $(id){return document.getElementById(id)}
+function toast(msg){const t=$("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2400)}
+function escapeHtml(s=""){return String(s).replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;","\"":"&quot;"}[c]))}
+function cloudReady(){return CONFIG.supabaseUrl.startsWith("https://")&&CONFIG.supabaseAnonKey&&CONFIG.supabaseAnonKey!=="YOUR_SUPABASE_ANON_KEY"}
+function initCloud(){if(!cloudReady()){toast("กรุณาใส่ Supabase URL และ Publishable/Anon Key ใน CONFIG");return false}if(!window.supabase){toast("ไม่พบ Supabase Library");return false}supabaseClient=window.supabase.createClient(CONFIG.supabaseUrl,CONFIG.supabaseAnonKey);return true}
+async function loadCloud(){if(!supabaseClient)return;try{const [photosResult,lettersResult,settingsResult]=await Promise.all([supabaseClient.from("photos").select("*").eq("app_id",CONFIG.appId).order("month").order("index"),supabaseClient.from("letters").select("*").eq("app_id",CONFIG.appId).order("created_at",{ascending:false}),supabaseClient.from("settings").select("key,value").eq("app_id",CONFIG.appId)]);if(photosResult.error||lettersResult.error||settingsResult.error){console.error("Cloud Load Error:",photosResult.error||lettersResult.error||settingsResult.error);toast("โหลดข้อมูล Cloud ไม่สำเร็จ");return}allPhotos=photosResult.data||[];allLetters=lettersResult.data||[];settings={dark:false};for(const row of(settingsResult.data||[]))settings[row.key]=row.value;settings.dark=settings.dark===true;document.body.classList.toggle("dark",settings.dark);$("darkMode").checked=settings.dark;renderMonths();renderStats();renderGallery();renderStory();renderLetters()}catch(error){console.error("Cloud Exception:",error);toast("เกิดข้อผิดพลาดในการโหลด Cloud")}}
+function compressImage(file,maxSide=1600,quality=.82){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>{const img=new Image();img.onload=()=>{const scale=Math.min(1,maxSide/Math.max(img.width,img.height));const canvas=document.createElement("canvas");canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);const ctx=canvas.getContext("2d");ctx.drawImage(img,0,0,canvas.width,canvas.height);canvas.toBlob(blob=>blob?resolve(blob):reject(new Error("compress failed")),"image/jpeg",quality)};img.onerror=reject;img.src=reader.result};reader.onerror=reject;reader.readAsDataURL(file)})}
+async function uploadPhoto(file){if(!supabaseClient)throw new Error("Supabase ยังไม่ได้เชื่อมต่อ");const compressed=await compressImage(file,1600,.82);const path=`${CONFIG.appId}/${currentMonth}/${Date.now()}-${Math.random().toString(36).slice(2)}.jpg`;const{error:uploadError}=await supabaseClient.storage.from("memories").upload(path,compressed,{contentType:"image/jpeg",upsert:false});if(uploadError)throw uploadError;const{data:urlData}=supabaseClient.storage.from("memories").getPublicUrl(path);if(!urlData?.publicUrl)throw new Error("ไม่สามารถสร้าง Public URL ของรูปได้");const{data:maxRows,error:maxError}=await supabaseClient.from("photos").select("index").eq("app_id",CONFIG.appId).eq("month",currentMonth).order("index",{ascending:false}).limit(1);if(maxError){await supabaseClient.storage.from("memories").remove([path]);throw maxError}const nextIndex=(maxRows?.[0]?.index??-1)+1;const{error:insertError}=await supabaseClient.from("photos").insert({app_id:CONFIG.appId,month:currentMonth,index:nextIndex,url:urlData.publicUrl,storage_path:path});if(insertError){await supabaseClient.storage.from("memories").remove([path]);throw insertError}}
+async function deletePhoto(photo){if(!supabaseClient)return;if(!confirm("ลบรูปนี้จาก Cloud ใช่ไหม?"))return;try{if(photo.storage_path){const{error:storageError}=await supabaseClient.storage.from("memories").remove([photo.storage_path]);if(storageError)console.warn("Storage delete warning:",storageError)}const{error}=await supabaseClient.from("photos").delete().eq("id",photo.id);if(error)throw error;toast("ลบรูปแล้ว");await loadCloud();await openMonth(currentMonth);renderGallery();renderStory()}catch(e){console.error(e);toast("ลบรูปไม่สำเร็จ")}}
+async function saveMonthNote(){if(!supabaseClient){toast("Supabase ยังไม่ได้เชื่อมต่อ");return}const text=$("monthNote").value.trim();if(!text){toast("ยังไม่ได้เขียนความทรงจำ");return}const key=`note_${currentMonth}`;const{error}=await supabaseClient.from("settings").upsert({app_id:CONFIG.appId,key:key,value:{text:text}},{onConflict:"app_id,key"});if(error){console.error(error);toast("บันทึกไม่สำเร็จ");return}settings[key]={text:text};toast("บันทึกความทรงจำแล้ว ♡");renderStory()}
+async function loadMonthNote(){if(!supabaseClient){$("monthNote").value="";return}const key=`note_${currentMonth}`;if(settings[key]){$("monthNote").value=settings[key]?.text||"";return}const{data,error}=await supabaseClient.from("settings").select("value").eq("app_id",CONFIG.appId).eq("key",key).maybeSingle();if(error){console.error("Load note error:",error);$("monthNote").value="";return}$("monthNote").value=data?.value?.text||""}
+async function saveLetter(){if(!supabaseClient){toast("Supabase ยังไม่ได้เชื่อมต่อ");return}const title=$("letterTitle").value.trim()||"จดหมายของเรา",text=$("letterText").value.trim(),month=Number($("letterMonth").value);if(!text){toast("กรุณาเขียนข้อความก่อน");return}const{error}=await supabaseClient.from("letters").insert({app_id:CONFIG.appId,month:month,title:title,text:text});if(error){console.error(error);toast("บันทึกจดหมายไม่สำเร็จ");return}$("letterTitle").value="";$("letterText").value="";toast("บันทึกจดหมายแล้ว ♡");await loadCloud();renderLetters()}
+async function deleteLetter(id){if(!confirm("ลบจดหมายนี้ไหม?"))return;const{error}=await supabaseClient.from("letters").delete().eq("id",id);if(error){console.error(error);toast("ลบไม่สำเร็จ");return}await loadCloud();renderLetters()}
+async function editLetter(id){const letter=allLetters.find(x=>String(x.id)===String(id));if(!letter)return;$("modalTitle").textContent="แก้ไขจดหมาย";$("modalBody").innerHTML=`<input class="field" id="editLetterTitle" value="${escapeHtml(letter.title||"")}" placeholder="หัวข้อจดหมาย"><select class="field" id="editLetterMonth" style="margin-top:9px">${monthNames.map((n,i)=>`<option value="${i+1}" ${Number(letter.month)==i+1?"selected":""}>${n}</option>`).join("")}</select><textarea class="textarea" id="editLetterText" style="margin-top:9px">${escapeHtml(letter.text||"")}</textarea><div class="formRow"><button class="primary" onclick="updateLetter('${String(id)}')">บันทึกการแก้ไข</button></div>`;$("modal").classList.add("show")}
+async function updateLetter(id){const title=$("editLetterTitle").value.trim()||"จดหมายของเรา",month=Number($("editLetterMonth").value),text=$("editLetterText").value.trim();if(!text){toast("กรุณาเขียนข้อความก่อน");return}const{error}=await supabaseClient.from("letters").update({title:title,month:month,text:text}).eq("id",id);if(error){console.error(error);toast("แก้ไขไม่สำเร็จ");return}closeModal();await loadCloud();renderLetters();toast("แก้ไขจดหมายแล้ว")}
+async function toggleDark(){const enabled=$("darkMode").checked;document.body.classList.toggle("dark",enabled);settings.dark=enabled;if(!supabaseClient){toast("Supabase ยังไม่ได้เชื่อมต่อ");return}const{error}=await supabaseClient.from("settings").upsert({app_id:CONFIG.appId,key:"dark",value:enabled},{onConflict:"app_id,key"});if(error){console.error("Dark mode save error:",error);toast("บันทึกโหมดมืดไม่สำเร็จ");return}toast(enabled?"เปิดโหมดมืดแล้ว":"ปิดโหมดมืดแล้ว")}
+async function exportBackup(){if(!supabaseClient){toast("Supabase ยังไม่ได้เชื่อมต่อ");return}try{const[photos,letters,settingsRows]=await Promise.all([supabaseClient.from("photos").select("*").eq("app_id",CONFIG.appId),supabaseClient.from("letters").select("*").eq("app_id",CONFIG.appId),supabaseClient.from("settings").select("*").eq("app_id",CONFIG.appId)]);if(photos.error||letters.error||settingsRows.error)throw(photos.error||letters.error||settingsRows.error);const payload={app_id:CONFIG.appId,exported_at:new Date().toISOString(),photos:photos.data||[],letters:letters.data||[],settings:settingsRows.data||[]};const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=`our-anniversary-backup-${new Date().toISOString().slice(0,10)}.json`;a.click();URL.revokeObjectURL(url);toast("Export ข้อมูลแล้ว")}catch(e){console.error(e);toast("Export ไม่สำเร็จ")}}
+async function importBackup(file){if(!file||!supabaseClient)return;try{const data=JSON.parse(await file.text());if(data.app_id&&data.app_id!==CONFIG.appId){toast("ไฟล์นี้ไม่ใช่ข้อมูลของเว็บไซต์นี้");return}if(Array.isArray(data.letters)){for(const letter of data.letters){await supabaseClient.from("letters").insert({app_id:CONFIG.appId,month:Number(letter.month)||1,title:letter.title||"จดหมายของเรา",text:letter.text||""})}}if(Array.isArray(data.settings)){for(const row of data.settings){await supabaseClient.from("settings").upsert({app_id:CONFIG.appId,key:row.key,value:row.value},{onConflict:"app_id,key"})}}await loadCloud();toast("Restore ข้อมูลแล้ว")}catch(e){console.error(e);toast("Restore ไม่สำเร็จ")}}
+async function clearAllData(){if(!supabaseClient)return;if(!confirm("ต้องการลบข้อมูลและรูปทั้งหมดจาก Cloud จริงหรือไม่?"))return;try{const{data:files,error:listError}=await supabaseClient.storage.from("memories").list(CONFIG.appId,{limit:1000});if(listError)console.warn(listError);if(Array.isArray(files)&&files.length){const paths=[];for(const item of files){const monthPath=`${CONFIG.appId}/${item.name}`,{data:monthFiles}=await supabaseClient.storage.from("memories").list(monthPath,{limit:1000});if(Array.isArray(monthFiles))for(const f of monthFiles)paths.push(`${monthPath}/${f.name}`)}if(paths.length)await supabaseClient.storage.from("memories").remove(paths)}await supabaseClient.from("photos").delete().eq("app_id",CONFIG.appId);await supabaseClient.from("letters").delete().eq("app_id",CONFIG.appId);await supabaseClient.from("settings").delete().eq("app_id",CONFIG.appId);settings={dark:false};document.body.classList.remove("dark");$("darkMode").checked=false;await loadCloud();if($("detail").classList.contains("active"))await openMonth(currentMonth);toast("ล้างข้อมูล Cloud แล้ว")}catch(e){console.error(e);toast("ล้างข้อมูลไม่สำเร็จ")}}
+function monthDate(month){const d=new Date(CONFIG.startDate+"T00:00:00");d.setMonth(d.getMonth()+month);return d}
+function formatThaiDate(date){return date.toLocaleDateString("th-TH",{day:"numeric",month:"long",year:"numeric"})}
+function isMonthUnlocked(month){return new Date()>=monthDate(month)}
+function currentUnlockedMonth(){let n=0;for(let i=1;i<=CONFIG.totalMonths;i++)if(isMonthUnlocked(i))n=i;return n}
+function renderMonths(){const unlocked=currentUnlockedMonth();$("monthStat").textContent=unlocked;$("months").innerHTML=monthNames.map((name,i)=>{const m=i+1,unlockedMonth=isMonthUnlocked(m),photos=allPhotos.filter(p=>Number(p.month)===m),thumb=photos[0]?.url||"";return `<button class="month ${unlockedMonth?"unlocked":"locked"} ${photos.length?"hasMemory":""}" ${unlockedMonth?`onclick="openMonth(${m})"`:"disabled"}><span class="status">${unlockedMonth?(photos.length?"♡":"○"):"🔒"}</span>${thumb?`<img class="thumb" src="${escapeHtml(thumb)}" alt="">`:``}<div class="num">MONTH ${m}</div><div class="title">${name}</div><div class="date">${formatThaiDate(monthDate(m))}</div></button>`}).join("")}
+async function openMonth(month){if(!isMonthUnlocked(month)){toast("เดือนนี้ยังไม่ถึงวันเปิด");return}currentMonth=month;$("detailNav").textContent=`Month ${month}`;$("detailTitle").textContent=monthNames[month-1];$("detailDate").textContent=formatThaiDate(monthDate(month));currentPhotos=allPhotos.filter(p=>Number(p.month)===month);$("memoryCount").textContent=`${currentPhotos.length} รูป`;const first=currentPhotos[0];$("photoArea").classList.toggle("has",!!first);$("mainPhoto").src=first?.url||"";renderMonthGallery();await loadMonthNote();openScreen("detail")}
+function renderMonthGallery(){if(!currentPhotos.length){$("monthGallery").innerHTML=`<div class="emptyState">ยังไม่มีรูปในเดือนนี้</div>`;return}$("monthGallery").innerHTML=currentPhotos.map((p,i)=>`<button class="galleryItem" onclick="openLightbox(${i})"><img src="${escapeHtml(p.url)}" alt="memory"></button>`).join("")}
+$("photoInput").addEventListener("change",async e=>{const files=[...(e.target.files||[])];if(!files.length)return;try{for(const file of files)await uploadPhoto(file);toast(`${files.length} รูปถูกบันทึกแล้ว`);await loadCloud();await openMonth(currentMonth)}catch(err){console.error(err);toast("อัปโหลดรูปไม่สำเร็จ")}finally{e.target.value=""}});
+function renderGallery(){const q=($("gallerySearch")?.value||"").trim().toLowerCase(),m=$("galleryMonth")?.value||"all",sort=$("gallerySort")?.value||"asc";let list=[...allPhotos];if(q)list=list.filter(p=>monthNames[(Number(p.month)||1)-1].toLowerCase().includes(q));if(m!=="all")list=list.filter(p=>Number(p.month)===Number(m));list.sort((a,b)=>{const ma=Number(a.month)||0,mb=Number(b.month)||0;if(ma!==mb)return sort==="asc"?ma-mb:mb-ma;return sort==="asc"?(Number(a.index)||0)-(Number(b.index)||0):(Number(b.index)||0)-(Number(a.index)||0)});$("allGallery").innerHTML=list.length?list.map(p=>`<button class="galleryItem" onclick="openGalleryPhoto(${JSON.stringify(p.id)})"><img src="${escapeHtml(p.url)}" alt="memory"><div class="galleryLabel">${escapeHtml(monthNames[(Number(p.month)||1)-1])}</div></button>`).join(""):`<div class="emptyState">ยังไม่มีรูปภาพ</div>`}
+function populateGalleryMonth(){const select=$("galleryMonth");if(!select)return;select.innerHTML=`<option value="all">ทุกเดือน</option>`+monthNames.map((n,i)=>`<option value="${i+1}">${n}</option>`).join("")}
+function openGalleryPhoto(id){const photo=allPhotos.find(p=>String(p.id)===String(id));if(!photo)return;currentPhotos=allPhotos.filter(p=>Number(p.month)===Number(photo.month));currentMonth=Number(photo.month);currentPhotoIndex=currentPhotos.findIndex(p=>String(p.id)===String(photo.id));showLightbox()}
+function renderStory(){const items=[];for(let m=1;m<=currentUnlockedMonth();m++){const note=settings[`note_${m}`]?.text||"",photos=allPhotos.filter(p=>Number(p.month)===m);if(note||photos.length)items.push(`<div class="storyItem"><div class="storyDot"></div><div class="storyCard"><div class="storyTitle">${escapeHtml(monthNames[m-1])}</div><div class="storyDate">${formatThaiDate(monthDate(m))}</div>${note?`<div class="storyText">${escapeHtml(note)}</div>`:""}<div class="storyMeta">${photos.length} รูป</div></div></div>`)}$("storyList").innerHTML=items.length?items.join(""):`<div class="emptyState">ยังไม่มีบันทึกเรื่องราว</div>`}
+function renderLetters(){$("lettersList").innerHTML=allLetters.length?allLetters.map(letter=>`<div class="letter"><div class="letterBtns"><button class="iconBtn" onclick="editLetter('${String(letter.id)}')">✎</button><button class="iconBtn" onclick="deleteLetter('${String(letter.id)}')">×</button></div><h3>${escapeHtml(letter.title||"จดหมายของเรา")}</h3><p>${escapeHtml(letter.text||"")}</p><div class="small" style="margin-top:8px">${escapeHtml(monthNames[(Number(letter.month)||1)-1])}</div></div>`).join(""):`<div class="emptyState">ยังไม่มีจดหมาย</div>`}
+function populateLetterMonths(){$("letterMonth").innerHTML=monthNames.map((n,i)=>`<option value="${i+1}">${n}</option>`).join("")}
+function renderStats(){$("photoStat").textContent=allPhotos.length;$("letterStat").textContent=allLetters.length;$("monthStat").textContent=currentUnlockedMonth()}
+function openLightbox(index){currentPhotoIndex=index;showLightbox()}
+function showLightbox(){const photo=currentPhotos[currentPhotoIndex];if(!photo)return;$("lbImage").src=photo.url;$("lbInfo").textContent=`${currentMonth} / ${currentPhotoIndex+1} / ${currentPhotos.length}`;$("lightbox").classList.add("show")}
 function closeLightbox(){$("lightbox").classList.remove("show")}
-function prevPhoto(){
-    if(!currentPhotos.length) return;
-    currentPhotoIndex=(currentPhotoIndex-1+currentPhotos.length)%currentPhotos.length;
-    showLightbox();
-}
-function nextPhoto(){
-    if(!currentPhotos.length) return;
-    currentPhotoIndex=(currentPhotoIndex+1)%currentPhotos.length;
-    showLightbox();
-}
-async function deleteCurrentPhoto(){
-    const photo=currentPhotos[currentPhotoIndex];
-    if(!photo) return;
-    closeLightbox();
-    await deletePhoto(photo);
-}
-
-/* =========================================================
-   SCREEN NAVIGATION
-========================================================= */
-function openScreen(id){
-    document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
-    $(id).classList.add("active");
-    if(id==="home"){
-        renderMonths();
-        renderStats();
-    }
-    if(id==="gallery") renderGallery();
-    if(id==="story") renderStory();
-    if(id==="letters") renderLetters();
-}
-
-/* =========================================================
-   PIN
-========================================================= */
-function updatePinDots(){
-    $("pin").querySelectorAll("span").forEach((el,i)=>el.classList.toggle("on",i<pinValue.length));
-}
-function press(n){
-    if(pinValue.length>=4) return;
-    pinValue+=n;
-    updatePinDots();
-    if(pinValue.length===4){
-        setTimeout(()=>{
-            if(pinValue===CONFIG.password){
-                pinValue="";
-                updatePinDots();
-                $("pinError").textContent="";
-                openScreen("home");
-            }else{
-                $("pinError").textContent="PIN ไม่ถูกต้อง";
-                pinValue="";
-                updatePinDots();
-            }
-        },120);
-    }
-}
-function lockApp(){
-    closeLightbox();
-    closeModal();
-    pinValue="";
-    updatePinDots();
-    openScreen("lock");
-}
-
-/* =========================================================
-   MODAL
-========================================================= */
+function prevPhoto(){if(!currentPhotos.length)return;currentPhotoIndex=(currentPhotoIndex-1+currentPhotos.length)%currentPhotos.length;showLightbox()}
+function nextPhoto(){if(!currentPhotos.length)return;currentPhotoIndex=(currentPhotoIndex+1)%currentPhotos.length;showLightbox()}
+async function deleteCurrentPhoto(){const photo=currentPhotos[currentPhotoIndex];if(!photo)return;closeLightbox();await deletePhoto(photo)}
+function openScreen(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));$(id).classList.add("active");if(id==="home"){renderMonths();renderStats()}if(id==="gallery")renderGallery();if(id==="story")renderStory();if(id==="letters")renderLetters()}
+function updatePinDots(){$("pin").querySelectorAll("span").forEach((el,i)=>el.classList.toggle("on",i<pinValue.length))}
+function clearPin(){pinValue="";$("pinError").textContent="";updatePinDots()}
+function press(n){if(pinValue.length>=4)return;pinValue+=n;updatePinDots();if(pinValue.length===4)setTimeout(()=>{if(pinValue===CONFIG.password){pinValue="";updatePinDots();$("pinError").textContent="";openScreen("home")}else{$("pinError").textContent="PIN ไม่ถูกต้อง";pinValue="";updatePinDots()}},120)}
+function lockApp(){closeLightbox();closeModal();pinValue="";updatePinDots();openScreen("lock")}
 function closeModal(){$("modal").classList.remove("show")}
-$("modal").addEventListener("click",e=>{if(e.target.id==="modal") closeModal()});
-$("lightbox").addEventListener("click",e=>{if(e.target.id==="lightbox") closeLightbox()});
-
-/* =========================================================
-   COUNTER
-========================================================= */
-    
-function updateCounter(){
-    const start = new Date(CONFIG.startDate + "T00:00:00");
-    const now = new Date();
-
-    // ตัดเวลาออก เพื่อให้นับเป็นจำนวน "วัน" จริง ๆ
-    const today = new Date(
-        now.getFullYear(),
-        now.getMonth(),
-        now.getDate()
-    );
-
-    const startDay = new Date(
-        start.getFullYear(),
-        start.getMonth(),
-        start.getDate()
-    );
-
-    // จำนวนวันที่เดินทางมาด้วยกัน
-    const diff = Math.max(
-        0,
-        Math.floor((today - startDay) / 86400000)
-    );
-
-    $("daysTogether").textContent = `${diff} วัน`;
-
-    // หาวันครบรอบเดือนถัดไป
-    let next = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        start.getDate()
-    );
-
-    // ถ้าครบรอบของเดือนนี้ผ่านไปแล้ว
-    if (today >= next) {
-        next = new Date(
-            today.getFullYear(),
-            today.getMonth() + 1,
-            start.getDate()
-        );
-    }
-
-    // จำนวนวันจนถึงครบรอบถัดไป
-    const days = Math.max(
-        0,
-        Math.round((next - today) / 86400000)
-    );
-
-    $("nextAnniv").innerHTML =
-        `ครบรอบถัดไปใน <strong>${days} วัน</strong> · ${formatThaiDate(next)}`;
-}
-
-/* =========================================================
-   CELEBRATION
-========================================================= */
-function showCelebrate(){
-    const unlocked=currentUnlockedMonth();
-    if(unlocked<1) return;
-    const date=monthDate(unlocked);
-    $("celebrateTitle").textContent=unlocked===1?"Happy 1 Month ♡":`Happy ${unlocked} Months ♡`;
-    $("celebrateText").textContent=`เปิดความทรงจำของ ${formatThaiDate(date)} ได้แล้ว`;
-    $("celebrate").classList.add("show");
-    const c=$("confetti");
-    c.innerHTML="";
-    for(let i=0;i<35;i++){
-        const el=document.createElement("i");
-        el.textContent=["♡","✦","•"][Math.floor(Math.random()*3)];
-        el.style.left=Math.random()*100+"%";
-        el.style.animationDelay=Math.random()*1.2+"s";
-        el.style.fontSize=(10+Math.random()*14)+"px";
-        c.appendChild(el);
-    }
-}
+$("modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal()});$("lightbox").addEventListener("click",e=>{if(e.target.id==="lightbox")closeLightbox()});
+function updateCounter(){const start=new Date(CONFIG.startDate+"T00:00:00"),now=new Date(),today=new Date(now.getFullYear(),now.getMonth(),now.getDate()),startDay=new Date(start.getFullYear(),start.getMonth(),start.getDate()),diff=Math.max(0,Math.floor((today-startDay)/86400000));$("daysTogether").textContent=`${diff} วัน`;let next=new Date(today.getFullYear(),today.getMonth(),start.getDate());if(today>=next)next=new Date(today.getFullYear(),today.getMonth()+1,start.getDate());const days=Math.max(0,Math.round((next-today)/86400000));$("nextAnniv").innerHTML=`ครบรอบถัดไปใน <strong>${days} วัน</strong> · ${formatThaiDate(next)}`}
+function showCelebrate(){const unlocked=currentUnlockedMonth();if(unlocked<1)return;$("celebrateTitle").textContent=`Happy Anniversary · ${unlocked} เดือน`;$("celebrateText").textContent="ขอบคุณสำหรับทุกช่วงเวลาที่เราได้เก็บไว้ด้วยกัน";$("celebrate").classList.add("show");const c=$("confetti");c.innerHTML="";for(let i=0;i<28;i++){const el=document.createElement("i");el.textContent=["♡","✦","•"][Math.floor(Math.random()*3)];el.style.left=Math.random()*100+"%";el.style.animationDelay=Math.random()*.5+"s";el.style.fontSize=10+Math.random()*14+"px";c.appendChild(el)}}
 function closeCelebrate(){$("celebrate").classList.remove("show")}
-
-/* =========================================================
-   START APP
-========================================================= */
-async function init(){
-    populateGalleryMonth();
-    populateLetterMonths();
-    updateCounter();
-    setInterval(updateCounter,60000);
-    initCloud();
-    await loadCloud();
-    renderMonths();
-    renderStats();
-    renderGallery();
-    renderStory();
-    renderLetters();
-}
-
-init();
+function showDailyMessage(){showFeatureModal("💌 ข้อความวันนี้",["วันนี้ไม่ต้องเป็นวันที่พิเศษก็ได้ แค่ได้มีช่วงเวลาดี ๆ ด้วยกันก็พอ","ขอให้วันนี้เป็นอีกหนึ่งวันที่เรายิ้มให้กันได้","เรื่องเล็ก ๆ ในแต่ละวัน วันหนึ่งอาจกลายเป็นความทรงจำที่สำคัญที่สุด","ค่อย ๆ เดินไปด้วยกันในแบบของเรา ไม่ต้องรีบ"])}
+function showFeatureModal(title,items){const old=document.querySelector(".anvFeatureModal");if(old)old.remove();const wrap=document.createElement("div");wrap.className="anvFeatureModal modal show";wrap.innerHTML=`<div class="anvFeatureCard modalCard"><div class="modalHead"><h2>${title}</h2><button class="closeBtn anvClose" onclick="this.closest('.anvFeatureModal').remove()">×</button></div><div class="sub" style="margin-top:12px;line-height:1.9">${escapeHtml(items[Math.floor(Math.random()*items.length)])}</div><div class="formRow"><button class="primary" onclick="showFeatureModal('${title.replace(/'/g,"\\'")}',${JSON.stringify(items).replace(/</g,"\\u003c")})">สุ่มใหม่</button></div></div>`;document.body.appendChild(wrap)}
+function showDailyFood(){showFeatureModal("🍜 วันนี้กินอะไรดี?",["กะเพราหมูสับ","กะเพราหมูกรอบ","กะเพราไก่ไข่ดาว","กะเพราทะเล","ข้าวผัดหมู","ข้าวผัดกุ้ง","ข้าวหมูกระเทียม","ข้าวไก่กระเทียม","ผัดพริกแกงหมู","ผัดพริกแกงไก่","คะน้าหมูกรอบ","คะน้าหมูชิ้น","ผัดผักรวมหมู","ผัดซีอิ๊ว","ราดหน้า","สุกี้น้ำ","สุกี้แห้ง","ก๋วยเตี๋ยวต้มยำ","ก๋วยเตี๋ยวน้ำตก","เย็นตาโฟ","ข้าวมันไก่","ข้าวหมูแดง","ข้าวขาหมู","ข้าวหน้าไก่","ข้าวไข่เจียวหมูสับ","ข้าวต้มหมู","ข้าวแกง","ข้าวคลุกกะปิ","ข้าวหมูทอด","ข้าวไก่ทอด","ส้มตำ + ไก่ย่าง","ส้มตำ + คอหมูย่าง","หมูกระทะ","ชาบู","บุฟเฟ่ต์","ปิ้งย่าง","อาหารญี่ปุ่น","อาหารเกาหลี","หมาล่า","พิซซ่า","เบอร์เกอร์","ไก่ทอด","บะหมี่เกี๊ยว","ข้าวซอย","ผัดไทย","หอยทอด","ก๋วยจั๊บ","ขนมจีนน้ำยา","โจ๊กหมู","ข้าวผัดอเมริกัน"])}
+function showDailyActivity(){showFeatureModal("✨ วันนี้ทำอะไรด้วยกันดี?",["ไปกินหมูกระทะด้วยกัน","ไปกินชาบูด้วยกัน","ไปกินบุฟเฟ่ต์ด้วยกัน","หาร้านใหม่ ๆ แล้วลองด้วยกัน","ดูหนังเรื่องที่อยากดูด้วยกัน","เดินเล่นคุยกันแบบไม่รีบ","ถ่ายรูปเก็บเป็นความทรงจำ","ทำอาหารง่าย ๆ ด้วยกัน","เล่นเกมที่ทั้งคู่ชอบ","ฟังเพลงแล้วผลัดกันเลือกเพลง","ออกไปหาของกินเล่น","หาคาเฟ่หรือร้านขนมใหม่ ๆ","จัดรูปความทรงจำของเรา","เขียนข้อความสั้น ๆ ให้กัน","ย้อนดูรูปเก่า ๆ แล้วเล่าเรื่องวันนั้น","วางแผนสิ่งที่อยากทำด้วยกันในเดือนนี้"])}
+function showDeepTalk(){showFeatureModal("💬 วันนี้คุยอะไรกันดี?",["ช่วงเวลาไหนที่อยู่ด้วยกันแล้วรู้สึกสบายใจที่สุด?","มีเรื่องเล็ก ๆ อะไรที่อีกคนทำแล้วทำให้รู้สึกดีเสมอ?","ถ้าย้อนกลับไปแก้ไขวันหนึ่งได้ อยากกลับไปวันไหนและเพราะอะไร?","ความทรงจำไหนของเราที่อยากเก็บไว้ให้นานที่สุด?","มีอะไรที่อยากให้อีกคนเข้าใจเกี่ยวกับตัวเรามากขึ้นไหม?","ช่วงนี้มีอะไรที่ทำให้รู้สึกภูมิใจในตัวเองบ้าง?","ถ้าเราได้มีวันว่างด้วยกันหนึ่งวันเต็ม ๆ อยากใช้วันนั้นอย่างไร?","มีสิ่งไหนที่อยากลองทำด้วยกันแต่ยังไม่ได้ทำ?","ถ้าอีก 1 ปีมองย้อนกลับมาที่วันนี้ อยากให้เราเป็นแบบไหน?","อะไรคือสิ่งที่ทำให้รู้สึกว่าเราเป็นทีมเดียวกัน?","มีเรื่องอะไรที่อยากขอบคุณอีกคนแต่ยังไม่เคยพูด?","ตอนเด็ก ๆ เคยมีความฝันอะไรที่ยังจำได้อยู่ไหม?","ถ้าเลือกเก็บความทรงจำของเราได้เพียงหนึ่งช่วง อยากเลือกช่วงไหน?","มีนิสัยเล็ก ๆ ของอีกคนที่ตอนแรกไม่คุ้น แต่ตอนนี้กลับชอบไหม?","ช่วงนี้มีอะไรที่อยากให้เราช่วยกันผ่านไปด้วยกันไหม?","ถ้าเราสร้างประเพณีเล็ก ๆ ของเราเอง อยากให้เป็นเรื่องอะไร?","มีสถานที่ไหนที่อยากไปด้วยกันสักครั้ง และอยากทำอะไรที่นั่น?","อะไรทำให้คำว่า ‘บ้าน’ มีความหมายสำหรับเรา?","มีเรื่องสนุก ๆ อะไรที่อยากให้เกิดขึ้นกับเราในเร็ว ๆ นี้?","ถ้าเขียนจดหมายถึงตัวเราในอีก 5 ปี อยากเขียนว่าอะไร?"])}
+function init(){populateGalleryMonth();populateLetterMonths();if(initCloud())loadCloud();updateCounter();setInterval(updateCounter,60000)}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
 </script>
-
 <script src="./anv-enhancements.js"></script>
 <script src="./anv-birthday.js"></script>
 <script src="./anv-daily.js"></script>
