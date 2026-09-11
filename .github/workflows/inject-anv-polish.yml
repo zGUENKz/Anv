@@ -45,4 +45,6 @@ jobs:
           git add index.html
           git rm .github/workflows/inject-anv-polish.yml
           git commit -m 'chore: inject Anv final polish [anv-polish]'
-          git push
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
