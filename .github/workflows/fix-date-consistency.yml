@@ -1,0 +1,47 @@
+name: Fix Anv date consistency
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fix-date-consistency.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Apply date consistency fixes
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          old = 'function currentUnlockedMonth(){\n    let n=0;\n    for(let i=1;i<=CONFIG.totalMonths;i++) if(isMonthUnlocked(i)) n=i;\n    return Math.max(1,n);\n}'
+          new = 'function currentUnlockedMonth(){\n    let n=0;\n    for(let i=1;i<=CONFIG.totalMonths;i++) if(isMonthUnlocked(i)) n=i;\n    return n;\n}'
+          if old not in s:
+              raise SystemExit('currentUnlockedMonth pattern not found')
+          s = s.replace(old, new, 1)
+          old_date = '<div class="detailDate" id="detailDate">5 สิงหาคม 2026</div>'
+          new_date = '<div class="detailDate" id="detailDate">5 กันยายน 2026</div>'
+          if old_date not in s:
+              raise SystemExit('detailDate placeholder not found')
+          s = s.replace(old_date, new_date, 1)
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Commit fixes and remove temporary workflow
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git rm .github/workflows/fix-date-consistency.yml
+          git commit -m 'Fix anniversary date consistency [skip ci]'
+          git push
