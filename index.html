@@ -309,7 +309,7 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
         <div class="detail">
             <div class="heart">♡</div>
             <h2 id="detailTitle">เดือนที่ 1</h2>
-            <div class="detailDate" id="detailDate">5 สิงหาคม 2026</div>
+            <div class="detailDate" id="detailDate">5 กันยายน 2026</div>
             <div class="photoArea" id="photoArea">
                 <div class="placeholder">ยังไม่มีรูปของเดือนนี้</div>
                 <img id="mainPhoto" alt="memory">
@@ -963,7 +963,7 @@ function isMonthUnlocked(month){
 function currentUnlockedMonth(){
     let n=0;
     for(let i=1;i<=CONFIG.totalMonths;i++) if(isMonthUnlocked(i)) n=i;
-    return Math.max(1,n);
+    return n;
 }
 
 /* =========================================================
