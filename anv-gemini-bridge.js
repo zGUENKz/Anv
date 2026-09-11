@@ -9,8 +9,14 @@
       const url=typeof input==='string'?input:(input&&input.url)||'';
       if(url.includes('/functions/v1/anv-daily-ai')&&!url.includes('/functions/v1/anv-daily-ai-gemini')){
         const nextUrl=GEMINI_ENDPOINT;
-        if(typeof input==='string')return originalFetch(nextUrl,init);
-        return originalFetch(new Request(nextUrl,input),init);
+        const sourceInit=init||{};
+        const headers=new Headers(sourceInit.headers|| (typeof input!=='string'&&input&&input.headers) || {});
+        headers.delete('Authorization');
+        const key=typeof CONFIG!=='undefined'?CONFIG.supabaseKey:'';
+        if(key)headers.set('apikey',key);
+        headers.set('Content-Type','application/json');
+        const nextInit={...sourceInit,headers};
+        return originalFetch(nextUrl,nextInit);
       }
     }catch(_){ }
     return originalFetch(input,init);
