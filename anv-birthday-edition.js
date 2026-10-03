@@ -70,7 +70,7 @@
     const secret=wrap.children[1];
     hero.insertAdjacentElement('afterend',letter);
     letter.insertAdjacentElement('afterend',secret);
-    secret.insertAdjacentElement('afterend',wrap.children[2]);
+    secret.insertAdjacentElement('afterend',wrap.children[0]);
 
     hero.querySelector('#anvBdayLetterBtn').addEventListener('click',()=>{
       letter.classList.toggle('show');
