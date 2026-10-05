@@ -31,112 +31,30 @@
       .anvDailyTogether{max-width:650px;margin:12px auto 18px}.anvDailyTogetherTitle{text-align:center;color:var(--muted);font-size:12px;margin-bottom:9px}
       .anvDailyTogetherGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.anvDailyTogetherBtn{border:0;border-radius:18px;padding:15px 9px;background:var(--soft);color:var(--pink2);box-shadow:0 5px 18px rgba(123,70,93,.04);transition:.2s}.anvDailyTogetherBtn:hover{transform:translateY(-2px)}.anvDailyTogetherBtn b,.anvDailyTogetherBtn span{display:block}.anvDailyTogetherBtn b{font-size:13px}.anvDailyTogetherBtn span{font-size:10px;color:var(--muted);margin-top:4px}
       .anvDailyModal{position:fixed;inset:0;background:rgba(30,18,23,.58);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:16px;z-index:90}.anvDailyModal.show{display:flex}.anvDailyCard{width:min(94vw,540px);background:var(--card);border:1px solid var(--line);border-radius:28px;padding:24px;text-align:center;box-shadow:0 20px 70px rgba(0,0,0,.25);animation:pop .3s ease}.anvDailyHead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}.anvDailyHead h3{margin:0;color:var(--pink2);font-size:20px}.anvDailyClose{border:0;background:var(--soft);color:var(--pink2);width:38px;height:38px;border-radius:50%}.anvDailyResult{min-height:100px;display:flex;align-items:center;justify-content:center;background:var(--soft);border-radius:20px;padding:22px 16px;color:var(--dark);font-size:20px;font-weight:600;line-height:1.65}.anvDailyHint{font-size:11px;color:var(--muted);margin-top:10px}.anvDailyActions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:15px}
-      .anvDailyTogetherGrid{grid-template-columns:repeat(2,1fr)}
-      .anvDailyTogetherBtn:active{transform:scale(.97)}
-      .anvLuckyBtn{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--soft),rgba(255,255,255,.7));border:1px solid var(--line)}
-      .anvLuckyBtn:after{content:'✦';position:absolute;right:9px;top:6px;font-size:10px;animation:anvLuckyTwinkle 1.8s ease-in-out infinite}
-      .anvDailyRolling{opacity:.45;transform:scale(.98);filter:blur(1px);transition:.08s}
-      .anvDailyReveal{animation:anvDailyReveal .42s ease}
-      .anvLuckyResult{min-height:190px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(145deg,var(--soft),transparent);border:1px solid var(--line);border-radius:24px;padding:24px 18px}
-      .anvLuckyBadge{display:inline-flex;padding:6px 11px;border-radius:999px;background:var(--soft);color:var(--pink2);font-size:11px;margin-bottom:12px}
-      .anvLuckyIcon{font-size:42px;line-height:1}
-      .anvLuckyTitle{font-size:22px;font-weight:700;color:var(--pink2);margin:9px 0 6px}
-      .anvLuckyText{font-size:15px;line-height:1.8;color:var(--dark);max-width:420px}
-      .anvLuckyReveal{animation:anvLuckyPop .55s ease}
-      @keyframes anvDailyReveal{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
-      @keyframes anvLuckyPop{0%{transform:scale(.5) rotate(-10deg);opacity:0}70%{transform:scale(1.12) rotate(4deg)}100%{transform:none;opacity:1}}
-      @keyframes anvLuckyTwinkle{50%{transform:scale(1.5) rotate(25deg);opacity:1}}
-      @media(max-width:560px){.anvDailyTogetherGrid{grid-template-columns:1fr}.anvDailyCard{padding:19px}.anvDailyResult{font-size:18px}.anvLuckyText{font-size:14px}}
+      @media(max-width:560px){.anvDailyTogetherGrid{grid-template-columns:1fr}.anvDailyCard{padding:19px}.anvDailyResult{font-size:18px}}
     `;document.head.appendChild(s);
   }
-  const LUCKY=[
-    ['💕','Lucky Love','บอกอีกคนหนึ่งอย่างที่ชอบที่สุดในตัวเขา แล้วกอดกัน 10 วินาที'],
-    ['💌','Lucky Message','ส่งข้อความสั้น ๆ บอกอีกคนว่า วันนี้ดีใจที่มีเขาอยู่ในชีวิต'],
-    ['📸','Lucky Moment','ถ่ายรูปคู่กัน 1 รูปในวันนี้ เก็บไว้เป็นความทรงจำของเรา'],
-    ['🍰','Lucky Treat','วันนี้เลือกของกินหรือเครื่องดื่มให้อีกคน โดยห้ามบอกล่วงหน้า'],
-    ['🎵','Lucky Song','ผลัดกันเลือกเพลงคนละ 1 เพลง แล้วฟังด้วยกันจนจบ'],
-    ['💭','Lucky Question','ถามกันว่า “ช่วงเวลาไหนของเราที่อยากกลับไปอีกครั้ง?”'],
-    ['🤍','Lucky Thanks','ผลัดกันพูด 1 เรื่องที่อยากขอบคุณอีกคนในวันนี้'],
-    ['🎮','Lucky Challenge','เล่นเกมด้วยกัน 1 รอบ คนแพ้ต้องทำอะไรน่ารัก ๆ ให้คนชนะ'],
-    ['🌙','Lucky Night','คืนนี้หาเวลาคุยกัน 15 นาที โดยวางโทรศัพท์ไว้ข้าง ๆ'],
-    ['🫶','Lucky Hug','หยุดทุกอย่างสักครู่ แล้วกอดกันโดยไม่ต้องพูดอะไร'],
-    ['✨','Lucky Surprise','ทำเรื่องเล็ก ๆ ที่คิดว่าอีกคนน่าจะชอบให้ 1 อย่าง โดยไม่บอกก่อน'],
-    ['🌷','Lucky Date','ให้คนหนึ่งเป็นคนเลือกกิจกรรมเล็ก ๆ ของเราในวันนี้ทั้งหมด']
-  ];
-
   function modal(){
     let m=document.getElementById('anvDailyModal');
     if(m)return m;
-    m=document.createElement('div');m.id='anvDailyModal';m.className='anvDailyModal';
-    m.innerHTML='<div class="anvDailyCard"><div class="anvDailyHead"><h3 id="anvDailyModalTitle"></h3><button class="anvDailyClose" type="button" aria-label="ปิด">×</button></div><div class="anvDailyResult" id="anvDailyResult"></div><div class="anvDailyHint" id="anvDailyHint">กำลังลุ้นผลอยู่ ♡</div><div class="anvDailyActions"><button class="primary" type="button" id="anvDailyAgain">🎲 สุ่มใหม่</button></div></div>';
+    m=document.createElement('div');m.id='anvDailyModal';m.className='anvDailyModal';m.innerHTML='<div class="anvDailyCard"><div class="anvDailyHead"><h3 id="anvDailyModalTitle"></h3><button class="anvDailyClose" type="button" aria-label="ปิด">×</button></div><div class="anvDailyResult" id="anvDailyResult"></div><div class="anvDailyHint">สุ่มใหม่ได้เรื่อย ๆ จนกว่าจะเจออันที่ใช่ ♡</div><div class="anvDailyActions"><button class="primary" type="button" id="anvDailyAgain">🎲 สุ่มใหม่</button></div></div>';
     document.body.appendChild(m);
     m.querySelector('.anvDailyClose').addEventListener('click',()=>m.classList.remove('show'));
     m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show')});
     return m;
   }
-
-  function animateNormal(m,list){
-    const result=m.querySelector('#anvDailyResult'),hint=m.querySelector('#anvDailyHint');
-    if(result.dataset.rolling==='1')return;
-    result.dataset.rolling='1';result.className='anvDailyResult';
-    result.textContent='กำลังสุ่ม...';hint.textContent='ลุ้นอีกนิดนะ ♡';
-    let i=0;
-    const timer=setInterval(()=>{
-      result.classList.add('anvDailyRolling');
-      result.textContent=['✦','♡','…','✦','♡','…'][i%6];
-      i++;
-      if(i>=8){
-        clearInterval(timer);
-        result.textContent=pick(list);
-        result.className='anvDailyResult anvDailyReveal';
-        hint.textContent='ได้อันนี้แล้ว ♡';
-        result.dataset.rolling='0';
-      }
-    },90);
-  }
-
   function open(type,title,list){
-    const m=modal(),again=m.querySelector('#anvDailyAgain');
-    m.classList.remove('anvLuckyModal');
-    m.querySelector('#anvDailyModalTitle').textContent=title;
-    again.textContent='🎲 สุ่มอีกครั้ง';
-    again.style.display='';
-    m.classList.add('show');
-    animateNormal(m,list);
-    again.onclick=()=>animateNormal(m,list);
+    const m=modal();m.querySelector('#anvDailyModalTitle').textContent=title;m.querySelector('#anvDailyResult').textContent=pick(list);m.classList.add('show');
+    m.querySelector('#anvDailyAgain').onclick=()=>{m.querySelector('#anvDailyResult').textContent=pick(list)};
   }
-
-  function openLucky(){
-    const m=modal(),result=m.querySelector('#anvDailyResult'),hint=m.querySelector('#anvDailyHint'),again=m.querySelector('#anvDailyAgain');
-    const item=LUCKY[Math.floor(Math.random()*LUCKY.length)];
-    m.classList.add('anvLuckyModal','show');
-    m.querySelector('#anvDailyModalTitle').textContent='🍀 Lucky Random';
-    hint.textContent='ภารกิจพิเศษสำหรับเราสองคน ♡';
-    again.textContent='🍀 Lucky อีกครั้ง';
-    again.style.display='';
-    result.dataset.rolling='1';
-    result.className='anvLuckyResult';
-    result.innerHTML='<div class="anvLuckyBadge">✦ LUCKY ✦</div><div class="anvLuckyIcon">🍀</div><div class="anvLuckyTitle">กำลังสุ่ม...</div><div class="anvLuckyText">โชคดีกำลังเลือกอะไรบางอย่างให้เรา</div>';
-    setTimeout(()=>{
-      result.innerHTML='<div class="anvLuckyBadge">✦ LUCKY ✦</div><div class="anvLuckyIcon">'+item[0]+'</div><div class="anvLuckyTitle">'+item[1]+'</div><div class="anvLuckyText">'+item[2]+'</div>';
-      result.classList.add('anvLuckyReveal');
-      result.dataset.rolling='0';
-    },800);
-    again.onclick=openLucky;
-  }
-
   function init(){
     injectStyle();
     const counter=document.querySelector('.counter');if(!counter)return;
     if(document.getElementById('anvDailyTogether'))return;
-    const wrap=document.createElement('section');wrap.id='anvDailyTogether';wrap.className='anvDailyTogether';
-    wrap.innerHTML='<div class="anvDailyTogetherTitle">วันนี้ของเรา ♡</div><div class="anvDailyTogetherGrid"><button class="anvDailyTogetherBtn" type="button" data-daily="food">🍜<b>วันนี้กินอะไรดี?</b><span>สุ่มเมนูให้เรา</span></button><button class="anvDailyTogetherBtn" type="button" data-daily="activity">🍲<b>วันนี้ทำอะไรดี?</b><span>สุ่มกิจกรรมให้เรา</span></button><button class="anvDailyTogetherBtn" type="button" data-daily="deep">💭<b>วันนี้คุยอะไรกันดี?</b><span>สุ่มคำถาม Deep Talk</span></button><button class="anvDailyTogetherBtn anvLuckyBtn" type="button" data-daily="lucky">🍀<b>Lucky Random</b><span>ภารกิจพิเศษของเรา</span></button></div>';
+    const wrap=document.createElement('section');wrap.id='anvDailyTogether';wrap.className='anvDailyTogether';wrap.innerHTML='<div class="anvDailyTogetherTitle">วันนี้ของเรา ♡</div><div class="anvDailyTogetherGrid"><button class="anvDailyTogetherBtn" type="button" data-daily="food">🍜<b>วันนี้กินอะไรดี?</b><span>สุ่มเมนูให้เรา</span></button><button class="anvDailyTogetherBtn" type="button" data-daily="activity">🍲<b>วันนี้ทำอะไรดี?</b><span>สุ่มกิจกรรมให้เรา</span></button><button class="anvDailyTogetherBtn" type="button" data-daily="deep">💭<b>วันนี้คุยอะไรกันดี?</b><span>สุ่มคำถาม Deep Talk</span></button></div>';
     counter.insertAdjacentElement('afterend',wrap);
     const map={food:['วันนี้กินอะไรดี?',FOOD],activity:['วันนี้ทำอะไรดี?',ACTIVITIES],deep:['วันนี้คุยอะไรกันดี?',DEEP]};
-    wrap.querySelectorAll('[data-daily]').forEach(btn=>btn.addEventListener('click',()=>{
-      if(btn.dataset.daily==='lucky'){openLucky();return}
-      const item=map[btn.dataset.daily];if(item)open(btn.dataset.daily,item[0],item[1]);
-    }));
+    wrap.querySelectorAll('[data-daily]').forEach(btn=>btn.addEventListener('click',()=>{const item=map[btn.dataset.daily];if(item)open(btn.dataset.daily,item[0],item[1]);}));
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
