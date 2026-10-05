@@ -113,10 +113,38 @@
     wrap.querySelector('.anvDailyTogetherGrid').appendChild(btn);
   }
 
+  function enhanceNormalRandom(){
+    const wrap=document.getElementById('anvDailyTogether');
+    if(!wrap||wrap.dataset.uxBound==='1')return;
+    wrap.dataset.uxBound='1';
+    wrap.addEventListener('click',function(e){
+      const btn=e.target.closest('[data-daily]');
+      if(!btn||btn.dataset.daily==='lucky')return;
+      setTimeout(function(){
+        const m=getModal(),r=document.getElementById('anvDailyResult');
+        if(!m||!r||!m.classList.contains('show'))return;
+        const final=r.textContent;
+        r.className='anvDailyResult anvUXRolling';
+        r.textContent='กำลังสุ่ม...';
+        let i=0;
+        const timer=setInterval(function(){
+          r.textContent=['✦','♡','…','✦','♡','…'][i%6];
+          i++;
+          if(i>=7){
+            clearInterval(timer);
+            r.textContent=final;
+            r.className='anvDailyResult anvUXResult';
+          }
+        },80);
+      },20);
+    });
+  }
+
   function init(){
     style();
     addLucky();
-    setTimeout(addLucky,500);
+    enhanceNormalRandom();
+    setTimeout(function(){addLucky();enhanceNormalRandom()},500);
   }
 
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
